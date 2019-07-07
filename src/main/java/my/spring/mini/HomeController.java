@@ -1,8 +1,11 @@
 package my.spring.mini;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +18,7 @@ import vo.UsersVO;
  */
 @Controller
 public class HomeController {
+
 	@Autowired
 	UsersDAO dao;
 	
@@ -29,15 +33,20 @@ public class HomeController {
 		return "login";
 	}
 	@RequestMapping(value="/login", method= RequestMethod.POST)
-	public ModelAndView doLogin(String idVal, String pwdVal) {
+	public ModelAndView doLogin(String idVal, String pwdVal,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		boolean result = dao.loginUser(idVal, pwdVal);
-		if(result)
+		UsersVO user = dao.loginUser(idVal, pwdVal);
+		String url;
+		if(user!=null) {
 			mav.addObject("msg", "로그인 성공");
-		else
+			session.setAttribute("loginUser", user);
+			url = "redirect:/";
+		}
+		else {
 			mav.addObject("msg","로그인 실패");
-		
-		mav.setViewName("redirect:/");
+			url="redirect:/login";
+		}
+		mav.setViewName(url);
 		return mav;
 	}
 	@RequestMapping(value="/register", method= RequestMethod.GET)
