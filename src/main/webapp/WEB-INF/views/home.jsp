@@ -1,4 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page session="false" %>
 <html>
 <head>
@@ -6,9 +7,17 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	tmp  
 </h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<button onclick="goLogin()">로그인화면</button>
+<button onclick="goRegister()">회원가입화면</button>
+<script>
+	function goLogin(){
+		location.href="/mini/login/"
+	}
+	function goRegister(){
+		location.href="/mini/register/"
+	}
+</script>
 </body>
 </html>
