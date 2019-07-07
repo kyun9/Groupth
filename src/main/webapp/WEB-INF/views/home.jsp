@@ -19,5 +19,14 @@
 		location.href="/mini/register/"
 	}
 </script>
+<% 
+ if(request.getParameter("msg")!=null){
+ %>
+ <script>
+ 	alert("<%=request.getParameter("msg")%>");
+ </script>
+ <%
+ }
+ %>
 </body>
 </html>

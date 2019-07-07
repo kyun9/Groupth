@@ -10,5 +10,8 @@
 		insert into users(id, users_id, users_name, password, email, join_date)
 		values(#{id},#{users_id},#{users_name},#{password},#{email}, sysdate)
 	</insert>
-
+	<select id="searchLoginId" resultType="vo.UsersVO" parameterType="string">
+		select * from users where users_id like #{idVal}
+	</select>
+	
 </mapper>

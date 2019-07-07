@@ -28,6 +28,18 @@ public class HomeController {
 		System.out.println("login");
 		return "login";
 	}
+	@RequestMapping(value="/login", method= RequestMethod.POST)
+	public ModelAndView doLogin(String idVal, String pwdVal) {
+		ModelAndView mav = new ModelAndView();
+		boolean result = dao.loginUser(idVal, pwdVal);
+		if(result)
+			mav.addObject("msg", "로그인 성공");
+		else
+			mav.addObject("msg","로그인 실패");
+		
+		mav.setViewName("redirect:/");
+		return mav;
+	}
 	@RequestMapping(value="/register", method= RequestMethod.GET)
 	public String register() {
 		System.out.println("register");
@@ -42,7 +54,7 @@ public class HomeController {
 		else
 			mav.addObject("msg","가입에 실패하였습니다.");
 		
-		mav.setViewName("login");
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 }

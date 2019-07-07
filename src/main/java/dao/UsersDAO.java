@@ -18,4 +18,15 @@ public class UsersDAO {
 			result=false;
 		return result;
 	}
+	public boolean loginUser(String idVal, String pwdVal) {
+		boolean result =true;
+		UsersVO user=null;
+		String statement="UsersMapper.searchLoginId";
+		user=session.selectOne(statement,idVal);
+		if(user==null) 
+			result=false;
+		if(!user.getPassword().equals(pwdVal))
+			result=false;
+		return result;
+	}
 }
