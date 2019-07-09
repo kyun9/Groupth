@@ -1,4 +1,7 @@
 databases
+
+// users 테이블 생성
+
 CREATE TABLE users (
         id   number(8) not null,
        users_id                VARCHAR2(20)             NOT NULL,
@@ -10,10 +13,15 @@ CREATE TABLE users (
     
       CONSTRAINT USERS_PK PRIMARY KEY (users_id)
 );
+
+// users sequence 생성, id에 설정
+
 create sequence users_seq
 start with 1
 increment by 1;
 update users set id=users_seq.nextval;
+
+// board table 생성
 
 CREATE TABLE board 
    (	"BID" NUMBER(8,0), 
@@ -24,27 +32,43 @@ CREATE TABLE board
 	"CNT" NUMBER(8,0), 
 	 PRIMARY KEY ("BID")
      );
-     
+
+// users_board table 생성
      CREATE TABLE users_board 
    (	
     "id" NUMBER(8,0), 
-    "u_id" NUMBER(8,0), 
+    "u_id" VARCHAR2(20), 
     "b_id" NUMBER(8,0), 
      PRIMARY KEY ("id")
 	
      );
      
+ // pk, fk 연결 
+ 
      ALTER TABLE "USERS_BOARD" ADD FOREIGN KEY ("u_id") REFERENCES "USERS" ("USERS_ID");
     ALTER TABLE "USERS_BOARD"  ADD FOREIGN KEY ("b_id") REFERENCES "BOARD" ("BID");
     SELECT * FROM    ALL_CONSTRAINTS;
 commit;
+
+// board sequence 생성
+
 create sequence board_seq
 start with 1
 increment by 1;
+
+// users_board sequence 생성
+
 create sequence users_board_seq
 start with 1
 increment by 1;
 select * from user_sequences;
+
+// sequence 등록
+
 update board set bid=board_seq.nextval;
 update users_board set "id" =users_board_seq.nextval;
 commit;
+
+// table 연결 확인
+
+select * from users, users_board where users.users_id = USERS_BOARD."u_id";
