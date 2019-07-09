@@ -26,7 +26,7 @@ if(session.getAttribute("loginUser")!=null){
 <%
 }
 %>
-<script>
+<script>ㄴ
 	function goLogin(){
 		location.href="/mini/login/"
 	}
