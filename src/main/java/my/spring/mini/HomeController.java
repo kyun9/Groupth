@@ -32,7 +32,7 @@ public class HomeController {
 		System.out.println("login");
 		return "login";
 	}
-	@RequestMapping(value="/login", method= RequestMethod.POST)
+	@RequestMapping(value="/loginProcess", method= RequestMethod.POST)
 	public ModelAndView doLogin(String idVal, String pwdVal,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		UsersVO user = dao.loginUser(idVal, pwdVal);
