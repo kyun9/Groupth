@@ -5,12 +5,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.UsersDAO;
-import vo.Login_InfoVO;
 import vo.UsersVO;
 
 /**
@@ -38,15 +38,12 @@ public class HomeController {
 		UsersVO user = dao.loginUser(idVal, pwdVal);
 		String url;
 		if(user!=null) {
-			System.out.println("로그인 성공");
-			Login_InfoVO loginInfo = new Login_InfoVO();
-			loginInfo.setUser(user.getUsers_id());
-			loginInfo.setUser_name(user.getUsers_name());
-			session.setAttribute("loginUser", loginInfo);
+			mav.addObject("msg", "로그인 성공");
+			session.setAttribute("loginUser", user);
 			url = "redirect:/";
 		}
 		else {
-			System.out.println("로그인 실패");
+			mav.addObject("msg","로그인 실패");
 			url="redirect:/login";
 		}
 		mav.setViewName(url);
@@ -62,9 +59,9 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		boolean result= dao.insert(vo);
 		if(result)
-			System.out.println("성공적으로 가입되었습니다.");
+			mav.addObject("msg","성공적으로 가입되었습니다.");
 		else
-			System.out.println(" 가입 실패하었습니다.");
+			mav.addObject("msg","가입에 실패하였습니다.");
 		
 		mav.setViewName("redirect:/");
 		return mav;

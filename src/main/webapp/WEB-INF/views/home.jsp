@@ -12,7 +12,7 @@
 <%
 if(session.getAttribute("loginUser")!=null){
 %>
-<h2>로그인아이디 : ${ sessionScope.loginUser.user}</h2>
+<h2>로그인아이디 : ${ sessionScope.loginUser.users_id }</h2>
 <form method="get" action="/mini/logout">
 <input type="submit" value="로그아웃">
 <input type="button" value="마이페이지">
@@ -34,5 +34,14 @@ if(session.getAttribute("loginUser")!=null){
 		location.href="/mini/register/"
 	}
 </script>
+<% 
+ if(request.getParameter("msg")!=null){
+ %>
+ <script>
+ 	alert("<%=request.getParameter("msg")%>");
+ </script>
+ <%
+ }
+ %>
 </body>
 </html>

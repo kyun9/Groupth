@@ -14,37 +14,3 @@ create sequence users_seq
 start with 1
 increment by 1;
 update users set id=users_seq.nextval;
-
-CREATE TABLE board 
-   (	"BID" NUMBER(8,0), 
-	"WRITER" VARCHAR2(18 BYTE), 
-	"TITLE" VARCHAR2(120 BYTE), 
-	"CONTENT" VARCHAR2(900 BYTE), 
-	"WRITEDATE" DATE, 
-	"CNT" NUMBER(8,0), 
-	 PRIMARY KEY ("BID")
-     );
-     
-     CREATE TABLE users_board 
-   (	
-    "id" NUMBER(8,0), 
-    "u_id" NUMBER(8,0), 
-    "b_id" NUMBER(8,0), 
-     PRIMARY KEY ("id")
-	
-     );
-     
-     ALTER TABLE "USERS_BOARD" ADD FOREIGN KEY ("u_id") REFERENCES "USERS" ("USERS_ID");
-    ALTER TABLE "USERS_BOARD"  ADD FOREIGN KEY ("b_id") REFERENCES "BOARD" ("BID");
-    SELECT * FROM    ALL_CONSTRAINTS;
-commit;
-create sequence board_seq
-start with 1
-increment by 1;
-create sequence users_board_seq
-start with 1
-increment by 1;
-select * from user_sequences;
-update board set bid=board_seq.nextval;
-update users_board set "id" =users_board_seq.nextval;
-commit;
