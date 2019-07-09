@@ -8,13 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-if(session.getAttribute("loginUser")!=null){
-%>
-<script>
-	window.location.href="/mini/";
-</script>
-<%} %>
 <h3>로그인</h3>
  <form method="post" action="/mini/login">
  	아이디 <input type="text" name="idVal" required><br>
