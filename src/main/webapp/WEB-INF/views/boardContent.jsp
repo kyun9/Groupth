@@ -17,8 +17,16 @@ if(session.getAttribute("loginUser")!=null){
 Login_InfoVO user = (Login_InfoVO)session.getAttribute("loginUser");
 if(user.getUser().equals(request.getParameter("writer"))){
 %>
-<button>삭제하기</button>
-<button>수정하기</button>
+<form method="get" action="/mini/board/content/edit">
+<input type="hidden" name="action" value="update">
+<input type="submit" value="수정하기">
+<input type="button" onclick="boardDelete(); return false;" value="삭제하기">
+</form>
+<script>
+	function boardDelete(){
+		alert("아직 만드는중");
+	}
+</script>
 <%	
 }}
 %>
@@ -26,7 +34,7 @@ hi content
 <button onclick="goBoard()">뒤로가기</button>
 <script>
 function goBoard(){
-	 location.href="/mini/board/";
+	 location.href="<%=request.getHeader("referer") %>";
  }
 </script>
 </body>
