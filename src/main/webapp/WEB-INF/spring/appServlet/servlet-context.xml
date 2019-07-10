@@ -33,8 +33,8 @@
 			value="oracle.jdbc.OracleDriver" />
 		<beans:property name="url"
 			value="jdbc:oracle:thin:@localhost:1521:XE" />
-		<beans:property name="username" value="mini" />
-		<beans:property name="password" value="mini" />
+		<beans:property name="username" value="groupth" />
+		<beans:property name="password" value="groupth" />
 	</beans:bean>
 
 	<beans:bean id="sqlSessionFactory"
