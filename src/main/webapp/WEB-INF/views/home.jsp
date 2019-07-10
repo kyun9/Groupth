@@ -23,6 +23,7 @@ if(session.getAttribute("loginUser")!=null){
 %>
 <button onclick="goLogin()">로그인화면</button>
 <button onclick="goRegister()">회원가입화면</button>
+<button onclick="goBoard(); return false;">게시판</button>
 <%
 }
 %>

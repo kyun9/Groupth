@@ -28,8 +28,8 @@
 	<select id="listWriterBoard" resultType="vo.BoardVO" parameterType="string">
 		select * from board where writer=#{writer} order by bid desc
 	</select>
-	<select id = "searchInfo" parameterType = "vo.BoardSearchVO" resultType="vo.BoardVO">
-		select * from board where #{a.searchType} like '%'||#{b.key}||'%'
+	<select id = "searchInfo" parameterType = "java.util.HashMap" resultType="vo.BoardVO">
+		select * from board where ${searchType} like '%'||#{key}||'%'
 	</select>
 
 </mapper>

@@ -11,36 +11,50 @@ h1 {
 	text-align: center;
 	text-shadow: 6px 2px 2px silver;
 }
+
 body {
 	margin: 0 auto;
 	width: 60%;
 }
+
 th {
 	border: 2px solid black;
 }
+
 td {
 	border-bottom: 1px dotted black;
 	width: 200px;
 	text-align: center;
 }
+
 tr:hover {
 	background-color: silver;
 	font-weight: bold;
 }
+
 td:nth-child(2) {
 	width: 400px;
 	text-align: left;
 }
+
 a {
 	text-decoration: none;
 }
+
 a:visited {
 	color: black;
 }
 </style>
 </head>
 <body>
-	<h1>뉴스 게시판</h1>
+	<%
+if(session.getAttribute("loginUser")!=null){
+%>
+	<h2>로그인아이디 : ${ sessionScope.loginUser.user}</h2>
+	<%
+}
+%>
+	<h1>게시판</h1>
 	<%
 		ArrayList<BoardVO> list = (ArrayList<BoardVO>) request.getAttribute("list");
 		if (!list.isEmpty()) {
@@ -59,7 +73,8 @@ a:visited {
 		%>
 		<tr>
 			<td><%=vo.getBid()%></td>
-			<td><a href='/mini/board?action=read&newsid=<%=vo.getBid()%>'><%=vo.getTitle()%></a></td>
+<%-- 			<td><a href='/mini/board?action=read&newsid=<%=vo.getBid()%>'><%=vo.getTitle()%></a></td> --%>
+			<td><a href='/mini/board/content?bid=<%=vo.getBid()%>&writer=<%=vo.getWriter()%>&action=read'><%=vo.getTitle()%></a></td>
 			<td><a
 				href='/mini/board?action=listwriter&writer=<%=vo.getWriter()%>'><%=vo.getWriter()%></a></td>
 			<td><%=vo.getWritedate()%></td>
@@ -100,8 +115,14 @@ a:visited {
 	</div>
 	<br>
 	<div align="center">
-		<button onclick="moveHome()">뉴스 홈으로</button>
-		<button onclick="displayDiv(1)">뉴스 작성</button>
+		<button onclick="moveHome()">홈으로</button>
+<%
+if(session.getAttribute("loginUser")!=null){
+%>
+		<button onclick="displayDiv(1)">게시글 작성</button>
+<%
+}
+%>
 	</div>
 	<br>
 	<script>
@@ -117,16 +138,18 @@ a:visited {
 			location.href="/mini/board?action=delete&newsid="+id;
 		}
 		function moveHome(){
-			location.href="/mini/board";
+			location.href="/mini";
 		}
 		
 	</script>
 	<div id="write" style="display: none" align="center">
 		<form method="post" action="/mini/board">
 			<input type="hidden" name="action" value="insert"> <input
-				type="text" name="writer" placeholder="작성자명을 입력해주세요." required size=48><br>
-			<input type="text" name="title" placeholder="제목을 입력해주세요" required size=48><br>
-			<textarea cols="50" rows="8" name="content" required placeholder="내용을 입력해주세요."></textarea>
+				type="text" name="writer" placeholder="작성자명을 입력해주세요." required
+				size=48><br> <input type="text" name="title"
+				placeholder="제목을 입력해주세요" required size=48><br>
+			<textarea cols="50" rows="8" name="content" required
+				placeholder="내용을 입력해주세요."></textarea>
 			<br> <input type="submit" value="저장"> <input
 				type="reset" value="재작성"> <input type="button"
 				onclick="displayDiv(2); return false;" value="취소">
