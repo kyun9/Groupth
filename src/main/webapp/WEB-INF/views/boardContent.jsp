@@ -24,7 +24,7 @@ if(user.getUser().equals(request.getParameter("writer"))){
 </form>
 <script>
 	function boardDelete(){
-		alert("아직 만드는중");
+		location.href="/mini/board/content?action=delete&bid=<%=request.getParameter("bid")%>"
 	}
 </script>
 <%	
