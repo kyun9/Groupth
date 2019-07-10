@@ -93,14 +93,6 @@ if(session.getAttribute("loginUser")!=null){
 	</script>
 	<%
 		}
-		if (request.getAttribute("msg") != null) {
-	%>
-	<script>
-		alert("${msg}");
-		document.location.href="/mini/board";
-	</script>
-	<%
-		}
 	%>
 	<br>
 	<div align="center">
@@ -119,20 +111,32 @@ if(session.getAttribute("loginUser")!=null){
 <%
 if(session.getAttribute("loginUser")!=null){
 %>
-		<button onclick="displayDiv(1)">게시글 작성</button>
+		<button onclick="moveWrite()">게시글 작성</button>
 <%
 }
 %>
 	</div>
 	<br>
+	
+	<%
+		
+		if (request.getAttribute("msg") != null) {
+	%>
+	<script>
+		alert("${msg}");
+	</script>
+	<%
+		}
+	%>
 	<script>
 		function displayDiv(type){
 			if(type==1)
-				document.getElementById("write").style.display="block";
-			else if(type==2)
 				document.getElementById("write").style.display="none";
-			else if(type==3)
+			else if(type==2)
 				document.getElementById("search").style.display="none";
+		}
+		function moveWrite(){
+			location.href="/mini/board/content/edit?action=insert"
 		}
 		function deleteNews(id){
 			location.href="/mini/board?action=delete&newsid="+id;
@@ -142,19 +146,6 @@ if(session.getAttribute("loginUser")!=null){
 		}
 		
 	</script>
-	<div id="write" style="display: none" align="center">
-		<form method="post" action="/mini/board">
-			<input type="hidden" name="action" value="insert"> <input
-				type="text" name="writer" placeholder="작성자명을 입력해주세요." required
-				size=48><br> <input type="text" name="title"
-				placeholder="제목을 입력해주세요" required size=48><br>
-			<textarea cols="50" rows="8" name="content" required
-				placeholder="내용을 입력해주세요."></textarea>
-			<br> <input type="submit" value="저장"> <input
-				type="reset" value="재작성"> <input type="button"
-				onclick="displayDiv(2); return false;" value="취소">
-		</form>
-	</div>
 	<%
 		if (request.getAttribute("listone") != null) {
 			BoardVO one = (BoardVO) request.getAttribute("listone");
@@ -168,7 +159,7 @@ if(session.getAttribute("loginUser")!=null){
 			<input type="text" name="title" value=<%=one.getTitle()%> size=48><br>
 			<textarea cols="50" rows="8" name="content"><%=one.getContent()%></textarea>
 			<br> <input type="button" value="확인"
-				onclick="displayDiv(3); return false;"> <input type="submit"
+				onclick="displayDiv(2); return false;"> <input type="submit"
 				value="수정"> <input type="button"
 				onclick="deleteNews(<%=one.getBid()%>)" value="삭제">
 		</form>
