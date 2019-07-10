@@ -1,12 +1,13 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import vo.BoardSearchVO;
 import vo.BoardVO;
 
 
@@ -62,12 +63,13 @@ public class BoardDAO {
 		return list;
 	}
 	
-	public List<BoardVO> search(BoardSearchVO vo){
+	public List<BoardVO> search(String key, String searchType){
 		List<BoardVO> list;
 		String statement = "BoardMapper.searchInfo";
-		System.out.println(vo.getA());
-		System.out.println(vo.getB());
-		list = session.selectList(statement, vo);
+		 Map<String, String> parameters = new HashMap<String, String>();
+		 parameters.put("key", key);
+		 parameters.put("searchType", searchType);
+		list = session.selectList(statement, parameters);
 		return list;
 
 	}
