@@ -79,6 +79,16 @@ public class BoardController {
 
 		if (action.equals("read")) {
 			mav.addObject("listone", dao.listOne(Integer.valueOf(bid)));
+		}else if (action.equals("delete")) {
+			boolean result = dao.delete(Integer.valueOf(bid));
+			if (result) {
+				mav.addObject("msg", "성공적으로 삭제되었습니다.");
+			} else {
+				mav.addObject("msg", "삭제 실패 했습니다.");
+			}
+			mav.addObject("list", dao.listAll());
+			mav.setViewName("board");
+			return mav;
 		}
 		mav.setViewName("boardContent");
 		return mav;
