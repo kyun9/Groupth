@@ -3,7 +3,7 @@ databases
 // users 테이블 생성
 
 CREATE TABLE users (
-        id   number(8) not null,
+
        users_id                VARCHAR2(20)             NOT NULL,
        users_name        VARCHAR2(20)  NOT NULL,
        password         VARCHAR2(20)  not null,
@@ -14,12 +14,7 @@ CREATE TABLE users (
       CONSTRAINT USERS_PK PRIMARY KEY (users_id)
 );
 
-// users sequence 생성, id에 설정
 
-create sequence users_seq
-start with 1
-increment by 1;
-update users set id=users_seq.nextval;
 
 // board table 생성
 
@@ -72,3 +67,28 @@ commit;
 // table 연결 확인
 
 select * from users, users_board where users.users_id = USERS_BOARD."u_id";
+
+//삽입
+INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('a', 'a', 'a', 'a@a.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('b', 'b', 'b', 'b@b.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('c', 'c', 'c', 'c@c.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('d', 'd', 'd', 'd@d.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('e', 'e', 'e', 'e@e.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
+commit;
+
+INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('1', 'a', 'test', 'test', TO_DATE('2019-07-10 23:53:30', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('2', 'b', 'test2', 'test2', TO_DATE('2019-07-10 23:53:30', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('3', 'c', 'test3', 'test3', TO_DATE('2019-07-10 23:54:10', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('4', 'd', 'test4', 'test4', TO_DATE('2019-07-20 23:54:12', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('5', 'e', 'test5', 'test5', TO_DATE('2019-07-27 23:54:15', 'YYYY-MM-DD HH24:MI:SS'));
+commit;
+
+INSERT INTO "GROUPTH"."USERS_BOARD" ("id", "u_id", "b_id") VALUES ('1', 'a', '1')
+INSERT INTO "GROUPTH"."USERS_BOARD" ("id", "u_id", "b_id") VALUES ('2', 'b', '2')
+INSERT INTO "GROUPTH"."USERS_BOARD" ("id", "u_id", "b_id") VALUES ('3', 'c', '3')
+INSERT INTO "GROUPTH"."USERS_BOARD" ("id", "u_id", "b_id") VALUES ('4', 'd', '4')
+INSERT INTO "GROUPTH"."USERS_BOARD" ("id", "u_id", "b_id") VALUES ('5', 'e', '5')
+commit;
+
+
+
