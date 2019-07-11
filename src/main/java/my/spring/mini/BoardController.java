@@ -22,12 +22,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 
 		if (action != null) {
-			if (action.equals("read")) {
-				mav.addObject("listone", dao.listOne(Integer.valueOf(newsid)));
-			} else if (action.equals("search")) {
-//				BoardSearchVO vo = info.find(key, searchType);
-//				mav.addObject("list", dao.search(vo));
-
+			if (action.equals("search")) {
 				mav.addObject("list", dao.search(key, searchType));
 				mav.setViewName("board");
 				return mav;
@@ -66,12 +61,7 @@ public class BoardController {
 		if (action.equals("read")) {
 			mav.addObject("listone", dao.listOne(Integer.valueOf(bid)));
 		}else if (action.equals("delete")) {
-			boolean result = dao.delete(Integer.valueOf(bid));
-			if (result) {
-				mav.addObject("msg", "성공적으로 삭제되었습니다.");
-			} else {
-				mav.addObject("msg", "삭제 실패 했습니다.");
-			}
+			dao.delete(Integer.valueOf(bid));
 			mav.addObject("list", dao.listAll());
 			mav.setViewName("redirect:/board");
 			return mav;
@@ -88,18 +78,14 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value="/board/content/edit", method=RequestMethod.POST)
-	public ModelAndView doPostEdit(BoardVO vo, String action, String bid) {
+	public ModelAndView doPostEdit(BoardVO vo, String action) {
 		ModelAndView mav = new ModelAndView();
+		
 		if (action.equals("insert")) {
-			boolean result = dao.insert(vo);
-			if (result) {
-				mav.addObject("msg", "등록되었습니다.");
-			} else {
-				mav.addObject("mag", "등록에 실패하였습니다.");
-			}
+			dao.insert(vo);
 		}
 		else if(action.equals("update")) {
-			
+			dao.update(vo);
 		}
 		mav.addObject("list", dao.listAll());
 		mav.setViewName("redirect:/board");

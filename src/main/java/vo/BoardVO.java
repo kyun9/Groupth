@@ -11,6 +11,9 @@ public class BoardVO {
 	public int getBid() {
 		return bid;
 	}
+	public void setBid(int bid) {
+		this.bid = bid;
+	}
 	public String getWriter() {
 		return writer;
 	}
@@ -40,6 +43,11 @@ public class BoardVO {
 	}
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
+	}
+	@Override
+	public String toString() {
+		return "BoardVO [bid=" + bid + ", writer=" + writer + ", title=" + title + ", content=" + content
+				+ ", writedate=" + writedate + ", cnt=" + cnt + "]";
 	}
 
 }

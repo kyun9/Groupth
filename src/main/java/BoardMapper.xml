@@ -11,7 +11,7 @@
 		values(#{bid},#{writer},#{title},#{content}, sysdate,0)
 	</insert>
 	<update id="updateBoard" parameterType="vo.BoardVO">
-		update board set writer=#{writer},title=#{title},content=#{content},writedate= sysdate,cnt='0' where bid=#{bid}
+		update board set title=#{title},content=#{content},writedate= sysdate,cnt='0' where bid=#{bid}
 	</update>
 	<delete id="deleteBoard" parameterType="_int">
 		delete from board where bid = #{bid}
