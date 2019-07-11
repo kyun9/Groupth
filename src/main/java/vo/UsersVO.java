@@ -1,19 +1,12 @@
 package vo;
 
 public class UsersVO {
-	private int id;
 	private String users_id;
 	private String users_name;
 	private String password;
 	private String email;
 	private String join_date;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getUsers_id() {
 		return users_id;
 	}

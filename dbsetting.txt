@@ -1,5 +1,9 @@
 databases
 
+//sqlplus
+create user groupth identified by groupth;
+grant connect, resource to groupth;
+
 // users 테이블 생성
 
 CREATE TABLE users (
@@ -28,20 +32,11 @@ CREATE TABLE board
 	 PRIMARY KEY ("BID")
      );
 
-// users_board table 생성
-     CREATE TABLE users_board 
-   (	
-    "id" NUMBER(8,0), 
-    "u_id" VARCHAR2(20), 
-    "b_id" NUMBER(8,0), 
-     PRIMARY KEY ("id")
-	
-     );
+
      
  // pk, fk 연결 
  
-     ALTER TABLE "USERS_BOARD" ADD FOREIGN KEY ("u_id") REFERENCES "USERS" ("USERS_ID");
-    ALTER TABLE "USERS_BOARD"  ADD FOREIGN KEY ("b_id") REFERENCES "BOARD" ("BID");
+     ALTER TABLE "BOARD" ADD FOREIGN KEY ("WRITER") REFERENCES "USERS" ("USERS_ID");
     SELECT * FROM    ALL_CONSTRAINTS;
 commit;
 
@@ -51,22 +46,18 @@ create sequence board_seq
 start with 1
 increment by 1;
 
-// users_board sequence 생성
 
-create sequence users_board_seq
-start with 1
-increment by 1;
 select * from user_sequences;
 
 // sequence 등록
 
 update board set bid=board_seq.nextval;
-update users_board set "id" =users_board_seq.nextval;
+update users set "users_id" =users_seq.nextval;
 commit;
 
 // table 연결 확인
 
-select * from users, users_board where users.users_id = USERS_BOARD."u_id";
+select * from users, board where users.users_id = board.writer;
 
 //삽입
 INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('a', 'a', 'a', 'a@a.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
@@ -83,12 +74,7 @@ INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('
 INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('5', 'e', 'test5', 'test5', TO_DATE('2019-07-27 23:54:15', 'YYYY-MM-DD HH24:MI:SS'));
 commit;
 
-INSERT INTO "GROUPTH"."USERS_BOARD" ("id", "u_id", "b_id") VALUES ('1', 'a', '1')
-INSERT INTO "GROUPTH"."USERS_BOARD" ("id", "u_id", "b_id") VALUES ('2', 'b', '2')
-INSERT INTO "GROUPTH"."USERS_BOARD" ("id", "u_id", "b_id") VALUES ('3', 'c', '3')
-INSERT INTO "GROUPTH"."USERS_BOARD" ("id", "u_id", "b_id") VALUES ('4', 'd', '4')
-INSERT INTO "GROUPTH"."USERS_BOARD" ("id", "u_id", "b_id") VALUES ('5', 'e', '5')
-commit;
+
 
 
 
