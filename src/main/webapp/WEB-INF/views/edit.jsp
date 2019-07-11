@@ -22,9 +22,6 @@
 		if(action.equals("insert")){
 	%>
 		<input type="hidden" name="action" value="insert">
-	<%}else if(action.equals("update")){ %> 
-		<input type="hidden" name="action" value="update">
-	<%} %>
 		<input type="hidden" name="writer" value="${sessionScope.loginUser.user}">
 		<input type="text" name="title" placeholder="제목을 입력해주세요" required size=48><br>
 		<textarea cols="50" rows="8" name="content" required
@@ -32,6 +29,17 @@
 		<input type="submit" value="저장"> <input type="reset"
 			value="재작성"> <input type="button"
 			onclick="back(); return false;" value="뒤로가기">
+	<%}else if(action.equals("update")){ %> 
+		<input type="hidden" name="action" value="update">
+		<input type="hidden" name="writer" value="${sessionScope.loginUser.user}">
+		<input type="text" name="title" placeholder="제목을 입력해주세요" required size=48><br>
+		<textarea cols="50" rows="8" name="content" required
+			placeholder="내용을 입력해주세요."></textarea><br> 
+		<input type="submit" value="저장"> <input type="reset"
+			value="재작성"> <input type="button"
+			onclick="back(); return false;" value="뒤로가기">
+	<%} %>
+		
 	</form>
 	<script>
 		function back(){

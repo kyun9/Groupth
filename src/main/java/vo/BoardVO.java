@@ -11,9 +11,6 @@ public class BoardVO {
 	public int getBid() {
 		return bid;
 	}
-	public void setBid(int bid) {
-		this.bid = bid;
-	}
 	public String getWriter() {
 		return writer;
 	}

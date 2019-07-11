@@ -24,13 +24,6 @@ public class BoardController {
 		if (action != null) {
 			if (action.equals("read")) {
 				mav.addObject("listone", dao.listOne(Integer.valueOf(newsid)));
-			} else if (action.equals("delete")) {
-				boolean result = dao.delete(Integer.valueOf(newsid));
-				if (result) {
-					mav.addObject("msg", "성공적으로 삭제되었습니다.");
-				} else {
-					mav.addObject("msg", "삭제 실패 했습니다.");
-				}
 			} else if (action.equals("search")) {
 //				BoardSearchVO vo = info.find(key, searchType);
 //				mav.addObject("list", dao.search(vo));
@@ -53,14 +46,7 @@ public class BoardController {
 	public ModelAndView doPost(BoardVO vo, String action, String id) {
 		ModelAndView mav = new ModelAndView();
 
-		if (action.equals("insert")) {
-			boolean result = dao.insert(vo);
-			if (result) {
-				mav.addObject("msg", "등록되었습니다.");
-			} else {
-				mav.addObject("mag", "등록에 실패하였습니다.");
-			}
-		} else if (action.equals("update")) {
+		if (action.equals("update")) {
 			boolean result = dao.update(vo);
 			if (result) {
 				mav.addObject("msg", "업데이트 되었습니다.");
@@ -87,7 +73,7 @@ public class BoardController {
 				mav.addObject("msg", "삭제 실패 했습니다.");
 			}
 			mav.addObject("list", dao.listAll());
-			mav.setViewName("board");
+			mav.setViewName("redirect:/board");
 			return mav;
 		}
 		mav.setViewName("boardContent");
@@ -116,7 +102,7 @@ public class BoardController {
 			
 		}
 		mav.addObject("list", dao.listAll());
-		mav.setViewName("board");
+		mav.setViewName("redirect:/board");
 		return mav;
 	}
 }
