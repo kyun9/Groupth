@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="vo.Login_InfoVO"%>
+<%@ page import="vo.BoardVO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,20 +16,35 @@
 	<%
 		}
 	%>
+	<%
+		if (request.getAttribute("listone") != null) {
+			BoardVO one = (BoardVO) request.getAttribute("listone");
+	%>
 	<form method="get" action="/mini/board/content/edit">
-		작성자 : ${sessionScope.loginUser.user}<br> 
-		<input type="text" name="title" placeholder="제목을 입력해주세요" required size=48><br>
-		<textarea cols="50" rows="8" name="content" required placeholder="내용을 입력해주세요."></textarea>
-		<br> <input type="hidden" name="action" value="update"> 
+		번호 : <%= one.getBid() %> 조회수: <%= one.getCnt() %><br>
+		작성자 : <%= one.getWriter() %><br>
+		날짜 : <%= one.getWritedate() %><br> 
+		제목 : <%= one.getTitle() %><br>
+		내용 : <%= one.getContent() %><br><br>
+		
+		<input type="hidden" name="action" value="update"> 
+		<input type="hidden" name="bid" value="<%= one.getBid() %>"> 
+		<input type="hidden" name="title" value="<%= one.getTitle() %>"> 
+		<input type="hidden" name="content" value="<%= one.getContent() %>"> 
+		
 		<%
+		if (session.getAttribute("loginUser") != null) {
 			Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
 			if (user.getUser().equals(request.getParameter("writer"))) {
 		%>
 		<input type="submit" value="수정하기"> 
 		<input type="button" onclick="boardDelete(); return false;" value="삭제하기">
-		<%}
+		<%}}
 		%>
 	</form>
+	<%
+		}
+	%>
 	hi content
 	<button onclick="goBoard()">뒤로가기</button>
 	<script>

@@ -30,11 +30,13 @@
 			value="재작성"> <input type="button"
 			onclick="back(); return false;" value="뒤로가기">
 	<%}else if(action.equals("update")){ %> 
+		번호 : <%= request.getParameter("bid") %>
+		작성자 :  ${ sessionScope.loginUser.user}<br>
 		<input type="hidden" name="action" value="update">
-		<input type="hidden" name="writer" value="${sessionScope.loginUser.user}">
-		<input type="text" name="title" placeholder="제목을 입력해주세요" required size=48><br>
+		<input type="hidden" name="bid" value="<%= request.getParameter("bid")%>">
+		<input type="text" name="title" value="<%= request.getParameter("title") %>" required size=48><br>
 		<textarea cols="50" rows="8" name="content" required
-			placeholder="내용을 입력해주세요."></textarea><br> 
+			><%= request.getParameter("content") %></textarea><br> 
 		<input type="submit" value="저장"> <input type="reset"
 			value="재작성"> <input type="button"
 			onclick="back(); return false;" value="뒤로가기">
