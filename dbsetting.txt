@@ -74,6 +74,33 @@ INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('
 INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('5', 'e', 'test5', 'test5', TO_DATE('2019-07-27 23:54:15', 'YYYY-MM-DD HH24:MI:SS'));
 commit;
 
+//group 생성	
+CREATE TABLE GROUPS  
+(
+  gid NUMBER(8,0),
+  group_name varchar2(30) not null,
+  fid NUMBER(8,0),
+  content varchar2(900 BYTE),
+  leader VARCHAR2(20) not null,
+  limit_num NUMBER(8,0),
+  img blob,
+  CONSTRAINT GROUP_PK PRIMARY KEY (gid)
+);
+
+//group gid sequence 생성
+create sequence groups_seq
+start with 1
+increment by 1;
+
+//sequence update
+update groups set gid=groups_seq.nextval;
+
+//constraint setting groups=users
+ALTER TABLE "GROUPS" ADD FOREIGN KEY ("LEADER") REFERENCES "USERS" ("USERS_ID");
+commit;
+
+//setting test
+select * from users, groups where users.users_id = groups.leader;
 
 
 

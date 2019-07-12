@@ -17,13 +17,15 @@ if(session.getAttribute("loginUser")!=null){
 <input type="submit" value="로그아웃">
 <input onclick="goMypage(); return false;" type="button" value="마이페이지">
 <input onclick="goBoard(); return false;" type="button" value="게시판">
+<input onclick="goGroup(); return false;" type="button" value="그룹">
 </form>
 <%
 }else{
 %>
 <button onclick="goLogin()">로그인화면</button>
 <button onclick="goRegister()">회원가입화면</button>
-<button onclick="goBoard(); return false;">게시판</button>
+<button onclick="goBoard()">게시판</button>
+<button onclick="goGroup()">그룹</button>
 <%
 }
 %>
@@ -39,6 +41,9 @@ if(session.getAttribute("loginUser")!=null){
 	}
 	function goBoard(){
 		location.href="/mini/board/"
+	}
+	function goGroup(){
+		location.href="/mini/group/"
 	}
 </script>
 </body>

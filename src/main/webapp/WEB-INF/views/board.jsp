@@ -118,16 +118,7 @@ if(session.getAttribute("loginUser")!=null){
 	</div>
 	<br>
 	
-	<%
-		
-		if (request.getAttribute("msg") != null) {
-	%>
-	<script>
-		alert("${msg}");
-	</script>
-	<%
-		}
-	%>
+	
 	<script>
 		function displayDiv(type){
 			if(type==1)
@@ -146,26 +137,6 @@ if(session.getAttribute("loginUser")!=null){
 		}
 		
 	</script>
-	<%
-		if (request.getAttribute("listone") != null) {
-			BoardVO one = (BoardVO) request.getAttribute("listone");
-	%>
-	<div id="search" align="center">
-		<h2>뉴스 내용</h2>
-		<form method="post" action="/mini/board">
-			<input type="hidden" name="action" value="update"> <input
-				type="hidden" name="id" value=<%=one.getBid()%>> <input
-				type="text" name="writer" value=<%=one.getWriter()%> size=48><br>
-			<input type="text" name="title" value=<%=one.getTitle()%> size=48><br>
-			<textarea cols="50" rows="8" name="content"><%=one.getContent()%></textarea>
-			<br> <input type="button" value="확인"
-				onclick="displayDiv(2); return false;"> <input type="submit"
-				value="수정"> <input type="button"
-				onclick="deleteNews(<%=one.getBid()%>)" value="삭제">
-		</form>
-	</div>
-	<%
-		}
-	%>
+	
 </body>
 </html>
