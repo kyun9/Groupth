@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
+    
+    <title>Groupth</title>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./file/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./file/css/respond.css" />
+
+    <link rel="stylesheet" href="./file/css/yt-video-background.min.css">
+
+    <!--[if lt IE 9]>
+       <script src="./file/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<dl class="skip">
+	<dt class="blind"><strong>skip navigation</strong></dt>
+    <dd><a href="#content">skip to content</a></dd>
+</dl>
+<div id="wrap">
+	<div id="header">
+		<div class="container">
+			<h1 id="logo"><a href="#"><img src="./file/img/s_img/logo.png" /></a></h1>
+			
+			<div class="menu mobile"></div>
+			<div class="nav">
+				<ul class="gnb">
+					<li><a href="#">매칭</a></li>
+					<li><a href="#">그룹</a></li>
+					<li><a href="#">게시판</a></li>
+				</ul>
+				<ul class="nav_bar">
+					<ul>
+						<li><a href="#">로그인</a></li>
+						<li class="last"><a href="#">회원가입</a></li>
+					</ul>
+				</ul>
+			</div><!-- nav End -->
+		</div><!-- container End -->
+	</div><!-- header End -->
+
+	<script>
+	$(".menu").click(function(){
+		$(".nav").animate({
+			left: 0;	  
+		}, 5000);
+	});
+	</script>
+
+	<div id="content">
+		<div class="visual_section">
+			<div class="video-background"></div>
+			<div class="cover"></div>
+			<div class="container">
+				<h3>직접 만나 함께하는 즐거움</h3>
+				<p>로컬 그룹에 가입하고 사람들과 좋아하는 일을 함께 하며 새로운 경험을 즐겨 보세요.</p>
+				<a href="#">Groupth 가입하기</a> <!-- session true = 가입 X -->
+			</div>
+		</div><!-- visual_section End -->
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="./file/js/yt-video-background.min.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			$('.video-background').youtubeBackground({
+				videoId: 'aaF-49vtAXw',
+				backgroundColor: '#212121',
+				backgroundImage: 'https://i.ytimg.com/vi/ITpIv6Efz8Y/maxresdefault.jpg', // For mobile devices
+				opacity: 0.6
+			});
+		</script>
+
+
+		<div class="group_section">
+			<div class="container">
+				<h4>인기 있는 그룹</h4>
+				<ul>
+					<li>
+						<div class="img"></div>
+						<div class="cty">카테고리</div>
+						<div class="title">그룹명</div>
+					</li>
+					<li>
+						<div class="img"></div>
+						<div class="cty">카테고리</div>
+						<div class="title">그룹명</div>
+					</li>
+					<li class="last">
+						<div class="img"></div>
+						<div class="cty">카테고리</div>
+						<div class="title">그룹명</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div><!-- content End -->
+
+	<div id="footer">
+		<div class="container"><p>Copyrightⓒ Groupth</p></div>
+	</div>
+</div>
+
+</body>
+</html>
