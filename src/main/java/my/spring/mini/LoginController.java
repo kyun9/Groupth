@@ -27,12 +27,13 @@ public class LoginController {
 	public ModelAndView doLogin(String idVal, String pwdVal,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		UsersVO user = dao.loginUser(idVal, pwdVal);
+		System.out.println(user.toString());
 		String url;
 		if(user!=null) {
 			System.out.println("로그인 성공");
 			Login_InfoVO loginInfo = new Login_InfoVO();
 			loginInfo.setUser(user.getUsers_id());
-			loginInfo.setUser_name(user.getUsers_name());
+			loginInfo.setUser_name(user.getName());
 			session.setAttribute("loginUser", loginInfo);
 			url = "redirect:/";
 		}

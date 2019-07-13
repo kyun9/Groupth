@@ -14,10 +14,10 @@ if(session.getAttribute("loginUser")!=null){
 	window.location.href="/mini/";
 </script>
 <%} %>
-<h3>회원가입</h3>
+<h3>회원가입</h3> 
  <form method="post" action="/mini/register">
  	아이디 <input type="text" name="users_id" required><br>
- 	이름 <input type="text" name="users_name" required><br>
+ 	이름 <input type="text" name="name" required><br>
  	비밀번호 <input type="password" name="password" required><br>
  	이메일 <input type="email" name="email" required><br>
  	<input type="submit" value="가입">

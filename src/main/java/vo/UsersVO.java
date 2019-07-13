@@ -2,22 +2,41 @@ package vo;
 
 public class UsersVO {
 	private String users_id;
-	private String users_name;
+	@Override
+	public String toString() {
+		return "UsersVO [users_id=" + users_id + ", name=" + name + ", password=" + password + ", email=" + email
+				+ ", join_date=" + join_date + ", img=" + img + ", field=" + field + "]";
+	}
+	private String name;
 	private String password;
 	private String email;
 	private String join_date;
+	private String img;
+	private int field;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public int getField() {
+		return field;
+	}
+	public void setField(int field) {
+		this.field = field;
+	}
 	public String getUsers_id() {
 		return users_id;
 	}
 	public void setUsers_id(String users_id) {
 		this.users_id = users_id;
-	}
-	public String getUsers_name() {
-		return users_name;
-	}
-	public void setUsers_name(String users_name) {
-		this.users_name = users_name;
 	}
 	public String getPassword() {
 		return password;

@@ -1,107 +1,118 @@
-databases
-
-//sqlplus
-create user groupth identified by groupth;
-grant connect, resource to groupth;
-
-// users 테이블 생성
-
-CREATE TABLE users (
-
-       users_id                VARCHAR2(20)             NOT NULL,
-       users_name        VARCHAR2(20)  NOT NULL,
-       password         VARCHAR2(20)  not null,
-       email      VARCHAR2(40)   not null,
-       join_date              date,  
-      
-    
-      CONSTRAINT USERS_PK PRIMARY KEY (users_id)
+CREATE TABLE  users 
+(
+   users_id  varchar2(20) PRIMARY KEY,
+   name  varchar2(20) NOT NULL,
+   password  varchar2(20) NOT NULL,
+   email  varchar2(40) NOT NULL,
+   join_date  date,
+   img  blob,
+   field  NUMBER(8,0)
 );
 
+CREATE TABLE  board 
+(
+   bid  NUMBER(8,0) PRIMARY KEY,
+   writer  varchar2(20) NOT NULL,
+   title  varchar2(120) NOT NULL,
+   content  varchar2(900),
+   writedate  date,
+   cnt  NUMBER(8,0)
+);
 
+CREATE TABLE  comments
+(
+   cid  NUMBER(8,0) PRIMARY KEY,
+   bid  NUMBER(8,0) NOT NULL,
+   writer  varchar2(20) NOT NULL,
+   content  varchar2(500),
+   writedate  date
+);
 
-// board table 생성
+CREATE TABLE  field 
+(
+   fid  NUMBER(8,0) PRIMARY KEY,
+   type  varchar2(20) NOT NULL
+);
 
-CREATE TABLE board 
-   (	"BID" NUMBER(8,0), 
-	"WRITER" VARCHAR2(18 BYTE), 
-	"TITLE" VARCHAR2(120 BYTE), 
-	"CONTENT" VARCHAR2(900 BYTE), 
-	"WRITEDATE" DATE, 
-	"CNT" NUMBER(8,0), 
-	 PRIMARY KEY ("BID")
-     );
+CREATE TABLE  groups 
+(
+   gid  NUMBER(8,0) PRIMARY KEY,
+   g_name  varchar2(200) NOT NULL,
+   fid  NUMBER(8,0) NOT NULL,
+   leader  varchar2(20) NOT NULL,
+   g_content  varchar2(900),
+   limit_mem  NUMBER(8,0),
+   img  blob
+);
 
+CREATE TABLE  users_group 
+(
+   id  NUMBER(8,0) PRIMARY KEY,
+   users_id  varchar2(20) NOT NULL,
+   gid  NUMBER(8,0) NOT NULL,
+   leader  varchar2(20) NOT NULL
+);
 
-     
- // pk, fk 연결 
- 
-     ALTER TABLE "BOARD" ADD FOREIGN KEY ("WRITER") REFERENCES "USERS" ("USERS_ID");
-    SELECT * FROM    ALL_CONSTRAINTS;
-commit;
+CREATE TABLE  group_board 
+(
+   group_bid  NUMBER(8,0) PRIMARY KEY,
+   gid  NUMBER(8,0) NOT NULL,
+   writer  varchar2(20) NOT NULL,
+   title  varchar2(200) NOT NULL,
+   content  varchar2(900),
+   writedate  date,
+   cnt  NUMBER(8,0)
+);
 
-// board sequence 생성
+ALTER TABLE  board  ADD FOREIGN KEY ( writer ) REFERENCES  users  ( users_id );
+
+ALTER TABLE  comments  ADD FOREIGN KEY ( bid ) REFERENCES  board  ( bid );
+
+ALTER TABLE  comments  ADD FOREIGN KEY ( writer) REFERENCES  users  ( users_id );
+
+ALTER TABLE  users_group  ADD FOREIGN KEY ( users_id ) REFERENCES  users  ( users_id );
+
+ALTER TABLE  users_group  ADD FOREIGN KEY ( gid ) REFERENCES  groups  ( gid );
+    
+ALTER TABLE  users  ADD FOREIGN KEY ( field ) REFERENCES  field  ( fid );
+
+ALTER TABLE  groups  ADD FOREIGN KEY ( fid ) REFERENCES  field  ( fid );
+
+ALTER TABLE  group_board  ADD FOREIGN KEY ( writer ) REFERENCES  users  ( users_id );
+
+ALTER TABLE  group_board  ADD FOREIGN KEY ( gid ) REFERENCES  groups  ( gid );
 
 create sequence board_seq
 start with 1
 increment by 1;
 
+create sequence users_group_seq
+start with 1
+increment by 1;
 
-select * from user_sequences;
+create sequence comments_seq
+start with 1
+increment by 1;
 
-// sequence 등록
+create sequence field_seq
+start with 1
+increment by 1;
 
-update board set bid=board_seq.nextval;
-update users set "users_id" =users_seq.nextval;
-commit;
-
-// table 연결 확인
-
-select * from users, board where users.users_id = board.writer;
-
-//삽입
-INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('a', 'a', 'a', 'a@a.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('b', 'b', 'b', 'b@b.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('c', 'c', 'c', 'c@c.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('d', 'd', 'd', 'd@d.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO "GROUPTH"."USERS" (USERS_ID, USERS_NAME, PASSWORD, EMAIL, JOIN_DATE) VALUES ('e', 'e', 'e', 'e@e.com', TO_DATE('2019-07-10 23:50:21', 'YYYY-MM-DD HH24:MI:SS'));
-commit;
-
-INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('1', 'a', 'test', 'test', TO_DATE('2019-07-10 23:53:30', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('2', 'b', 'test2', 'test2', TO_DATE('2019-07-10 23:53:30', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('3', 'c', 'test3', 'test3', TO_DATE('2019-07-10 23:54:10', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('4', 'd', 'test4', 'test4', TO_DATE('2019-07-20 23:54:12', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO "GROUPTH"."BOARD" (BID, WRITER, TITLE, CONTENT, WRITEDATE) VALUES ('5', 'e', 'test5', 'test5', TO_DATE('2019-07-27 23:54:15', 'YYYY-MM-DD HH24:MI:SS'));
-commit;
-
-//group 생성	
-CREATE TABLE GROUPS  
-(
-  gid NUMBER(8,0),
-  group_name varchar2(30) not null,
-  fid NUMBER(8,0),
-  content varchar2(900 BYTE),
-  leader VARCHAR2(20) not null,
-  limit_num NUMBER(8,0),
-  img blob,
-  CONSTRAINT GROUP_PK PRIMARY KEY (gid)
-);
-
-//group gid sequence 생성
 create sequence groups_seq
 start with 1
 increment by 1;
 
-//sequence update
+create sequence group_board_seq
+start with 1
+increment by 1;
+
+select * from user_sequences;
+
+update board set bid=board_seq.nextval;
+update users_group set id=users_group_seq.nextval;
+update comments set cid=comments_seq.nextval;
+update field set fid=field_seq.nextval;
 update groups set gid=groups_seq.nextval;
+update group_board set group_bid=group_board_seq.nextval;
 
-//constraint setting groups=users
-ALTER TABLE "GROUPS" ADD FOREIGN KEY ("LEADER") REFERENCES "USERS" ("USERS_ID");
 commit;
-
-//setting test
-select * from users, groups where users.users_id = groups.leader;
-
-
-
-
