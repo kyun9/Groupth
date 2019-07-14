@@ -33,7 +33,7 @@
 		<button onclick="goCreateGroup()">그룹 생성하기</button><br>
 		<script>
 			function goCreateGroup(){
-		<%
+		<%	
 		if (session.getAttribute("loginUser") != null) {
 		%>
 				location.href="/mini/group/createGroup";
@@ -43,20 +43,23 @@
 			<%}%>
 			
 			}
+			function goGroup(){
+				location.href="/mini/group/content";
+				//이거 listone이랑 똑같이 만들면돼
+			}
 		</script>
 		<%
 		ArrayList<Group_InfoVO> group = (ArrayList<Group_InfoVO>) request.getAttribute("grouplist");
 		if (!group.isEmpty()) {
 			for (Group_InfoVO list : group) {
 		%> 
-		<div style="border: 1px solid black">
-			<img src="../resources/img/tmp.png" width=200px height=200px><br>
+		<div style="border: 1px solid black" onclick="goGroup()">
+			<img src="./resources/img/tmp.png" width=200px height=200px><br>
 			분야 <%=list.getType() %><br>
 			그룹 명 : <%=list.getG_name()%><br>
 			그룹 리더 <%=list.getLeader() %><br>
 			모집인원 : <%=list.getLimit_mem() %><br>
 		</div>
  		<%}} %>
-		
 </body>
 </html>

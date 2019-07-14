@@ -31,19 +31,19 @@ if(session.getAttribute("loginUser")!=null){
 %>
 <script>
 	function goLogin(){
-		location.href="/mini/login/"
+		location.href="/mini/login"
 	}
 	function goRegister(){
-		location.href="/mini/register/"
+		location.href="/mini/register"
 	}
 	function goMypage(){
-		location.href="/mini/mypage/"
+		location.href="/mini/mypage"
 	}
 	function goBoard(){
-		location.href="/mini/board/"
+		location.href="/mini/board"
 	}
 	function goGroup(){
-		location.href="/mini/group/"
+		location.href="/mini/group"
 	}
 </script>
 </body>
