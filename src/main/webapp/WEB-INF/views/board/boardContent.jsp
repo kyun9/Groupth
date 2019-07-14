@@ -49,7 +49,7 @@
 	<button onclick="goBoard()">뒤로가기</button>
 	<script>
 		function goBoard(){
-		 location.href="<%=request.getHeader("referer")%>";
+		 location.href="/mini/board";
 		}
 		function boardDelete(){
 			location.href="/mini/board/content?action=delete&bid=<%=request.getParameter("bid")%>"

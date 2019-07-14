@@ -17,7 +17,7 @@ public class RegisterController {
 	@RequestMapping(value="/register", method= RequestMethod.GET)
 	public String register() {
 		System.out.println("register");
-		return "register";
+		return "auth/register";
 	}
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public ModelAndView doRegister(UsersVO vo) {

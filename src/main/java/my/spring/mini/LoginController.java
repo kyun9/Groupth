@@ -21,13 +21,12 @@ public class LoginController {
 	@RequestMapping(value="/login", method= RequestMethod.GET)
 	public String login(HttpSession session) {
 		System.out.println("login");
-		return "login";
+		return "auth/login";
 	}
 	@RequestMapping(value="/loginProcess", method= RequestMethod.POST)
 	public ModelAndView doLogin(String idVal, String pwdVal,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		UsersVO user = dao.loginUser(idVal, pwdVal);
-		System.out.println(user.toString());
 		String url;
 		if(user!=null) {
 			System.out.println("로그인 성공");

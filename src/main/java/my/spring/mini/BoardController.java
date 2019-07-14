@@ -24,16 +24,16 @@ public class BoardController {
 		if (action != null) {
 			if (action.equals("search")) {
 				mav.addObject("list", dao.search(key, searchType));
-				mav.setViewName("board");
+				mav.setViewName("board/board");
 				return mav;
 			} else if (action.equals("listwriter")) {
 				mav.addObject("list", dao.listWriter(writer));
-				mav.setViewName("board");
+				mav.setViewName("board/board");
 				return mav;
 			}
 		}
 		mav.addObject("list", dao.listAll());
-		mav.setViewName("board");
+		mav.setViewName("board/board");
 		return mav;
 	}
 
@@ -50,7 +50,7 @@ public class BoardController {
 			}
 		}
 		mav.addObject("list", dao.listAll());
-		mav.setViewName("board");
+		mav.setViewName("board/board");
 		return mav;
 	}
 
@@ -66,7 +66,7 @@ public class BoardController {
 			mav.setViewName("redirect:/board");
 			return mav;
 		}
-		mav.setViewName("boardContent");
+		mav.setViewName("board/boardContent");
 		return mav;
 	}
 	
@@ -74,7 +74,7 @@ public class BoardController {
 	public ModelAndView doGetEdit(BoardVO vo, String action) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("edit");
+		mav.setViewName("board/edit");
 		return mav;
 	}
 	@RequestMapping(value="/board/content/edit", method=RequestMethod.POST)
