@@ -1,6 +1,6 @@
 package vo;
 
-public class GroupVO {
+public class Group_InfoVO {
 	private int gid;
 	private String g_name;
 	private int fid;
@@ -8,6 +8,7 @@ public class GroupVO {
 	private String g_content;
 	private int limit_mem;
 	private String img;
+	private String type;
 	public int getGid() {
 		return gid;
 	}
@@ -50,7 +51,11 @@ public class GroupVO {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	
-	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 }

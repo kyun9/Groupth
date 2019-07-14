@@ -7,16 +7,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.FieldDAO;
+import dao.GroupDAO;
+import vo.GroupVO;
 
 @Controller
 public class GroupController {
 	@Autowired
 	FieldDAO Fielddao;
+	@Autowired
+	GroupDAO GroupDao;
 	
 	@RequestMapping(value="/group",  method = RequestMethod.GET)
 	public ModelAndView group() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("field", Fielddao.ListAllType());
+		mav.addObject("grouplist", GroupDao.ListAllGroup());
 		mav.setViewName("group/group");
 		return mav;		
 	}
@@ -30,10 +35,16 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="/group/createGroup", method = RequestMethod.POST)
-	public ModelAndView doPostCreatGroup() {
+	public ModelAndView doPostCreatGroup(GroupVO vo, String action) {
 		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("group/gEdit");
+		if (action.equals("insert")) {
+			boolean result = GroupDao.create(vo);
+			if(result) 
+				System.out.println("그룹 생성 성공");
+			else
+				System.out.println("그룹 생성 실패");
+		}
+		mav.setViewName("redirect:/group");
 		return mav;
 	}
 	

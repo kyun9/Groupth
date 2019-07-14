@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="vo.FieldVO, java.util.ArrayList"%>
+<%@ page import="vo.FieldVO, vo.Group_InfoVO, java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,14 +27,36 @@
  	<%}} %>
  	<br>
  		<input type="text" name="key">
- 		<input type="submit" value="검색"><br>
+ 		<input type="submit" value="그룹 검색"><br>
 	</form>
 	
-		<button onclick="goCreateGroup()">그룹 생성하기</button>
+		<button onclick="goCreateGroup()">그룹 생성하기</button><br>
 		<script>
 			function goCreateGroup(){
+		<%
+		if (session.getAttribute("loginUser") != null) {
+		%>
 				location.href="/mini/group/createGroup";
+			<%} else{%>
+				alert("로그인이 필요합니다.");
+				location.href="/mini/login/";
+			<%}%>
+			
 			}
 		</script>
+		<%
+		ArrayList<Group_InfoVO> group = (ArrayList<Group_InfoVO>) request.getAttribute("grouplist");
+		if (!group.isEmpty()) {
+			for (Group_InfoVO list : group) {
+		%> 
+		<div style="border: 1px solid black">
+			<img src="../resources/img/tmp.png" width=200px height=200px><br>
+			분야 <%=list.getType() %><br>
+			그룹 명 : <%=list.getG_name()%><br>
+			그룹 리더 <%=list.getLeader() %><br>
+			모집인원 : <%=list.getLimit_mem() %><br>
+		</div>
+ 		<%}} %>
+		
 </body>
 </html>

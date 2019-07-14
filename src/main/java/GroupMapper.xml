@@ -3,11 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="GroupMapper">
-	<insert id="createGroup" parameterType="vo.GroupVO">
+	<insert id="insertGroup" parameterType="vo.GroupVO">
 		<selectKey resultType="_int" keyProperty="gid" order="BEFORE">
 			select GROUPS_SEQ.nextval from dual
 		</selectKey>
-		insert into groups(gid, group_name, fid, content, leader, limit_num, img)
-		values(#{gid},#{group_name},#{fid},#{leader},#{fid},#{limit_num},#{img})
+		insert into groups(gid, g_name, fid, leader, g_content, limit_mem, img)
+		values(#{gid},#{g_name},#{fid},#{leader},#{g_content},#{limit_mem},#{img})
 	</insert>
+	<select id="ListAllGroup" resultType="vo.Group_InfoVO">
+		select gid, g_name, leader, g_content, limit_mem, type from groups,field where groups.fid =field.fid
+	</select>
 </mapper>

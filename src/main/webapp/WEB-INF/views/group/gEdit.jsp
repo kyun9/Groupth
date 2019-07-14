@@ -16,8 +16,8 @@
 		}
 	%>
 	
-	<!-- post로 바꾸기  -->
-	<form method="get" action="/mini/group">
+	<form method="post" action="/mini/group/createGroup">
+		<input type="hidden" name ="action" value="insert">
 		그룹 분야 : <select name="fid">
 			<%
 				ArrayList<FieldVO> field = (ArrayList<FieldVO>) request.getAttribute("field");
