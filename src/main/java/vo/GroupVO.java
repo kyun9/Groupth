@@ -2,32 +2,29 @@ package vo;
 
 public class GroupVO {
 	private int gid;
-	private String group_name;
-	private int fid;
-	private String content;
-	private String leader;
-	private int limit_num;
+	private String g_name;
+	private String fid;
+	private String leader; 
+	private String g_content;
+	private String limit_mem;
 	private String img;
 	public int getGid() {
 		return gid;
 	}
-	public String getGroup_name() {
-		return group_name;
+	public void setGid(int gid) {
+		this.gid = gid;
 	}
-	public void setGroup_name(String group_name) {
-		this.group_name = group_name;
+	public String getG_name() {
+		return g_name;
 	}
-	public int getFid() {
+	public void setG_name(String g_name) {
+		this.g_name = g_name;
+	}
+	public String getFid() {
 		return fid;
 	}
-	public void setFid(int fid) {
+	public void setFid(String fid) {
 		this.fid = fid;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
 	}
 	public String getLeader() {
 		return leader;
@@ -35,11 +32,17 @@ public class GroupVO {
 	public void setLeader(String leader) {
 		this.leader = leader;
 	}
-	public int getLimit_num() {
-		return limit_num;
+	public String getG_content() {
+		return g_content;
 	}
-	public void setLimit_num(int limit_num) {
-		this.limit_num = limit_num;
+	public void setG_content(String g_content) {
+		this.g_content = g_content;
+	}
+	public String getLimit_mem() {
+		return limit_mem;
+	}
+	public void setLimit_mem(String limit_mem) {
+		this.limit_mem = limit_mem;
 	}
 	public String getImg() {
 		return img;

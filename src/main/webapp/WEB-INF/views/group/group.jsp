@@ -19,20 +19,20 @@
 	<form method="get" action="/mini/group">
 		관심분야 <br>
 	<%
-		ArrayList<String> field = (ArrayList<String>) request.getAttribute("field");
+		ArrayList<FieldVO> field = (ArrayList<FieldVO>) request.getAttribute("field");
 		if (!field.isEmpty()) {
-			for (String type : field) {
+			for (FieldVO type : field) {
 	%>
-		<input type='checkbox' name='field' value='<%=type%>' /><%=type%>
+		<input type='checkbox' name='field' value='<%=type.getType()%>' /><%=type.getType()%>
  	<%}} %>
  	<br>
  		<input type="text" name="key">
  		<input type="submit" value="검색"><br>
 	</form>
 	
-		<button onclick="createGroup()">그룹 생성하기</button>
+		<button onclick="goCreateGroup()">그룹 생성하기</button>
 		<script>
-			function createGroup(){
+			function goCreateGroup(){
 				location.href="/mini/group/createGroup";
 			}
 		</script>

@@ -101,8 +101,9 @@ if(session.getAttribute("loginUser")!=null){
 				<option value="title">제목</option>
 				<option value="bid">번호</option>
 				<option value="writer">작성자</option>
-			</select> <input type="hidden" name="action" value="search"> <input
-				type="text" name="key"> <input type="submit" value="뉴스검색">
+			</select>
+			 <input type="hidden" name="action" value="search"> 
+			 <input type="text" name="key"> <input type="submit" value="뉴스검색">
 		</form>
 	</div>
 	<br>
