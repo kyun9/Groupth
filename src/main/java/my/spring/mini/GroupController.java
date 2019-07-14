@@ -16,7 +16,13 @@ public class GroupController {
 	public ModelAndView group() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("field", Fielddao.ListAllType());
-		mav.setViewName("group");
+		mav.setViewName("group/group");
 		return mav;		
 	}
+	
+	@RequestMapping(value="/group/createGroup")
+	public ModelAndView creatGroup() {
+		return null;
+	}
+	
 }

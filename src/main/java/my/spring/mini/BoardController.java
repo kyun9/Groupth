@@ -37,22 +37,6 @@ public class BoardController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/board", method = RequestMethod.POST)
-	public ModelAndView doPost(BoardVO vo, String action, String id) {
-		ModelAndView mav = new ModelAndView();
-
-		if (action.equals("update")) {
-			boolean result = dao.update(vo);
-			if (result) {
-				mav.addObject("msg", "업데이트 되었습니다.");
-			} else {
-				mav.addObject("msg", "업데이트 실패하였습니다.");
-			}
-		}
-		mav.addObject("list", dao.listAll());
-		mav.setViewName("board/board");
-		return mav;
-	}
 
 	@RequestMapping(value = "/board/content", method = RequestMethod.GET)
 	public ModelAndView goContent(String action,String bid) {
@@ -88,7 +72,7 @@ public class BoardController {
 			dao.update(vo);
 		}
 		mav.addObject("list", dao.listAll());
-		mav.setViewName("redirect:/board");
+		mav.setViewName("/board/board");
 		return mav;
 	}
 }
