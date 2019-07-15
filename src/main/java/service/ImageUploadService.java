@@ -21,6 +21,7 @@ public class ImageUploadService {
 		boolean result =false;
 		String fileName =img.getOriginalFilename();
 		File f = new File(context.getRealPath("/")+"resources/Gimg/"+fileName);
+		System.out.println(context.getRealPath("/")+"resources/Gimg/"+fileName);
 		FileOutputStream fos = new FileOutputStream(f);
 		fos.write(img.getBytes());
 		fos.close();

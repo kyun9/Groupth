@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 	<%
@@ -26,6 +27,7 @@
 		<input type='checkbox' name='field' value='<%=type.getType()%>' /><%=type.getType()%>
  	<%}} %>
  	<br>
+ 		<input type="hidden" name="action" value="search">
  		<input type="text" name="key">
  		<input type="submit" value="그룹 검색"><br>
 	</form>
@@ -62,4 +64,14 @@
 		</div>
  		<%}} %>
 </body>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('input[type="checkbox"][name="field"]').click(function(){
+        if ($(this).prop('checked')) {
+            $('input[type="checkbox"][name="field"]').prop('checked', false);
+            $(this).prop('checked', true);
+        }
+    });
+});
+</script>
 </html>

@@ -24,10 +24,19 @@ public class GroupController {
 	@Autowired
 	private ImageUploadService imageUploadService;
 	
+	
 	@RequestMapping(value="/group",  method = RequestMethod.GET)
-	public ModelAndView group() {
+	public ModelAndView group(String action, String field,String key) {
 		ModelAndView mav = new ModelAndView();
+
 		mav.addObject("field", Fielddao.ListAllType());
+		if (action != null) {
+			if (action.equals("search")) {
+				mav.addObject("grouplist", GroupDao.search(key, field));
+				mav.setViewName("group/group");
+				return mav;
+			}
+		}
 		mav.addObject("grouplist", GroupDao.ListAllGroup());
 		mav.setViewName("group/group");
 		return mav;		
