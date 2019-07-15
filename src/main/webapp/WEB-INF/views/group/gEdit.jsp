@@ -16,7 +16,7 @@
 		}
 	%>
 	
-	<form method="post" action="/mini/group/createGroup">
+	<form method="post" action="/mini/group/createGroup" enctype="multipart/form-data">
 		<input type="hidden" name ="action" value="insert">
 		그룹 분야 : <select name="fid">
 			<%
@@ -34,8 +34,8 @@
 		그룹 명 : <input type = "text" name = "g_name" required><br>
 		<input type="hidden" name="leader" value="${ sessionScope.loginUser.user}">
 		그룹 소개 : <br>
-		<textarea cols="50" rows="8" name="content" required placeholder="내용을 입력해주세요."></textarea><br>
-		그룹 이미지 등록 : <input type="file" name = "img"><br>
+		<textarea cols="50" rows="8" name="g_content" required placeholder="내용을 입력해주세요."></textarea><br>
+		그룹 이미지 등록 : <input type="file" name = "image" accept="image/*"><br>
 		<input type="submit" value="그룹 생성하기">
 		<input type="reset" value="재작성">
 		<input type="button" onclick="goBack()" value="취소">

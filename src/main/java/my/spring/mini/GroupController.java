@@ -1,13 +1,17 @@
 package my.spring.mini;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.FieldDAO;
 import dao.GroupDAO;
+import service.ImageUploadService;
 import vo.GroupVO;
 
 @Controller
@@ -16,6 +20,8 @@ public class GroupController {
 	FieldDAO Fielddao;
 	@Autowired
 	GroupDAO GroupDao;
+	@Autowired
+	private ImageUploadService imageUploadService;
 	
 	@RequestMapping(value="/group",  method = RequestMethod.GET)
 	public ModelAndView group() {
@@ -35,9 +41,11 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="/group/createGroup", method = RequestMethod.POST)
-	public ModelAndView doPostCreatGroup(GroupVO vo, String action) {
+	public ModelAndView doPostCreatGroup(GroupVO vo, String action, MultipartFile image) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		if (action.equals("insert")) {
+			vo.setImg(image.getOriginalFilename());
+			imageUploadService.getImagePath(image);
 			boolean result = GroupDao.create(vo);
 			if(result) 
 				System.out.println("그룹 생성 성공");

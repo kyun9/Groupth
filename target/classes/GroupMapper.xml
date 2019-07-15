@@ -11,6 +11,6 @@
 		values(#{gid},#{g_name},#{fid},#{leader},#{g_content},#{limit_mem},#{img})
 	</insert>
 	<select id="ListAllGroup" resultType="vo.Group_InfoVO">
-		select gid, g_name, leader, g_content, limit_mem, type from groups,field where groups.fid =field.fid
+		select * from groups,field where groups.fid =field.fid
 	</select>
 </mapper>

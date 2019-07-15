@@ -54,7 +54,7 @@
 			for (Group_InfoVO list : group) {
 		%> 
 		<div style="border: 1px solid black" onclick="goGroup()">
-			<img src="./resources/img/tmp.png" width=200px height=200px><br>
+			<img src="./resources/Gimg/<%=list.getImg()%>" width=200px height=200px><br>
 			분야 <%=list.getType() %><br>
 			그룹 명 : <%=list.getG_name()%><br>
 			그룹 리더 <%=list.getLeader() %><br>
