@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TempMemMapper">
+	<select id="listTempMember" parameterType ="_int" resultType="vo.UsersVO">
+		select u.users_id, u.name, u.email, u.img, field from users u, users_group g where u.users_id = g.users_id and g.gid=#{gid} and cofirm in ('yes')
+	</select>
+</mapper>

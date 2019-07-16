@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="GroupMapper">
 	<insert id="insertGroup" parameterType="vo.GroupVO">
-		insert into groups(gid, g_name, fid, leader, g_content, limit_mem, img)
-		values(GROUPS_SEQ.nextval,#{g_name},#{fid},#{leader},#{g_content},#{limit_mem},#{img})
+		insert into groups(gid, g_name, fid, leader, g_content, limit_mem, img, count_mem)
+		values(GROUPS_SEQ.nextval,#{g_name},#{fid},#{leader},#{g_content},#{limit_mem},#{img},1)
 		<selectKey resultType="_int" keyProperty="gid" order="AFTER">
 			select GROUPS_SEQ.currval from dual
 		</selectKey>
@@ -14,8 +14,8 @@
 		<selectKey resultType="_int" keyProperty="id" order="BEFORE">
 			select USERS_GROUP_SEQ.nextval from dual
 		</selectKey>
-		insert into USERS_GROUP(id, users_id, gid)
-		values(#{id},#{leader},#{gid})
+		insert into USERS_GROUP(id, users_id, gid, cofirm)
+		values(#{id},#{leader},#{gid},'yes')
 	</insert>
 	<select id="ListAllGroup" resultType="vo.Group_InfoVO">
 		select * from groups,field where groups.fid =field.fid

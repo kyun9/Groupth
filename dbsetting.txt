@@ -42,7 +42,8 @@ CREATE TABLE  groups
    leader  varchar2(20) NOT NULL,
    g_content  varchar2(900),
    limit_mem  NUMBER(8,0),
-   img  varchar2(100)
+   img  varchar2(100),
+   count_mem number(8,0)
 );
 
 CREATE TABLE  users_group 
@@ -50,7 +51,7 @@ CREATE TABLE  users_group
    id  NUMBER(8,0) PRIMARY KEY,
    users_id  varchar2(20) NOT NULL,
    gid  NUMBER(8,0) NOT NULL,
-   leader  varchar2(20) NOT NULL
+   cofirm varchar2(20)
 );
 
 CREATE TABLE  group_board 

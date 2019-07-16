@@ -35,7 +35,7 @@
 		<input type="hidden" name="leader" value="${ sessionScope.loginUser.user}">
 		그룹 소개 : <br>
 		<textarea cols="50" rows="8" name="g_content" required placeholder="내용을 입력해주세요."></textarea><br>
-		그룹 이미지 등록 : <input type="file" name = "image" accept="image/*"><br>
+		그룹 이미지 등록 : <input type="file" name = "image" accept="image/*" required><br>
 		<input type="submit" value="그룹 생성하기">
 		<input type="reset" value="재작성">
 		<input type="button" onclick="goBack()" value="취소">

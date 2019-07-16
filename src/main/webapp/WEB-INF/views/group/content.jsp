@@ -33,7 +33,8 @@
 	%>
 	
 	<!-- 다시 post로 바꾸어주기 -->
-	<form action="/mini/group/admin" method="get">
+	<form action="/mini/group/manage" method="get">
+		<input type="hidden" name ="gid" value="<%=content.getGid()%>">
 		<input type="submit" value ="그룹관리">
 	</form>
 	<%}

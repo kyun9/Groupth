@@ -11,10 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.FieldDAO;
 import dao.GroupDAO;
+import dao.Users_GroupDAO;
 import service.ImageUploadService;
 import vo.GroupVO;
 import vo.Group_InfoVO;
-import vo.Users_GroupVO;
 
 @Controller
 public class GroupController {
@@ -22,6 +22,8 @@ public class GroupController {
 	FieldDAO Fielddao;
 	@Autowired
 	GroupDAO GroupDao;
+	@Autowired
+	Users_GroupDAO ugDAO;
 	@Autowired
 	private ImageUploadService imageUploadService;
 	
@@ -73,6 +75,19 @@ public class GroupController {
 		Group_InfoVO vo =GroupDao.showContent(gid);
 		mav.addObject("content", vo);
 		mav.setViewName("group/content");
+		return mav;
+	}
+	
+	@RequestMapping(value="/group/manage",method=RequestMethod.GET)
+	public ModelAndView manageGroup(int gid) {
+		ModelAndView mav = new ModelAndView();
+		if(ugDAO.tempMember(gid)==null) {
+			System.out.println("list 비어 잇음");
+		}
+		else {
+			mav.addObject("tempMember", ugDAO.tempMember(gid));
+		}
+		mav.setViewName("group/manage");
 		return mav;
 	}
 }
