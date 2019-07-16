@@ -55,7 +55,7 @@
 		if (!group.isEmpty()) {
 			for (Group_InfoVO list : group) {
 		%> 
-		<div style="border: 1px solid black" onclick="goGroup()">
+		<div style="border: 1px solid black;float: left;width: 25%;" onclick="goGroup()">
 			<img src="./resources/Gimg/<%=list.getImg()%>" width=200px height=200px><br>
 			분야 <%=list.getType() %><br>
 			그룹 명 : <%=list.getG_name()%><br>
@@ -64,6 +64,7 @@
 		</div>
  		<%}} %>
 </body>
+
 <script type="text/javascript">
 $(document).ready(function() {
     $('input[type="checkbox"][name="field"]').click(function(){

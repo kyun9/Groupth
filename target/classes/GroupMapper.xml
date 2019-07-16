@@ -4,16 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="GroupMapper">
 	<insert id="insertGroup" parameterType="vo.GroupVO">
-		<selectKey resultType="_int" keyProperty="gid" order="BEFORE">
-			select GROUPS_SEQ.nextval from dual
-		</selectKey>
 		insert into groups(gid, g_name, fid, leader, g_content, limit_mem, img)
-		values(#{gid},#{g_name},#{fid},#{leader},#{g_content},#{limit_mem},#{img})
+		values(GROUPS_SEQ.nextval,#{g_name},#{fid},#{leader},#{g_content},#{limit_mem},#{img})
+		<selectKey resultType="_int" keyProperty="gid" order="AFTER">
+			select GROUPS_SEQ.currval from dual
+		</selectKey>
+	</insert>
+	<insert id="insertUserGroupLeader" parameterType="java.util.HashMap">
+		<selectKey resultType="_int" keyProperty="id" order="BEFORE">
+			select USERS_GROUP_SEQ.nextval from dual
+		</selectKey>
+		insert into USERS_GROUP(id, users_id, gid)
+		values(#{id},#{leader},#{gid})
 	</insert>
 	<select id="ListAllGroup" resultType="vo.Group_InfoVO">
 		select * from groups,field where groups.fid =field.fid
 	</select>
+	<select id = "searchField" parameterType = "string" resultType="vo.Group_InfoVO">
+		select * from groups,field where groups.fid =field.fid and field.type = #{field}
+	</select>
+	<select id = "searchNonField" parameterType = "string" resultType="vo.Group_InfoVO">
+		select * from groups,field where groups.fid =field.fid and groups.g_name like '%'||#{key}||'%'
+	</select>
 	<select id = "searchInfo" parameterType = "java.util.HashMap" resultType="vo.Group_InfoVO">
-		select * from groups,field where groups.fid =field.fid and (field.type = #{field} or groups.g_name like '%'||#{key}||'%')
+		select * from groups,field where groups.fid =field.fid and (field.type = #{field} and groups.g_name like '%'||#{key}||'%')
 	</select>
 </mapper>

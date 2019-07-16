@@ -22,6 +22,15 @@ public class GroupDAO {
 			System.out.println("group table 삽입 에러");
 			result=false;
 		}
+		int gid = vo.getGid();
+		System.out.println(vo.getGid());
+		 Map<String, String> parameters = new HashMap<String, String>();
+		 parameters.put("gid", String.valueOf(vo.getGid()));
+		 parameters.put("leader", vo.getLeader());
+		if(session.insert("GroupMapper.insertUserGroupLeader",parameters)!=1) {
+			System.out.println("user_group table 삽입 에러");
+			result=false;
+		}
 		return result;
 	}
 	
@@ -33,11 +42,20 @@ public class GroupDAO {
 	}
 	public List<Group_InfoVO> search(String key, String field){
 		List<Group_InfoVO> list;
-		String statement = "GroupMapper.searchInfo";
-		 Map<String, String> parameters = new HashMap<String, String>();
-		 parameters.put("key", key);
-		 parameters.put("field", field);
-		list = session.selectList(statement, parameters);
+		if(key==null) {
+			list=session.selectList("GroupMapper.searchField", field);
+		}
+		else {
+			if(field==null) {
+				list=session.selectList("GroupMapper.searchNonField", key);
+			}
+			else {
+				Map<String, String> parameters = new HashMap<String, String>();
+				parameters.put("key", key);
+				parameters.put("field", field);
+				list = session.selectList("GroupMapper.searchInfo", parameters);
+			}
+		}
 		return list;
 
 	} 
