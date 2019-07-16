@@ -4,7 +4,7 @@ public class Users_GroupVO {
 	private int id;
 	private String users_id;
 	private int gid;
-	private String leader;
+	private String cofirm;
 	
 	public int getId() {
 		return id;
@@ -24,10 +24,11 @@ public class Users_GroupVO {
 	public void setGid(int gid) {
 		this.gid = gid;
 	}
-	public String getLeader() {
-		return leader;
+	public String getCofirm() {
+		return cofirm;
 	}
-	public void setLeader(String leader) {
-		this.leader = leader;
+	public void setCofirm(String cofirm) {
+		this.cofirm = cofirm;
 	}
+	
 }

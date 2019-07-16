@@ -8,6 +8,7 @@ public class GroupVO {
 	private String g_content;
 	private int limit_mem;
 	private String img;
+	private int count_mem;
 	public int getGid() {
 		return gid;
 	}
@@ -49,6 +50,12 @@ public class GroupVO {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public int getCount_mem() {
+		return count_mem;
+	}
+	public void setCount_mem(int count_mem) {
+		this.count_mem = count_mem;
 	}
 	
 	

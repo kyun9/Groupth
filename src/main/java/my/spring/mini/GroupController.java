@@ -70,8 +70,14 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="/group/content", method =RequestMethod.GET)
-	public ModelAndView showContent(int gid) {
+	public ModelAndView showContent(int gid, String action,String uid) {
 		ModelAndView mav = new ModelAndView();
+		if(action!=null) {
+		if(action.equals("apply")) {
+			if(!ugDAO.applyGroup(uid,gid)) { 
+				mav.addObject("msg", "이미 그룹 가입 신청하였습니다.");
+			}
+		}}
 		Group_InfoVO vo =GroupDao.showContent(gid);
 		mav.addObject("content", vo);
 		mav.setViewName("group/content");
@@ -81,13 +87,11 @@ public class GroupController {
 	@RequestMapping(value="/group/manage",method=RequestMethod.GET)
 	public ModelAndView manageGroup(int gid) {
 		ModelAndView mav = new ModelAndView();
-		if(ugDAO.tempMember(gid)==null) {
-			System.out.println("list 비어 잇음");
-		}
-		else {
-			mav.addObject("tempMember", ugDAO.tempMember(gid));
-		}
+		mav.addObject("tempMember", ugDAO.tempMember(gid));
+		mav.addObject("currentMember", ugDAO.currentMember(gid));
 		mav.setViewName("group/manage");
 		return mav;
 	}
+	
+	
 }

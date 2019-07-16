@@ -40,7 +40,10 @@
 	<%}
 			else{
 			%>
-			<form action="/mini/group/register" method="get">
+			<form action="/mini/group/content" method="get">
+				<input type="hidden" name="action" value="apply">
+				<input type="hidden" name="gid" value="<%=content.getGid()%>">
+				<input type="hidden" name="uid" value="<%=user.getUser()%>">
 				<input type="submit" value ="그룹 가입하기">
 			</form>
 			<%
@@ -48,6 +51,10 @@
 		}else{%>
 			<a href="/mini/login">로그인하고 가입하기</a>
 		<%
-		}} %>
+		}} if (request.getAttribute("msg") != null) {%>
+			<script>
+			alert("${msg}");
+			</script>
+		<%}%>
 </body>
 </html>
