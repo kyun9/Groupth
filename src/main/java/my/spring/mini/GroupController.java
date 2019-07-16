@@ -2,7 +2,6 @@ package my.spring.mini;
 
 import java.io.IOException;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +13,8 @@ import dao.FieldDAO;
 import dao.GroupDAO;
 import service.ImageUploadService;
 import vo.GroupVO;
+import vo.Group_InfoVO;
+import vo.Users_GroupVO;
 
 @Controller
 public class GroupController {
@@ -66,4 +67,12 @@ public class GroupController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/group/content", method =RequestMethod.GET)
+	public ModelAndView showContent(int gid) {
+		ModelAndView mav = new ModelAndView();
+		Group_InfoVO vo =GroupDao.showContent(gid);
+		mav.addObject("content", vo);
+		mav.setViewName("group/content");
+		return mav;
+	}
 }

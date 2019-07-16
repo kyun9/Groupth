@@ -57,6 +57,11 @@ public class GroupDAO {
 			}
 		}
 		return list;
-
 	} 
+	public Group_InfoVO showContent(int gid) {
+		Group_InfoVO vo= null;
+		String statement="GroupMapper.showContent";
+		vo=session.selectOne(statement,gid);
+		return vo;
+	}
 }

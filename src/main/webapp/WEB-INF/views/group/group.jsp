@@ -45,20 +45,17 @@
 			<%}%>
 			
 			}
-			function goGroup(){
-				location.href="/mini/group/content";
-				//이거 listone이랑 똑같이 만들면돼
-			}
 		</script>
 		<%
 		ArrayList<Group_InfoVO> group = (ArrayList<Group_InfoVO>) request.getAttribute("grouplist");
 		if (!group.isEmpty()) {
 			for (Group_InfoVO list : group) {
 		%> 
-		<div style="border: 1px solid black;float: left;width: 25%;" onclick="goGroup()">
-			<img src="./resources/Gimg/<%=list.getImg()%>" width=200px height=200px><br>
-			분야 <%=list.getType() %><br>
+		<div style="border: 1px solid black;float: left;width: 25%;">
+			<a href="/mini/group/content?gid=<%=list.getGid()%>"><img src="./resources/Gimg/<%=list.getImg()%>" width=200px height=200px><br>
 			그룹 명 : <%=list.getG_name()%><br>
+			</a>
+			분야 <%=list.getType() %><br>
 			그룹 리더 <%=list.getLeader() %><br>
 			모집인원 : <%=list.getLimit_mem() %><br>
 		</div>
