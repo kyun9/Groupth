@@ -77,6 +77,9 @@ public class GroupController {
 			if(!ugDAO.applyGroup(uid,gid)) { 
 				mav.addObject("msg", "이미 그룹 가입 신청하였습니다.");
 			}
+			else {
+				mav.addObject("msg", "가입 신청하였습니다.");
+			}
 		}}
 		Group_InfoVO vo =GroupDao.showContent(gid);
 		mav.addObject("content", vo);

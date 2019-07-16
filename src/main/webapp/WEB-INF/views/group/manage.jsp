@@ -19,7 +19,7 @@
 		if(!tempMember.isEmpty()){
 			for(UsersVO mem : tempMember){	
 	%>
-		멤버 아이디 : <%=mem.getUsers_id()%> <img src="./resources/static/success.png"> <img src="./resources/static/cancle.png">
+		멤버 아이디 : <%=mem.getUsers_id()%> <img src="../resources/static/welcome.png" width="25" height="25"> <img src="../resources/static/reject.png" width="25" height="25">
 	<%
 			}}
 		else{%>
