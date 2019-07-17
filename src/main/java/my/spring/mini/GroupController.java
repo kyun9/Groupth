@@ -2,6 +2,8 @@ package my.spring.mini;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import dao.Users_GroupDAO;
 import service.ImageUploadService;
 import vo.GroupVO;
 import vo.Group_InfoVO;
+import vo.Login_InfoVO;
 
 @Controller
 public class GroupController {
@@ -70,16 +73,23 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="/group/content", method =RequestMethod.GET)
-	public ModelAndView showContent(int gid, String action,String uid) {
+	public ModelAndView showContent(int gid, String action,String uid, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
 		if(action!=null) {
-		if(action.equals("apply")) {
-			if(!ugDAO.applyGroup(uid,gid)) { 
-				mav.addObject("msg", "이미 그룹 가입 신청하였습니다.");
+			if(action.equals("apply")) {
+				if(!ugDAO.applyGroup(uid,gid)) { 
+					mav.addObject("msg", "이미 그룹 가입 신청하였습니다.");
+				}
+				else {
+					mav.addObject("msg", "가입 신청하였습니다.");
+				}
 			}
-			else {
-				mav.addObject("msg", "가입 신청하였습니다.");
-			}
+		}
+		if(session.getAttribute("loginUser")!=null) {
+		if(ugDAO.statusJoin(user.getUser(),gid)) {
+			System.out.println("확인");
+			mav.addObject("confirm", "나의 그룹");
 		}}
 		Group_InfoVO vo =GroupDao.showContent(gid);
 		mav.addObject("content", vo);
@@ -88,11 +98,21 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="/group/manage",method=RequestMethod.GET)
-	public ModelAndView manageGroup(int gid) {
+	public ModelAndView manageGroup(int gid, String action,String uid) {
 		ModelAndView mav = new ModelAndView();
+		String url="group/manage";
+		if(action!=null) {
+			if(action.equals("welcomeApplicant")) {
+				ugDAO.acceptMember(gid,uid);
+				}
+			else if(action.equals("rejectApplicant")) {
+				ugDAO.rejectMember(gid,uid);
+			}
+			url="redirect:/group/manage?gid="+gid;
+		}
 		mav.addObject("tempMember", ugDAO.tempMember(gid));
 		mav.addObject("currentMember", ugDAO.currentMember(gid));
-		mav.setViewName("group/manage");
+		mav.setViewName(url);
 		return mav;
 	}
 	

@@ -44,7 +44,13 @@
 				<input type="hidden" name="action" value="apply">
 				<input type="hidden" name="gid" value="<%=content.getGid()%>">
 				<input type="hidden" name="uid" value="<%=user.getUser()%>">
+				<%
+				if (request.getAttribute("confirm") != null) {
+				%>
+				<h3>${confirm}</h3>
+				<%} else{%>
 				<input type="submit" value ="그룹 가입하기">
+				<% }%>
 			</form>
 			<%
 			}

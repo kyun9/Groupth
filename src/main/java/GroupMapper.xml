@@ -15,7 +15,7 @@
 			select USERS_GROUP_SEQ.nextval from dual
 		</selectKey>
 		insert into USERS_GROUP(id, users_id, gid, cofirm)
-		values(#{id},#{leader},#{gid},'yes')
+		values(#{id},#{leader},#{gid},'leader')
 	</insert>
 	<select id="ListAllGroup" resultType="vo.Group_InfoVO">
 		select * from groups,field where groups.fid =field.fid

@@ -19,7 +19,10 @@
 		if(!tempMember.isEmpty()){
 			for(UsersVO mem : tempMember){	
 	%>
-		멤버 아이디 : <%=mem.getUsers_id()%> <img src="../resources/static/welcome.png" width="25" height="25"> <img src="../resources/static/reject.png" width="25" height="25">
+		멤버 아이디 : <%=mem.getUsers_id()%>
+		<a href="/mini/group/manage?gid=<%=request.getParameter("gid")%>&uid=<%=mem.getUsers_id()%>&action=welcomeApplicant"><img src="../resources/static/welcome.png" width="25" height="25"></a>
+		<a href="/mini/group/manage?gid=<%=request.getParameter("gid") %>&uid=<%=mem.getUsers_id()%>&action=rejectApplicant"><img src="../resources/static/reject.png" width="25" height="25"></a>
+		<br>
 	<%
 			}}
 		else{%>
@@ -35,13 +38,15 @@
 				Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
 				if (user.getUser().equals(mem.getUsers_id())) {
 		%>
-			 그룹장 :
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그룹장 :
 		<%}else {%>
+			<a href="/mini/group/manage?gid=<%=request.getParameter("gid") %>&uid=<%=mem.getUsers_id()%>&action=rejectApplicant"><img src="../resources/static/drop.png" width="25" height="25"></a>
 			멤버 :
 		<%}}%> 
-			<%=mem.getUsers_id()%>
+			<%=mem.getUsers_id()%> <br>
 		<%}}else{%>
 			멤버가 없습니다.
 		<%}%>
+		
 </body>
 </html>

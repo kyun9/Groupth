@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>
-	tmp  
+	Groupth  
 </h1>
 <%
 if(session.getAttribute("loginUser")!=null){
