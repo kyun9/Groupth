@@ -104,6 +104,7 @@ public class GroupController {
 	public ModelAndView manageGroup(int gid, String action,String uid) {
 		ModelAndView mav = new ModelAndView();
 		String url="group/manage";
+		
 		if(action!=null) {
 			if(action.equals("welcomeApplicant")) {
 				ugDAO.acceptMember(gid,uid);
@@ -115,7 +116,15 @@ public class GroupController {
 		}
 		mav.addObject("tempMember", ugDAO.tempMember(gid));
 		mav.addObject("currentMember", ugDAO.currentMember(gid));
+		mav.addObject("noticelist", noticeDAO.noticeList(gid));
 		mav.setViewName(url);
+		return mav;
+	}
+	@RequestMapping(value="/group/noticeDelete",method=RequestMethod.GET)
+	public ModelAndView noticeDelete(int nid,int gid) {
+		ModelAndView mav = new ModelAndView();
+		noticeDAO.deleteNotice(nid);
+		mav.setViewName("redirect:/group/manage?gid="+gid);
 		return mav;
 	}
 	

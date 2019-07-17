@@ -15,7 +15,6 @@ public class NoticeDAO {
 	
 	public boolean writeNotice(NoticeVO vo) {
 		boolean result=true;
-		System.out.println(vo);
 		if(session.insert("NoticeMapper.writeNotice",vo)!=1) {
 			result=false;
 		}
@@ -26,5 +25,13 @@ public class NoticeDAO {
 		List<NoticeVO> list;
 		list= session.selectList("NoticeMapper.ListAll",gid);
 		return list;
+	}
+	
+	public boolean deleteNotice(int nid) {
+		boolean result= true;
+		if(session.delete("NoticeMapper.deleteNotice",nid)!=1) {
+			result=false;
+		}
+		return result;
 	}
 }

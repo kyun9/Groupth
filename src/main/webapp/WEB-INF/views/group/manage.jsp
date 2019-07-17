@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="vo.UsersVO, vo.Login_InfoVO, java.util.ArrayList"%>
+    <%@ page import="vo.UsersVO, vo.Login_InfoVO, vo.NoticeVO, vo.Group_InfoVO, java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +38,7 @@
 				Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
 				if (user.getUser().equals(mem.getUsers_id())) {
 		%>
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그룹장 :
+			 <img src="../resources/static/leader.png" width="25" height="25">그룹장 :
 		<%}else {%>
 			<a href="/mini/group/manage?gid=<%=request.getParameter("gid") %>&uid=<%=mem.getUsers_id()%>&action=rejectApplicant"><img src="../resources/static/drop.png" width="25" height="25"></a>
 			멤버 :
@@ -48,5 +48,62 @@
 			멤버가 없습니다.
 		<%}%>
 		
+		<br>
+		<br>
+	<button onclick ="writeNotice()">공지 작성하기</button>
+	<%
+		ArrayList<NoticeVO> noticelist = (ArrayList<NoticeVO>) request.getAttribute("noticelist");
+		if (!noticelist.isEmpty()) {
+	%>
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Writer</th>
+			<th>Date</th> 
+		</tr>
+		<% for (NoticeVO nList : noticelist) {%>
+		<tr>
+			<td><%=nList.getTitle()%></td>
+			<td class="b_title" style="cursor: pointer"><%=nList.getWriter()%></td>
+			<td><%=nList.getWritedate()%><a href="/mini/group/noticeDelete?nid=<%=nList.getNid()%>&gid=<%=request.getParameter("gid")%>">삭제</a></td>
+		</tr>
+		<tr class="b_content"> 
+			<td>내용 : <%=nList.getContent()%></td>
+			<td><a href="/mini/resources/files/<%=nList.getFiles()%>">다운로드 : <%=nList.getFiles()%></a></td>
+		</tr>
+		<%
+			}
+		%>
+	</table>
+	<%} %>
+	<br><br>
+	<button>그룹 삭제</button>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		$(".b_content").hide();
+		$(".b_title").click(function(){
+			if($(this).hasClass("on")){
+				$(".b_content").hide();
+				$(this).removeClass("on");
+			}else{
+				$(".b_content").show();
+				$(this).addClass("on");
+			}
+			
+		});
+	</script>
+	
+	<script>
+			<%
+			if (request.getAttribute("content") != null) {
+				Group_InfoVO content = (Group_InfoVO) request.getAttribute("content");
+			%>
+		function writeNotice(){
+			location.href="/mini/group/content/write?gid=<%=content.getGid()%>";
+		}
+			<%}%>
+	</script>
+	
+	
 </body>
 </html>
