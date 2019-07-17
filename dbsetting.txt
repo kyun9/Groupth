@@ -54,15 +54,15 @@ CREATE TABLE  users_group
    cofirm varchar2(20)
 );
 
-CREATE TABLE  group_board 
+CREATE TABLE  notice 
 (
-   group_bid  NUMBER(8,0) PRIMARY KEY,
+   nid  NUMBER(8,0) PRIMARY KEY,
    gid  NUMBER(8,0) NOT NULL,
    writer  varchar2(20) NOT NULL,
    title  varchar2(200) NOT NULL,
    content  varchar2(900),
    writedate  date,
-   cnt  NUMBER(8,0)
+   files varchar2(500)
 );
 
 ALTER TABLE  board  ADD FOREIGN KEY ( writer ) REFERENCES  users  ( users_id );
@@ -79,9 +79,9 @@ ALTER TABLE  users  ADD FOREIGN KEY ( field ) REFERENCES  field  ( fid );
 
 ALTER TABLE  groups  ADD FOREIGN KEY ( fid ) REFERENCES  field  ( fid );
 
-ALTER TABLE  group_board  ADD FOREIGN KEY ( writer ) REFERENCES  users  ( users_id );
+ALTER TABLE  notice  ADD FOREIGN KEY ( writer ) REFERENCES  users  ( users_id );
 
-ALTER TABLE  group_board  ADD FOREIGN KEY ( gid ) REFERENCES  groups  ( gid );
+ALTER TABLE  notice  ADD FOREIGN KEY ( gid ) REFERENCES  groups  ( gid );
 
 create sequence board_seq
 start with 1
@@ -103,7 +103,7 @@ create sequence groups_seq
 start with 1
 increment by 1;
 
-create sequence group_board_seq
+create sequence notice_seq
 start with 1
 increment by 1;
 
@@ -114,6 +114,6 @@ update users_group set id=users_group_seq.nextval;
 update comments set cid=comments_seq.nextval;
 update field set fid=field_seq.nextval;
 update groups set gid=groups_seq.nextval;
-update group_board set group_bid=group_board_seq.nextval;
+update notice set nid=notice_seq.nextval;
 
 commit;

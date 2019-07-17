@@ -88,7 +88,6 @@ public class GroupController {
 		}
 		if(session.getAttribute("loginUser")!=null) {
 		if(ugDAO.statusJoin(user.getUser(),gid)) {
-			System.out.println("확인");
 			mav.addObject("confirm", "나의 그룹");
 		}}
 		Group_InfoVO vo =GroupDao.showContent(gid);

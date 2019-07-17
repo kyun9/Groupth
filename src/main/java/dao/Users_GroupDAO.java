@@ -53,7 +53,6 @@ public class Users_GroupDAO {
 		parameters.put("users_id",users_id);
 		parameters.put("gid",String.valueOf(gid));
 		num=session.selectOne("TempMemMapper.statusJoin",parameters);
-		System.out.println(num);
 		if(num!=0)
 			result= true;
 		return result;

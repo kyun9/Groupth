@@ -7,6 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>th {
+	border: 2px solid black;
+}
+
+td {
+	border-bottom: 1px dotted black;
+	width: 200px;
+	text-align: center;
+}</style>
 </head>
 <body>
 	<%
@@ -62,5 +71,31 @@
 			alert("${msg}");
 			</script>
 		<%}%>
+		
+	<br><br><br>
+	<!-- 게시판  -->
+	<button onclick ="writeNotice()">Notice Write</button>
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Writer</th>
+			<th>Date</th> 
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+		</tr>
+	</table>
+	<script>
+			<%
+			if (request.getAttribute("content") != null) {
+				Group_InfoVO content = (Group_InfoVO) request.getAttribute("content");
+			%>
+		function writeNotice(){
+			location.href="/mini/group/content/write?gid=<%=content.getGid()%>";
+		}
+			<%}%>
+	</script>
 </body>
 </html>
