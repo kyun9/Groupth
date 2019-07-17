@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="vo.Group_InfoVO"%>
-    <%@ page import="vo.Login_InfoVO"%>
+    <%@ page import="vo.Group_InfoVO, vo.Login_InfoVO, vo.NoticeVO, java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +30,7 @@ td {
 		그룹 명 : <%=content.getG_name() %><br>
 		스터디 내용 : <%=content.getG_content() %><br>
 		그룹 리더 : <%=content.getLeader() %><br>
-		제한인원 : <%=content.getLimit_mem() %><br>
+		제한인원 : <%=content.getCount_mem() %>/<%=content.getLimit_mem() %><br>
 		<img src="../resources/Gimg/<%=content.getImg()%>" width=200px height=200px>
 	
 	<%
@@ -74,19 +73,49 @@ td {
 		
 	<br><br><br>
 	<!-- 게시판  -->
+	<%if (request.getAttribute("confirm") != null) { %>
 	<button onclick ="writeNotice()">Notice Write</button>
+	<%}
+		ArrayList<NoticeVO> noticelist = (ArrayList<NoticeVO>) request.getAttribute("noticelist");
+		if (!noticelist.isEmpty()) {
+	%>
 	<table>
 		<tr>
 			<th>Title</th>
 			<th>Writer</th>
 			<th>Date</th> 
 		</tr>
+		<% for (NoticeVO nList : noticelist) {%>
 		<tr>
-			<td>2</td>
-			<td>3</td>
-			<td>4</td>
+			<td><%=nList.getTitle()%></td>
+			<td class="b_title" style="cursor: pointer"><%=nList.getWriter()%></td>
+			<td><%=nList.getWritedate()%></td>
 		</tr>
+		<tr class="b_content">
+			<td>내용 : <%=nList.getContent()%></td>
+			<td><a href="/mini/resources/files/<%=nList.getContent()%>">다운로드 : <%=nList.getFiles()%></a></td>
+		</tr>
+		<%
+			}
+		%>
 	</table>
+	<%} %>
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		$(".b_content").hide();
+		$(".b_title").click(function(){
+			if($(this).hasClass("on")){
+				$(".b_content").hide();
+				$(this).removeClass("on");
+			}else{
+				$(".b_content").show();
+				$(this).addClass("on");
+			}
+			
+		});
+	</script>
+	
 	<script>
 			<%
 			if (request.getAttribute("content") != null) {

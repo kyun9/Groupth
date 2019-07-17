@@ -21,7 +21,6 @@ public class FileUploadService {
 		boolean result =false;
 		String fileName =files.getOriginalFilename();
 		File f = new File(context.getRealPath("/")+"resources/files/"+fileName);
-		System.out.println(context.getRealPath("/")+"resources/files/"+fileName);
 		FileOutputStream fos = new FileOutputStream(f);
 		fos.write(files.getBytes());
 		fos.close();

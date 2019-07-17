@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.FieldDAO;
 import dao.GroupDAO;
+import dao.NoticeDAO;
 import dao.Users_GroupDAO;
 import service.ImageUploadService;
 import vo.GroupVO;
@@ -27,6 +28,8 @@ public class GroupController {
 	GroupDAO GroupDao;
 	@Autowired
 	Users_GroupDAO ugDAO;
+	@Autowired
+	NoticeDAO noticeDAO;
 	@Autowired
 	private ImageUploadService imageUploadService;
 	
@@ -91,6 +94,7 @@ public class GroupController {
 			mav.addObject("confirm", "나의 그룹");
 		}}
 		Group_InfoVO vo =GroupDao.showContent(gid);
+		mav.addObject("noticelist", noticeDAO.noticeList(gid));
 		mav.addObject("content", vo);
 		mav.setViewName("group/content");
 		return mav;

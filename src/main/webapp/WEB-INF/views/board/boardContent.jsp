@@ -3,57 +3,77 @@
 <%@ page import="vo.Login_InfoVO"%>
 <%@ page import="vo.BoardVO"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
+    
+    <title>Groupth</title>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/respond.css" />
+
+    <!--[if lt IE 9]>
+       <script src="/mini/resources/file/js/html5shiv.js"></script>
+    <![endif]-->
 </head>
 <body>
-	<%
-		if (session.getAttribute("loginUser") != null) {
-	%>
-	<h2>로그인아이디 : ${sessionScope.loginUser.user}</h2>
-	<%
-		}
-	%>
+<dl class="skip">
+	<dt class="blind"><strong>skip navigation</strong></dt>
+    <dd><a href="#content">skip to content</a></dd>
+</dl>
+<div id="wrap">
+
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+	
+	<div id="content">
 	<%
 		if (request.getAttribute("listone") != null) {
 			BoardVO one = (BoardVO) request.getAttribute("listone");
 	%>
 	<form method="get" action="/mini/board/content/edit">
-		번호 : <%= one.getBid() %> 조회수: <%= one.getCnt() %><br>
-		작성자 : <%= one.getWriter() %><br>
-		날짜 : <%= one.getWritedate() %><br> 
-		제목 : <%= one.getTitle() %><br>
-		내용 : <%= one.getContent() %><br><br>
-		
-		<input type="hidden" name="action" value="update"> 
-		<input type="hidden" name="bid" value="<%= one.getBid() %>"> 
-		<input type="hidden" name="title" value="<%= one.getTitle() %>"> 
-		<input type="hidden" name="content" value="<%= one.getContent() %>"> 
-		
-		<%
-		if (session.getAttribute("loginUser") != null) {
-			Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
-			if (user.getUser().equals(request.getParameter("writer"))) {
-		%>
-		<input type="submit" value="수정하기"> 
-		<input type="button" onclick="boardDelete(); return false;" value="삭제하기">
-		<%}}
-		%>
-	</form>
+
+		<div id="boardView">
+			<div class="view_top">
+				<div class="title"><%= one.getTitle() %></div>
+				<p><%= one.getWriter() %> / <%= one.getWritedate() %></p>
+			</div>
+			
+			<div class="view_bottom">
+				<%= one.getContent() %>
+			</div>
+			
+			<input type="hidden" name="action" value="update"> 
+			<input type="hidden" name="bid" value="<%= one.getBid() %>"> 
+			<input type="hidden" name="title" value="<%= one.getTitle() %>"> 
+			<input type="hidden" name="content" value="<%= one.getContent() %>"> 
+
+			<%
+			if (session.getAttribute("loginUser") != null) {
+				Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
+				if (user.getUser().equals(request.getParameter("writer"))) {
+			%>
+			<div class="b_btn">
+				<input type="submit" value="수정" class="color" />
+				<a href='/mini/board/content?action=delete&bid=<%=request.getParameter("bid")%>'>삭제</a>
+			</div>
+			<%}}
+			%>
+			<div class="list_btn">
+				<a href="/mini/board">목록</a>
+			</div>
+		</div>
 	<%
 		}
 	%>
-	hi content
-	<button onclick="goBoard()">뒤로가기</button>
-	<script>
-		function goBoard(){
-		 location.href="/mini/board";
-		}
-		function boardDelete(){
-			location.href="/mini/board/content?action=delete&bid=<%=request.getParameter("bid")%>"
-		}
-	</script>
+	</div><!-- content End -->
+
+	<%@ include file="/WEB-INF/views/footer.jsp" %>
+
+</div>
+
 </body>
 </html>

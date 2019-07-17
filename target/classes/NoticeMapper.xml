@@ -10,4 +10,7 @@
 		insert into notice(nid, gid, writer, title, content, writedate, files)
 		values(#{nid},#{gid},#{writer},#{title}, #{content},sysdate,#{files})
 	</insert>
+	<select id="ListAll" resultType="vo.NoticeVO" parameterType="_int">
+		select * from notice where gid=#{gid}
+	</select>
 </mapper>

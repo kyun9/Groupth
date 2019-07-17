@@ -2,37 +2,64 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="vo.FieldVO, vo.Group_InfoVO, java.util.ArrayList"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
+    
+    <title>Groupth</title>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/respond.css" />
+
+    <!--[if lt IE 9]>
+       <script src="/mini/resources/file/js/html5shiv.js"></script>
+    <![endif]-->
 </head>
 <body>
-	<%
-		if (session.getAttribute("loginUser") != null) {
-	%>
-	<h2>로그인아이디 : ${ sessionScope.loginUser.user}</h2>
-	<%
-		}
-	%>
+<dl class="skip">
+	<dt class="blind"><strong>skip navigation</strong></dt>
+    <dd><a href="#content">skip to content</a></dd>
+</dl>
+<div id="wrap">
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+
+	<div id="content">
+
+		<div id="groupSch">
+			<h3 class="s_title">그룹</h3>
+			<div class="group_box">
+				<form method="get" action="/mini/group">
+				<div class="box">
+					<div class="title">관심분야</div>
+					<ul>
+						<%
+							ArrayList<FieldVO> field = (ArrayList<FieldVO>) request.getAttribute("field");
+							if (!field.isEmpty()) {
+								for (FieldVO type : field) {
+						%>
+							<li><input type="checkbox" name="field" value="<%=type.getType()%>" />&nbsp;&nbsp;<%=type.getType()%></li>
+					 	<%}} %>
+					</ul>
+				</div>
+
+				<div class="box">
+					<div class="title">그룹검색</div>
+					<div class="sch_box">
+						<input type="hidden" name="action" value="search">
+						<div class="search"><input type="text" name="key" /></div>
+						<div class="btn"><input type="submit" value="검색" /></div>
+					</div>
+				</div><!-- box End -->
+				</form>
+			</div><!-- group_box End -->
+		</div><!-- groupList End -->
 	
-	<form method="get" action="/mini/group">
-		관심분야 <br>
-	<%
-		ArrayList<FieldVO> field = (ArrayList<FieldVO>) request.getAttribute("field");
-		if (!field.isEmpty()) {
-			for (FieldVO type : field) {
-	%>
-		<input type='checkbox' name='field' value='<%=type.getType()%>' /><%=type.getType()%>
- 	<%}} %>
- 	<br>
- 		<input type="hidden" name="action" value="search">
- 		<input type="text" name="key">
- 		<input type="submit" value="그룹 검색"><br>
-	</form>
-	
-		<button onclick="goCreateGroup()">그룹 생성하기</button><br>
+		<div class="join_btn"><a href="javascript: void(0);" onclick="goCreateGroup()">그룹 생성하기</a></div>
+
 		<script>
 			function goCreateGroup(){
 		<%	
@@ -41,35 +68,52 @@
 				location.href="/mini/group/createGroup";
 			<%} else{%>
 				alert("로그인이 필요합니다.");
-				location.href="/mini/login/";
+				location.href="/mini/login";
 			<%}%>
 			
 			}
 		</script>
-		<%
-		ArrayList<Group_InfoVO> group = (ArrayList<Group_InfoVO>) request.getAttribute("grouplist");
-		if (!group.isEmpty()) {
-			for (Group_InfoVO list : group) {
-		%> 
-		<div style="border: 1px solid black;float: left;width: 25%;">
-			<a href="/mini/group/content?gid=<%=list.getGid()%>"><img src="./resources/Gimg/<%=list.getImg()%>" width=200px height=200px><br>
-			그룹 명 : <%=list.getG_name()%><br>
-			</a>
-			분야 <%=list.getType() %><br>
-			그룹 리더 <%=list.getLeader() %><br>
-			모집인원 : <%=list.getLimit_mem() %><br>
-		</div>
- 		<%}} %>
-</body>
 
-<script type="text/javascript">
-$(document).ready(function() {
-    $('input[type="checkbox"][name="field"]').click(function(){
-        if ($(this).prop('checked')) {
-            $('input[type="checkbox"][name="field"]').prop('checked', false);
-            $(this).prop('checked', true);
-        }
-    });
-});
-</script>
+
+		<div id="groupList">
+			<ul>
+				<%
+				ArrayList<Group_InfoVO> group = (ArrayList<Group_InfoVO>) request.getAttribute("grouplist");
+				if (!group.isEmpty()) {
+					for (Group_InfoVO list : group) {
+				%> 
+				<li>
+					<div class="img"><a href="/mini/group/content?gid=<%=list.getGid()%>"><img src="./resources/Gimg/<%=list.getImg()%>" alt="<%=list.getG_name()%>"></a></div>
+					<div class="cty"><%=list.getType() %></div>
+					<div class="title"><a href="#"><%=list.getG_name()%></a></div>
+					<div class="leader">그룹리더 : <%=list.getLeader() %></div>
+					<div class="number">인원 : <%=list.getCount_mem() %>/<%=list.getLimit_mem() %></div>
+				</li>
+
+				<%}} %>
+			</ul>
+		</div>
+	</div><!-- content End -->
+
+	<script>
+		$("#groupList ul li:nth-child(3n").css("margin-right", "0");
+
+	</script>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    $('input[type="checkbox"][name="field"]').click(function(){
+	        if ($(this).prop('checked')) {
+	            $('input[type="checkbox"][name="field"]').prop('checked', false);
+	            $(this).prop('checked', true);
+	        }
+	    });
+	});
+	</script>
+
+	<%@ include file="/WEB-INF/views/footer.jsp" %>
+
+</div>
+
+</body>
 </html>

@@ -1,50 +1,165 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%@ page session="true" %>
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
+    
+    <title>Groupth</title>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./resources/file/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./resources/file/css/respond.css" />
+
+    <link rel="stylesheet" href="./resources/file/css/yt-video-background.min.css" />
+
+    <!--[if lt IE 9]>
+       <script src="./resources/file/js/html5shiv.js"></script>
+    <![endif]-->
 </head>
 <body>
-<h1>
-	Groupth  
-</h1>
-<%
-if(session.getAttribute("loginUser")!=null){
-%>
-<h2>로그인아이디 : ${ sessionScope.loginUser.user}</h2>
-<form method="get" action="/mini/logout">
-<input type="submit" value="로그아웃">
-<input onclick="goMypage(); return false;" type="button" value="마이페이지">
-<input onclick="goBoard(); return false;" type="button" value="게시판">
-<input onclick="goGroup(); return false;" type="button" value="그룹">
-</form>
-<%
-}else{
-%>
-<button onclick="goLogin()">로그인화면</button>
-<button onclick="goRegister()">회원가입화면</button>
-<button onclick="goBoard()">게시판</button>
-<button onclick="goGroup()">그룹</button>
-<%
-}
-%>
-<script>
-	function goLogin(){
-		location.href="/mini/login"
+<dl class="skip">
+	<dt class="blind"><strong>skip navigation</strong></dt>
+    <dd><a href="#content">skip to content</a></dd>
+</dl>
+<div id="wrap" class="index">
+	
+	<%@ include file="header.jsp" %>
+
+	<div id="content">
+		<div class="visual_section">
+			<div class="video-background"></div>
+			<div class="cover"></div>
+			<div class="container">
+				<h3>직접 만나 함께하는 즐거움</h3>
+				<p>로컬 그룹에 가입하고 사람들과 좋아하는 일을 함께 하며 새로운 경험을 즐겨 보세요.</p>
+				<a href="/mini/register">Groupth 가입하기</a> <!-- session true = 가입 X -->
+			</div>
+		</div><!-- visual_section End -->
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="./resources/file/js/yt-video-background.min.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			$('.video-background').youtubeBackground({
+				videoId: 'aaF-49vtAXw',
+				backgroundColor: '#212121',
+				backgroundImage: 'https://i.ytimg.com/vi/ITpIv6Efz8Y/maxresdefault.jpg', // For mobile devices
+				opacity: 0.6
+			});
+		</script>
+
+
+		<div class="group_section">
+		
+			<div id="groupList">
+				<h3>인기있는 그룹</h3>
+				<ul>
+					<li>
+						<div class="img"><a href="./group_view.html"><img src="http://www.globalpeoples.net/news/photo/201902/652_1168_95.png" alt="그룹명"></a></div>
+						<div class="cty">분야</div>
+						<div class="title"><a href="#">제목</a></div>
+						<div class="leader">그룹리더 : 작성자</div>
+						<div class="number">인원 : 5/20</div>
+					</li>
+
+					<li>
+						<div class="img"><a href="./group_view.html"><img src="http://www.globalpeoples.net/news/photo/201902/652_1168_95.png" alt="그룹명"></a></div>
+						<div class="cty">분야</div>
+						<div class="title"><a href="#">제목</a></div>
+						<div class="leader">그룹리더 : 작성자</div>
+						<div class="number">인원 : 5/20</div>
+					</li>
+
+					<li>
+						<div class="img"><a href="./group_view.html"><img src="http://www.globalpeoples.net/news/photo/201902/652_1168_95.png" alt="그룹명"></a></div>
+						<div class="cty">분야</div>
+						<div class="title"><a href="#">제목</a></div>
+						<div class="leader">그룹리더 : 작성자</div>
+						<div class="number">인원 : 5/20</div>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<script>
+			$("#groupList ul li:nth-child(3n").css("margin-right", "0");
+
+		</script>
+
+	</div><!-- content End -->
+
+	<script>
+	$(window).scroll(function(e){
+		var vh = $(".visual_section").height();
+		if($(this).scrollTop() <= vh){
+			$("ul.gnb li").removeClass("on");
+			$(".nav_bar ul li").removeClass("on");
+			$("#header .menu").removeClass("bk");
+		}else{
+			$("ul.gnb li").addClass("on");
+			$(".nav_bar ul li").addClass("on");
+			$("#header .menu").addClass("bk");
+		}
+	});
+
+	/* 반응형 */
+	$(window).bind("resize", function () {
+
+		reset();
+
+	    // console.log($(this).width())
+	    if ($(window).width() < 1200) {
+	    	// $("body").css("background", "red");
+			reset();
+	    	
+	    	if($(window).width() < 1197){
+	    		reset();
+
+	    		if($(window).width() < 992){
+		    		reset();
+
+		    		if($(window).width() < 991){
+			    		reset();
+
+			    		if($(window).width() < 768){
+							reset();
+
+				    		if($(window).width() < 767){
+					    		reset();
+
+					    		if($(window).width() < 576){
+						    		reset();
+
+
+						    		
+							    }
+						    }
+					    		
+					    }
+				    }
+			    }
+		    }
+
+	    }else {
+
+
+	    }
+	}).trigger('resize');
+
+	function reset(){
+		var vh = $(".visual_section").height();
+
 	}
-	function goRegister(){
-		location.href="/mini/register"
-	}
-	function goMypage(){
-		location.href="/mini/mypage"
-	}
-	function goBoard(){
-		location.href="/mini/board"
-	}
-	function goGroup(){
-		location.href="/mini/group"
-	}
-</script>
+	</script>
+
+	<%@ include file="footer.jsp" %>
+
+</div>
+
 </body>
 </html>

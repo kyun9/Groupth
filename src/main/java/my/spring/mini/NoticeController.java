@@ -28,11 +28,11 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/group/content/write", method=RequestMethod.POST)
-	public ModelAndView doPostNotice(NoticeVO vo,MultipartFile file) throws IOException {
+	public ModelAndView doPostNotice(NoticeVO vo,MultipartFile file,String gid) throws IOException {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("hi");
-		if(file!=null) {
-			vo.setFiles(file.getOriginalFilename());
+		String fileName=file.getOriginalFilename();
+		if(!fileName.equals(fileName)) {
+			vo.setFiles(fileName);
 			fileUploadService.getFilePath(file);
 		}
 		if(dao.writeNotice(vo)) {
@@ -41,7 +41,7 @@ public class NoticeController {
 		else {
 			System.out.println("실패");
 		}
-		mav.setViewName("redirect:/group");
+		mav.setViewName("redirect:/group/content?gid="+gid);
 		//mav.setViewName("redirect:/group");
 		return mav;
 	}

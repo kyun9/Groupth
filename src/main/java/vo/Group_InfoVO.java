@@ -7,6 +7,13 @@ public class Group_InfoVO {
 	private String leader; 
 	private String g_content;
 	private int limit_mem;
+	private int count_mem;
+	public int getCount_mem() {
+		return count_mem;
+	}
+	public void setCount_mem(int count_mem) {
+		this.count_mem = count_mem;
+	}
 	private String img;
 	private String type;
 	public int getGid() {
