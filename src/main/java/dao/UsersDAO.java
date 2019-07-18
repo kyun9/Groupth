@@ -28,4 +28,9 @@ public class UsersDAO {
 			return null;
 		return user;
 	}
+	public int idDuplChk(String users_id)throws Exception{
+		String statement="UsersMapper.idCheck";
+		System.out.println(session.selectOne(statement,users_id));
+		return session.selectOne(statement,users_id);
+}
 }

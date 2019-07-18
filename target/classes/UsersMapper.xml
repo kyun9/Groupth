@@ -10,5 +10,7 @@
 	<select id="searchLoginId" resultType="vo.UsersVO" parameterType="string">
 		select users_id, name, password from users where users_id like #{idVal}
 	</select>
-	
+	<select id = "idCheck" parameterType = "String" resultType = "int">
+    SELECT COUNT(*) FROM users WHERE users_id = #{users_id}
+	</select>
 </mapper>

@@ -31,10 +31,8 @@ public class NoticeController {
 	public ModelAndView doPostNotice(NoticeVO vo,MultipartFile file,String gid) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		String fileName=file.getOriginalFilename();
-		if(!fileName.equals(fileName)) {
-			vo.setFiles(fileName);
-			fileUploadService.getFilePath(file);
-		}
+		vo.setFiles(fileName);
+		fileUploadService.getFilePath(file);
 		if(dao.writeNotice(vo)) {
 			System.out.println("notice성공");
 		}
