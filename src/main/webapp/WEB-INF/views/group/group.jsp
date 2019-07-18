@@ -26,7 +26,7 @@
 </dl>
 <div id="wrap">
 	<%@ include file="/WEB-INF/views/header.jsp" %>
-
+	
 	<div id="content">
 
 		<div id="groupSch">
@@ -94,7 +94,7 @@
 			</ul>
 		</div>
 	</div><!-- content End -->
-
+	
 	<script>
 		$("#groupList ul li:nth-child(3n").css("margin-right", "0");
 
@@ -110,7 +110,6 @@
 	    });
 	});
 	</script>
-
 	<%@ include file="/WEB-INF/views/footer.jsp" %>
 
 </div>

@@ -40,7 +40,7 @@
 		%>
 			 <img src="../resources/static/leader.png" width="25" height="25">그룹장 :
 		<%}else {%>
-			<a href="/mini/group/manage?gid=<%=request.getParameter("gid") %>&uid=<%=mem.getUsers_id()%>&action=rejectApplicant"><img src="../resources/static/drop.png" width="25" height="25"></a>
+			<a href="/mini/group/manage?gid=<%=request.getParameter("gid") %>&uid=<%=mem.getUsers_id()%>&action=dropApplicant"><img src="../resources/static/drop.png" width="25" height="25"></a>
 			멤버 :
 		<%}}%> 
 			<%=mem.getUsers_id()%> <br>
@@ -79,7 +79,7 @@
 	</table>
 	<%} %>
 	<br><br>
-	<button>그룹 삭제</button>
+	<button onclick="deleteGroup()">그룹 삭제</button>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 		$(".b_content").hide();
@@ -104,6 +104,10 @@
 			location.href="/mini/group/content/write?gid=<%=content.getGid()%>";
 		}
 			<%}%>
+			
+		function deleteGroup(){
+			location.href="/mini/group/manage?action=deleteGroup&gid=<%=request.getParameter("gid")%>";
+		}
 	</script>
 	
 	

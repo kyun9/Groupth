@@ -58,10 +58,19 @@ public class GroupDAO {
 		}
 		return list;
 	} 
+	
 	public Group_InfoVO showContent(int gid) {
 		Group_InfoVO vo= null;
 		String statement="GroupMapper.showContent";
 		vo=session.selectOne(statement,gid);
 		return vo;
+	}
+	
+	public boolean deleteGroup(int gid) {
+		boolean result=true;
+		if(session.delete("GroupMapper.deleteGroup",gid)!=1) {
+			result=false;
+		}
+		return result;
 	}
 }

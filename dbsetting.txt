@@ -73,7 +73,7 @@ ALTER TABLE  comments  ADD FOREIGN KEY ( writer) REFERENCES  users  ( users_id )
 
 ALTER TABLE  users_group  ADD FOREIGN KEY ( users_id ) REFERENCES  users  ( users_id );
 
-ALTER TABLE  users_group  ADD FOREIGN KEY ( gid ) REFERENCES  groups  ( gid );
+ALTER TABLE  users_group  ADD FOREIGN KEY ( gid ) REFERENCES  groups  ( gid ) on delete cascade;
     
 ALTER TABLE  users  ADD FOREIGN KEY ( field ) REFERENCES  field  ( fid );
 
@@ -81,7 +81,7 @@ ALTER TABLE  groups  ADD FOREIGN KEY ( fid ) REFERENCES  field  ( fid );
 
 ALTER TABLE  notice  ADD FOREIGN KEY ( writer ) REFERENCES  users  ( users_id );
 
-ALTER TABLE  notice  ADD FOREIGN KEY ( gid ) REFERENCES  groups  ( gid );
+ALTER TABLE  notice  ADD FOREIGN KEY ( gid ) REFERENCES  groups  ( gid ) on delete cascade;
 
 create sequence board_seq
 start with 1

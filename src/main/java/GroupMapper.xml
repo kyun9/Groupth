@@ -32,4 +32,13 @@
 	<select id="showContent" parameterType ="_int" resultType="vo.Group_InfoVO">
 		select * from groups,field where groups.fid =field.fid and groups.gid = #{gid}
 	</select>
+	<delete id="deleteGroup" parameterType="_int">
+		delete from groups where gid=#{gid}
+	</delete>
+	<update id="countAddMember" parameterType="_int">
+		update groups set count_mem =count_mem+1 where gid=#{gid}
+	</update>
+	<update id="countRemoveMember" parameterType="_int">
+		update groups set count_mem =count_mem-1 where gid=#{gid}
+	</update>
 </mapper>

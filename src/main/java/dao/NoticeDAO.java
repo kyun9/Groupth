@@ -27,7 +27,7 @@ public class NoticeDAO {
 		List<NoticeVO> list;
 		Map<String,String> parameters =new HashMap<String,String>();
 		parameters.put("gid", String.valueOf(gid));
-		parameters.put("leader", String.valueOf(gid));
+		parameters.put("leader", leader);
 		list= session.selectList("NoticeMapper.ListAll",parameters);
 		return list;
 	}

@@ -112,6 +112,15 @@ public class GroupController {
 			else if(action.equals("rejectApplicant")) {
 				ugDAO.rejectMember(gid,uid);
 			}
+			else if(action.equals("dropApplicant")) {
+				ugDAO.dropMember(gid,uid);
+			}
+			else if(action.equals("deleteGroup")) {
+				GroupDao.deleteGroup(gid);
+				mav.addObject("msg", "그룹이 삭제되었습니다.");
+				mav.setViewName("redirect:/group");
+				return mav;
+			}
 			url="redirect:/group/manage?gid="+gid;
 		}
 		Group_InfoVO vo =GroupDao.showContent(gid);
