@@ -10,8 +10,8 @@
 		insert into notice(nid, gid, writer, title, content, writedate, files)
 		values(#{nid},#{gid},#{writer},#{title}, #{content},sysdate,#{files})
 	</insert>
-	<select id="ListAll" resultType="vo.NoticeVO" parameterType="_int">
-		select * from notice where gid=#{gid}
+	<select id="ListAll" resultType="vo.NoticeVO" parameterType="java.util.HashMap">
+		select * from notice where gid=#{gid} order by DECODE ( writer, #{leader},1)
 	</select>
 	<delete id="deleteNotice" parameterType="_int">
 		delete from notice where nid = #{nid}

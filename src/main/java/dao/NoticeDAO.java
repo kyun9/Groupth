@@ -1,6 +1,8 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,12 @@ public class NoticeDAO {
 		return result;
 	}
 	
-	public List<NoticeVO> noticeList(int gid){
+	public List<NoticeVO> noticeList(int gid,String leader){
 		List<NoticeVO> list;
-		list= session.selectList("NoticeMapper.ListAll",gid);
+		Map<String,String> parameters =new HashMap<String,String>();
+		parameters.put("gid", String.valueOf(gid));
+		parameters.put("leader", String.valueOf(gid));
+		list= session.selectList("NoticeMapper.ListAll",parameters);
 		return list;
 	}
 	

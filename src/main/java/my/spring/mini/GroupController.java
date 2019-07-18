@@ -94,7 +94,7 @@ public class GroupController {
 			mav.addObject("confirm", "나의 그룹");
 		}}
 		Group_InfoVO vo =GroupDao.showContent(gid);
-		mav.addObject("noticelist", noticeDAO.noticeList(gid));
+		mav.addObject("noticelist", noticeDAO.noticeList(gid,vo.getLeader()));
 		mav.addObject("content", vo);
 		mav.setViewName("group/content");
 		return mav;
@@ -114,9 +114,11 @@ public class GroupController {
 			}
 			url="redirect:/group/manage?gid="+gid;
 		}
+		Group_InfoVO vo =GroupDao.showContent(gid);
+		mav.addObject("content", vo);
 		mav.addObject("tempMember", ugDAO.tempMember(gid));
 		mav.addObject("currentMember", ugDAO.currentMember(gid));
-		mav.addObject("noticelist", noticeDAO.noticeList(gid));
+		mav.addObject("noticelist", noticeDAO.noticeList(gid,vo.getLeader()));
 		mav.setViewName(url);
 		return mav;
 	}

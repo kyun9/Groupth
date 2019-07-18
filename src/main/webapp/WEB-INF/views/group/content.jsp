@@ -93,7 +93,9 @@ td {
 		</tr>
 		<tr class="b_content">
 			<td>내용 : <%=nList.getContent()%></td>
-			<td><a href="/mini/resources/files/<%=nList.getFiles()%>">다운로드 : <%=nList.getFiles()%></a></td>
+			<%if(nList.getFiles()!=null){ %>
+			<td><a href="/mini/resources/files/<%=nList.getFiles()%>" download>다운로드 : <%=nList.getFiles()%></a></td>
+			<%} %>
 		</tr>
 		<%
 			}
