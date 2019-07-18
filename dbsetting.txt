@@ -48,7 +48,7 @@ CREATE TABLE  groups
    count_mem number(8,0),
    lat  NUMBER(8,10),
    lng  NUMBER(8,10),
-   location varchar2(50)
+   location varchar2(500)
 );
 
 CREATE TABLE  users_group 

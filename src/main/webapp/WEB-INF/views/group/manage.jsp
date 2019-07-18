@@ -94,7 +94,7 @@
 		<input type="hidden" name="gid" id="gid" value="<%=request.getParameter("gid")%>">
 		<input type="hidden" name="lat" id="mapLat" />
 		<input type="hidden" name="lng" id="mapLng" />
-		<input type="text" name ="location" id="location" value="서울시 강남구 역삼동" />
+		<input type="text" name ="location" id="location" placeholder="서울시 강남구 역삼동" style="width:300px" />
 		<input type="button" id="findloc" value="위치찾기" />
 		<input type="button" id="storeLocation" value="저장하기">
 	</form>
@@ -126,6 +126,13 @@
 			    
 			    $("input#mapLng").val(lng);
 			    $("input#mapLat").val(lat);
+			    
+			    var latlng = encodeURIComponent(lat+","+lng);
+			    $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyD-nx_y7aBlJgfgVZRaIwMbnShQJsxpryY&latlng="+latlng, function(data) {
+					$("input#location").val(data.results[0].formatted_address);				
+											
+				});
+			    
 			}
 			
 			$("#findloc").click(function(){
@@ -163,6 +170,8 @@
 			});
 			
 			mymap.on('click', onMapClick);
+			
+			
 		});
 		
 		$("#storeLocation").click(function(){
