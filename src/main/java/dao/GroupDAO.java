@@ -73,4 +73,13 @@ public class GroupDAO {
 		}
 		return result;
 	}
+	
+	public int storeLocation(int gid, String lat,String lng,String location) {
+		Map<String, String> parameters = new HashMap<String, String>();
+		 parameters.put("gid", String.valueOf(gid));
+		 parameters.put("lat", lat);
+		 parameters.put("lng", lng);
+		 parameters.put("location", location);
+		return session.update("GroupMapper.storeLocation",parameters);
+	}
 }

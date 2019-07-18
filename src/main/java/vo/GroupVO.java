@@ -9,6 +9,10 @@ public class GroupVO {
 	private int limit_mem;
 	private String img;
 	private int count_mem;
+	private String lat;
+	private String lng;
+	private String location;
+	
 	public int getGid() {
 		return gid;
 	}
@@ -57,6 +61,32 @@ public class GroupVO {
 	public void setCount_mem(int count_mem) {
 		this.count_mem = count_mem;
 	}
+	
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	@Override
+	public String toString() {
+		return "GroupVO [gid=" + gid + ", g_name=" + g_name + ", fid=" + fid + ", leader=" + leader + ", g_content="
+				+ g_content + ", limit_mem=" + limit_mem + ", img=" + img + ", count_mem=" + count_mem + ", lat=" + lat
+				+ ", lng=" + lng + ", location=" + location + "]";
+	}
+	
 	
 	
 	

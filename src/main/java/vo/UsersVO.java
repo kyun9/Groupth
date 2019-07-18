@@ -2,17 +2,15 @@ package vo;
 
 public class UsersVO {
 	private String users_id;
-	@Override
-	public String toString() {
-		return "UsersVO [users_id=" + users_id + ", name=" + name + ", password=" + password + ", email=" + email
-				+ ", join_date=" + join_date + ", img=" + img + ", field=" + field + "]";
-	}
 	private String name;
 	private String password;
 	private String email;
 	private String join_date;
 	private String img;
 	private int field;
+	private long lat;
+	private long lng;
+	
 	
 	public String getName() {
 		return name;
@@ -56,4 +54,23 @@ public class UsersVO {
 	public void setJoin_date(String join_date) {
 		this.join_date = join_date;
 	}
+	public long getLat() {
+		return lat;
+	}
+	public void setLat(long lat) {
+		this.lat = lat;
+	}
+	public long getLng() {
+		return lng;
+	}
+	public void setLng(long lng) {
+		this.lng = lng;
+	}
+	@Override
+	public String toString() {
+		return "UsersVO [users_id=" + users_id + ", name=" + name + ", password=" + password + ", email=" + email
+				+ ", join_date=" + join_date + ", img=" + img + ", field=" + field + ", lat=" + lat + ", lng=" + lng
+				+ "]";
+	}
+	
 }

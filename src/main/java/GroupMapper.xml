@@ -41,4 +41,7 @@
 	<update id="countRemoveMember" parameterType="_int">
 		update groups set count_mem =count_mem-1 where gid=#{gid}
 	</update>
+	<update id="storeLocation" parameterType="java.util.HashMap">
+		update groups set lat =#{lat}, lng=#{lng}, location=#{location} where gid=#{gid}
+	</update>
 </mapper>

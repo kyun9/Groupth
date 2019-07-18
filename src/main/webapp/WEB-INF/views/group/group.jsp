@@ -83,7 +83,7 @@
 					for (Group_InfoVO list : group) {
 				%> 
 				<li>
-					<div class="img"><a href="/mini/group/content?gid=<%=list.getGid()%>"><img src="./resources/Gimg/<%=list.getImg()%>" alt="<%=list.getG_name()%>"></a></div>
+					<div class="img"><a href="/mini/group/content?gid=<%=list.getGid()%>"><img src="/mini/resources/Gimg/<%=list.getImg()%>" alt="<%=list.getG_name()%>"></a></div>
 					<div class="cty"><%=list.getType() %></div>
 					<div class="title"><a href="#"><%=list.getG_name()%></a></div>
 					<div class="leader">그룹리더 : <%=list.getLeader() %></div>
