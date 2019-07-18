@@ -95,6 +95,7 @@ public class GroupController {
 			mav.addObject("confirm", "나의 그룹");
 		}}
 		Group_InfoVO vo =GroupDao.showContent(gid);
+		mav.addObject("findLoc",GroupDao.findLoc(gid));
 		mav.addObject("noticelist", noticeDAO.noticeList(gid,vo.getLeader()));
 		mav.addObject("content", vo);
 		mav.setViewName("group/content");

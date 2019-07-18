@@ -179,7 +179,7 @@
 		        type:'get',
 		        success:function(data){
 		            if($.trim(data)==1){
-		                $('#chkMsg').html("저장하였습니다.").attr("style","color:black");                
+		                $('#chkMsg').html("위치를 저장하였습니다.").attr("style","color:black");                
 		            }else{
 		                $('#chkMsg').html("저장하지 못하였습니다.").attr("style","color:red");
 		            }

@@ -82,4 +82,10 @@ public class GroupDAO {
 		 parameters.put("location", location);
 		return session.update("GroupMapper.storeLocation",parameters);
 	}
+	
+	public GroupVO findLoc(int gid) {
+		GroupVO vo = null;
+		vo= session.selectOne("GroupMapper.findLoc",gid);
+		return vo;
+	}
 }

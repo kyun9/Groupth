@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="vo.Group_InfoVO, vo.Login_InfoVO, vo.NoticeVO, java.util.ArrayList"%>
+    <%@ page import="vo.Group_InfoVO, vo.Login_InfoVO, vo.NoticeVO, vo.GroupVO, java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +15,13 @@ td {
 	width: 200px;
 	text-align: center;
 }</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 	<%
@@ -102,8 +109,30 @@ td {
 		%>
 	</table>
 	<%} %>
+	<br><br>
+	<div id="mapid" style="width: 600px; height: 400px;"></div>
+	<script>
+	$(document).ready(function(){
+		<% GroupVO location = (GroupVO) request.getAttribute("findLoc");
+			System.out.println(location);
+			if(location.getLat()!=null){
+		%>
+		var mymap =L.map('mapid').setView([<%=location.getLat()%>, <%=location.getLng()%>], 15);
+		L.marker([<%=location.getLat()%>, <%=location.getLng()%>]).addTo(mymap)
+		.bindPopup("<%=location.getLocation()%>").openPopup(); 
+		<%}else{%>
+		var mymap =L.map('mapid').setView([37.566, 126.978], 13);
+		<%}%>
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+				'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery <a href="https://www.m/* apbox.com/">Mapbox</a>',
+			id: 'mapbox.streets'
+		}).addTo(mymap);
+	});
+	</script>
 	
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 		$(".b_content").hide();
 		$(".b_title").click(function(){

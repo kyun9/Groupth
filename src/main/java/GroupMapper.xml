@@ -44,4 +44,7 @@
 	<update id="storeLocation" parameterType="java.util.HashMap">
 		update groups set lat =#{lat}, lng=#{lng}, location=#{location} where gid=#{gid}
 	</update>
+	<select id="findLoc" parameterType="_int" resultType="vo.GroupVO">
+		select * from groups where gid =#{gid}
+	</select>
 </mapper>
