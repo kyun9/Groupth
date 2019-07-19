@@ -22,7 +22,7 @@
 	<select parameterType="string" id="searchGroupId" resultType="_int"> 
 		select gid from users_group where users_id = #{users_id} 
 	</select>
-	<select id="myGroup" parameterType="string" resultType="vo.GroupVO">
-		select * from users_group u, groups g where u.gid=g.gid and users_id = #{idVal}
+	<select id="myGroup" parameterType="java.util.HashMap" resultType="vo.GroupVO">
+		select * from users_group u, groups g where u.gid=g.gid and users_id = #{idVal} and u.cofirm in (#{accept},#{leader})
 	</select>
 </mapper>

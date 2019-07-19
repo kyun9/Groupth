@@ -94,10 +94,13 @@ public class Users_GroupDAO {
 		}
 		return result;
 	}
-	@SuppressWarnings("null")
 	public List<GroupVO> myGroup(String idVal){
 		List<GroupVO> glist=null;
-		glist = session.selectList("UsersMapper.myGroup", idVal);
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("idVal", idVal);
+		parameters.put("leader", "leader");
+		parameters.put("accept", "accept");
+		glist = session.selectList("UsersMapper.myGroup", parameters);
 		return glist;
 	}
 }

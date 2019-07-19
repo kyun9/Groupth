@@ -5,7 +5,7 @@
 <mapper namespace="GroupMapper">
 
 	<select id="popularGroup" resultType="vo.Group_InfoVO">
-		select * from groups,field where groups.fid =field.fid and rownum &lt;=3 order by cnt desc
+		select * from (select * from groups order by cnt desc) g , field f where g.fid=f.fid and rownum &lt; 4
 	</select>
 	<insert id="insertGroup" parameterType="vo.GroupVO">
 		insert into groups(gid, g_name, fid, leader, g_content, limit_mem, img, count_mem,cnt)
