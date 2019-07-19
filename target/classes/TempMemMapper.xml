@@ -10,7 +10,7 @@
 		select u.users_id, u.name, u.email, u.img, field from users u, users_group g where u.users_id = g.users_id and g.gid=#{gid} and cofirm in ('accept','leader')
 	</select>
 	<select id="statusJoin" parameterType="java.util.HashMap" resultType="_int">
-		select count(*) from users_group where gid=#{gid} and users_id =#{users_id} and cofirm ='accept'
+		select count(*) from users_group where gid=#{gid} and users_id =#{users_id} and cofirm in ('accept','leader')
 	</select>
 	<select id="checkUser" parameterType ="java.util.HashMap" resultType="_int">
 		select count(*) from users_group where users_id like #{users_id} and gid = #{gid}

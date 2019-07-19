@@ -48,11 +48,11 @@
 			<div id="myPageNav">
 				<h3>마이페이지</h3>
 				<ul>
-					<li class="info on"><a onclick="myInfo()">내 정보 수정</a></li> 
-					<li class="group"><a onclick="myGroup()">내 그룹 관리</a></li>
+					<li class="group on"><a onclick="myGroup()">내 그룹 관리</a></li>
+					<li class="info"><a onclick="myInfo()">내 정보 수정</a></li> 
 				</ul>
 			</div>
-			<div id="myInfo" style="display: block">
+			<div id="myInfo" style="display: none">
 				<h4>내 정보 수정</h4>
 				<div class="padding">
 					<%
@@ -99,7 +99,7 @@
 					%>
 				</div><!-- padding End -->
 			</div><!-- settingGroup End -->
-			<div id="settingGroup" style="display: none">
+			<div id="settingGroup" style="display: block">
 				<h4>내 그룹 관리</h4>
 				<div class="padding">
 					<%

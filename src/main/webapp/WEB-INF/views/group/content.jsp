@@ -137,6 +137,9 @@ td {
 	<script>
 		$(".b_content").hide();
 		$(".b_title").click(function(){
+		<%
+			if (request.getAttribute("confirm") != null) {
+		%>
 			if($(this).hasClass("on")){
 				$(".b_content").hide();
 				$(this).removeClass("on");
@@ -145,6 +148,9 @@ td {
 				$(this).addClass("on");
 			}
 			
+		<%}else{%>
+			alert("그룹 멤버만 글을 공개합니다.");
+		<%}%>
 		});
 	</script>
 	
