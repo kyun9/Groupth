@@ -3,9 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="GroupMapper">
+
+	<select id="popularGroup" resultType="vo.Group_InfoVO">
+		select * from groups,field where groups.fid =field.fid and rownum &lt;=3 order by cnt desc
+	</select>
 	<insert id="insertGroup" parameterType="vo.GroupVO">
-		insert into groups(gid, g_name, fid, leader, g_content, limit_mem, img, count_mem)
-		values(GROUPS_SEQ.nextval,#{g_name},#{fid},#{leader},#{g_content},#{limit_mem},#{img},1)
+		insert into groups(gid, g_name, fid, leader, g_content, limit_mem, img, count_mem,cnt)
+		values(GROUPS_SEQ.nextval,#{g_name},#{fid},#{leader},#{g_content},#{limit_mem},#{img},1,0)
 		<selectKey resultType="_int" keyProperty="gid" order="AFTER">
 			select GROUPS_SEQ.currval from dual
 		</selectKey>
@@ -32,6 +36,9 @@
 	<select id="showContent" parameterType ="_int" resultType="vo.Group_InfoVO">
 		select * from groups,field where groups.fid =field.fid and groups.gid = #{gid}
 	</select>
+	<update id="showContentUpdateCount" parameterType ="_int">
+		update groups set cnt = cnt+1 where gid=#{gid}
+	</update>
 	<delete id="deleteGroup" parameterType="_int">
 		delete from groups where gid=#{gid}
 	</delete>

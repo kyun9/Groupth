@@ -16,6 +16,13 @@ public class GroupDAO {
 	@Autowired
 	SqlSession session=null;
 	
+	public List<Group_InfoVO> popularGroup(){
+		List<Group_InfoVO> list;
+		
+		list = session.selectList("GroupMapper.popularGroup");
+		return list;
+	}
+	
 	public boolean create(GroupVO vo) {
 		boolean result =true;
 		if(session.insert("GroupMapper.insertGroup",vo)!=1) {
@@ -63,6 +70,7 @@ public class GroupDAO {
 		Group_InfoVO vo= null;
 		String statement="GroupMapper.showContent";
 		vo=session.selectOne(statement,gid);
+		session.update("GroupMapper.showContentUpdateCount",gid);
 		return vo;
 	}
 	

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%@ page session="true" %>
+   <%@ page import="vo.Group_InfoVO, java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -65,31 +66,19 @@
 		<div class="group_section">
 		
 			<div id="groupList">
-				<h3>인기있는 그룹</h3>
+				<h3>인기 그룹</h3>
 				<ul>
+				<% ArrayList<Group_InfoVO> popularGroup = (ArrayList<Group_InfoVO>) request.getAttribute("popularGroup"); 
+					for(Group_InfoVO vo : popularGroup){
+				%>
 					<li>
-						<div class="img"><a href="./group_view.html"><img src="http://www.globalpeoples.net/news/photo/201902/652_1168_95.png" alt="그룹명"></a></div>
-						<div class="cty">분야</div>
-						<div class="title"><a href="#">제목</a></div>
-						<div class="leader">그룹리더 : 작성자</div>
-						<div class="number">인원 : 5/20</div>
+						<div class="img"><a href="/mini/group/content?gid=<%=vo.getGid()%>"><img src="/mini/resources/Gimg/<%=vo.getImg()%>" alt="<%=vo.getG_name()%>"></a></div>
+						<div class="cty"><%=vo.getType()%></div>
+						<div class="title"><a href="#"><%=vo.getG_name() %></a></div>
+						<div class="leader">그룹리더 : <%=vo.getLeader() %></div>
+						<div class="number">인원 : <%=vo.getCount_mem() %>/<%=vo.getLimit_mem() %></div>
 					</li>
-
-					<li>
-						<div class="img"><a href="./group_view.html"><img src="http://www.globalpeoples.net/news/photo/201902/652_1168_95.png" alt="그룹명"></a></div>
-						<div class="cty">분야</div>
-						<div class="title"><a href="#">제목</a></div>
-						<div class="leader">그룹리더 : 작성자</div>
-						<div class="number">인원 : 5/20</div>
-					</li>
-
-					<li>
-						<div class="img"><a href="./group_view.html"><img src="http://www.globalpeoples.net/news/photo/201902/652_1168_95.png" alt="그룹명"></a></div>
-						<div class="cty">분야</div>
-						<div class="title"><a href="#">제목</a></div>
-						<div class="leader">그룹리더 : 작성자</div>
-						<div class="number">인원 : 5/20</div>
-					</li>
+				<%} %>
 				</ul>
 			</div>
 
