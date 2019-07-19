@@ -82,16 +82,17 @@ td {
 	<!-- 게시판  -->
 	<%if (request.getAttribute("confirm") != null) { %>
 	<button onclick ="writeNotice()">Notice Write</button>
-	<%}
-		ArrayList<NoticeVO> noticelist = (ArrayList<NoticeVO>) request.getAttribute("noticelist");
-		if (!noticelist.isEmpty()) {
-	%>
+	<%}%>
 	<table>
 		<tr>
 			<th>Title</th>
 			<th>Writer</th>
 			<th>Date</th> 
 		</tr>
+	<%
+		ArrayList<NoticeVO> noticelist = (ArrayList<NoticeVO>) request.getAttribute("noticelist");
+		if (!noticelist.isEmpty()) {
+	%>
 		<% for (NoticeVO nList : noticelist) {%>
 		<tr>
 			<td><%=nList.getTitle()%></td>
@@ -107,8 +108,8 @@ td {
 		<%
 			}
 		%>
-	</table>
 	<%} %>
+	</table>
 	<br><br>
 	<div id="mapid" style="width: 600px; height: 400px;"></div>
 	<script>

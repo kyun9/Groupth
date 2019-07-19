@@ -58,16 +58,16 @@
 		<br>
 		<br>
 	<button onclick ="writeNotice()">공지 작성하기</button>
-	<%
-		ArrayList<NoticeVO> noticelist = (ArrayList<NoticeVO>) request.getAttribute("noticelist");
-		if (!noticelist.isEmpty()) {
-	%>
 	<table>
 		<tr>
 			<th>Title</th>
 			<th>Writer</th>
 			<th>Date</th> 
 		</tr>
+	<%
+		ArrayList<NoticeVO> noticelist = (ArrayList<NoticeVO>) request.getAttribute("noticelist");
+		if (!noticelist.isEmpty()) {
+	%>
 		<% for (NoticeVO nList : noticelist) {%>
 		<tr>
 			<td><%=nList.getTitle()%></td>
@@ -83,8 +83,8 @@
 		<%
 			}
 		%>
-	</table>
 	<%} %>
+	</table>
 	<br><br>
 	<button onclick="deleteGroup()">그룹 삭제</button>
 	
