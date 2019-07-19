@@ -32,5 +32,20 @@ public class UsersDAO {
 		String statement="UsersMapper.idCheck";
 		System.out.println(session.selectOne(statement,users_id));
 		return session.selectOne(statement,users_id);
-}
+	}
+	public UsersVO showUser(String idVal) {
+		UsersVO user= null;
+		String statement="UsersMapper.showUser";
+		user=session.selectOne(statement,idVal);
+		return user;
+	}
+	
+	public boolean change(UsersVO vo) {
+		boolean result = true;
+		System.out.println(vo);
+		if(session.update("UsersMapper.changeUser",vo)!=1)
+			result=false;
+		return result;
+	}
+	
 }

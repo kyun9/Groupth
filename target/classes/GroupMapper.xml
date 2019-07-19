@@ -24,10 +24,10 @@
 		select * from groups,field where groups.fid =field.fid and field.type = #{field}
 	</select>
 	<select id = "searchNonField" parameterType = "string" resultType="vo.Group_InfoVO">
-		select * from groups,field where groups.fid =field.fid and groups.g_name like '%'||#{key}||'%'
+		select * from groups,field where groups.fid =field.fid and upper(groups.g_name) like upper('%'||#{key}||'%')
 	</select>
 	<select id = "searchInfo" parameterType = "java.util.HashMap" resultType="vo.Group_InfoVO">
-		select * from groups,field where groups.fid =field.fid and (field.type = #{field} and groups.g_name like '%'||#{key}||'%')
+		select * from groups,field where groups.fid =field.fid and (field.type = #{field} and upper(groups.g_name) like upper('%'||#{key}||'%'))
 	</select>
 	<select id="showContent" parameterType ="_int" resultType="vo.Group_InfoVO">
 		select * from groups,field where groups.fid =field.fid and groups.gid = #{gid}

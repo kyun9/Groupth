@@ -85,7 +85,7 @@
 				<li>
 					<div class="img"><a href="/mini/group/content?gid=<%=list.getGid()%>"><img src="/mini/resources/Gimg/<%=list.getImg()%>" alt="<%=list.getG_name()%>"></a></div>
 					<div class="cty"><%=list.getType() %></div>
-					<div class="title"><a href="#"><%=list.getG_name()%></a></div>
+					<div class="title"><a href="/mini/group/content?gid=<%=list.getGid()%>"><%=list.getG_name()%></a></div>
 					<div class="leader">그룹리더 : <%=list.getLeader() %></div>
 					<div class="number">인원 : <%=list.getCount_mem() %>/<%=list.getLimit_mem() %></div>
 				</li>

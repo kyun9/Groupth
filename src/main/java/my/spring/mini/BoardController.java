@@ -69,7 +69,7 @@ public class BoardController {
 			dao.update(vo);
 		}
 		mav.addObject("list", dao.listAll());
-		mav.setViewName("/board/board");
+		mav.setViewName("redirect:/board");
 		return mav;
 	}
 }

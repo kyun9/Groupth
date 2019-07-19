@@ -35,9 +35,18 @@
 			<div class="video-background"></div>
 			<div class="cover"></div>
 			<div class="container">
+				<%
+					if(session.getAttribute("loginUser")!=null){
+				%>
 				<h3>직접 만나 함께하는 즐거움</h3>
 				<p>로컬 그룹에 가입하고 사람들과 좋아하는 일을 함께 하며 새로운 경험을 즐겨 보세요.</p>
+				<a href="/mini/group">그룹으로 바로가기</a>
+				<%}else{ %>
+				<h3>직접 만나 함께하는 즐거움</h3>
+				<p>GROUPTH는 Group 과 Growth 의 합성어로 그룹활동으로의 공동 성장을 추구합니다.<br>
+				GROUPTH의 가입하고 다양한 활동을 즐겨보세요</p>
 				<a href="/mini/register">Groupth 가입하기</a> <!-- session true = 가입 X -->
+				<%} %>
 			</div>
 		</div><!-- visual_section End -->
 

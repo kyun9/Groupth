@@ -7,8 +7,8 @@ CREATE TABLE  users
    join_date  date,
    img  varchar2(100),
    field  NUMBER(8,0),
-   lat  NUMBER(8,10),
-   lng  NUMBER(8,10)
+   lat  varchar2(50),
+   lng  varchar2(50)
 );
 
 CREATE TABLE  board 
@@ -46,9 +46,10 @@ CREATE TABLE  groups
    limit_mem  NUMBER(8,0),
    img  varchar2(100),
    count_mem number(8,0),
-   lat  NUMBER(8,10),
-   lng  NUMBER(8,10),
-   location varchar2(500)
+   lat  varchar2(50),
+   lng  varchar2(50),
+   location varchar2(500),
+   cnt NUMBER(8,0)
 );
 
 CREATE TABLE  users_group 

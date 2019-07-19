@@ -13,4 +13,16 @@
 	<select id = "idCheck" parameterType = "String" resultType = "int">
     SELECT COUNT(*) FROM users WHERE users_id = #{users_id}
 	</select>
+	<select parameterType="string" id="showUser" resultType="vo.UsersVO"> 
+		select * from users where users_id like #{idVal} 
+	</select>
+	<update parameterType="vo.UsersVO" id="changeUser"> 
+		update users set name=#{name},password=#{password},email=#{email} where users_id like #{users_id} 
+	</update>
+	<select parameterType="string" id="searchGroupId" resultType="_int"> 
+		select gid from users_group where users_id = #{users_id} 
+	</select>
+	<select id="myGroup" parameterType="string" resultType="vo.GroupVO">
+		select * from users_group u, groups g where u.gid=g.gid and users_id = #{idVal}
+	</select>
 </mapper>

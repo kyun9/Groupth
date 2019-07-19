@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import vo.GroupVO;
 import vo.UsersVO;
-import vo.Users_GroupVO;
 
 @Repository
 public class Users_GroupDAO {
@@ -93,5 +93,11 @@ public class Users_GroupDAO {
 			result = false;
 		}
 		return result;
+	}
+	@SuppressWarnings("null")
+	public List<GroupVO> myGroup(String idVal){
+		List<GroupVO> glist=null;
+		glist = session.selectList("UsersMapper.myGroup", idVal);
+		return glist;
 	}
 }
