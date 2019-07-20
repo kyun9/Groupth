@@ -52,5 +52,10 @@ public class UsersDAO {
 			result=false;
 		return result;
 	}
-	
+	public UsersVO matchInfo(String idVal) {
+		UsersVO vo =null;
+		vo= session.selectOne("UsersMapper.matchInfo", idVal);
+		System.out.println(vo);
+		return vo;
+	}
 }

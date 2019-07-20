@@ -11,7 +11,7 @@
 <%
 if(session.getAttribute("loginUser")!=null){
 %>
-					<li><a href="javascript: void(0);">매칭</a></li>
+					<li><a href="/mini/match">매칭</a></li>
 <%
 }
 %>

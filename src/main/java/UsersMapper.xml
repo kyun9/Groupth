@@ -28,4 +28,7 @@
 	<select id="myGroup" parameterType="java.util.HashMap" resultType="vo.GroupVO">
 		select * from users_group u, groups g where u.gid=g.gid and users_id = #{idVal} and u.cofirm in (#{accept},#{leader})
 	</select>
+	<select id="matchInfo" parameterType="string" resultType = "vo.UsersVO">
+		select * from users where users_id =#{idVal}
+	</select>
 </mapper>
