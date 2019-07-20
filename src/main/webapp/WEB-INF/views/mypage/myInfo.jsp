@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="vo.UsersVO,vo.GroupVO, java.util.ArrayList"%>
+<%@ page import="vo.UsersVO,vo.GroupVO, vo.FieldVO, java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,6 +18,12 @@
     <!--[if lt IE 9]>
        <script src="/mini/resources/file/js/html5shiv.js"></script>
     <![endif]-->
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+	   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+	   crossorigin=""></script>
 </head>
 <body>
 <dl class="skip">
@@ -97,6 +103,7 @@
 					<%
 						}
 					%>
+					
 				</div><!-- padding End -->
 			</div><!-- settingGroup End -->
 			<div id="settingGroup" style="display: block">
@@ -118,12 +125,33 @@
 						<%}}%> 
 					
 					</ul>
-
+<!-- ******항목 이름 추가 정보 입력하기*******************************************추가부분****************************************************************** -->
+				<form method="post" action="/mini/mypage/myInfo">
+				<input type="hidden" name="action" value="addInfo" />
+				<input type="hidden" name="lat" id="mapLat" />
+				<input type="hidden" name="lng" id="mapLng" />
+				관심 그룹 분야 : <select name="field">
+						<%
+							ArrayList<FieldVO> field = (ArrayList<FieldVO>) request.getAttribute("field");
+							if (!field.isEmpty()) {
+								for (FieldVO type : field) {
+						%>
+						<option value="<%=type.getFid()%>"><%=type.getType()%></option>
+						<%
+							}}
+						%>
+				</select>
+				<br>
+				주소 입력 : 
+				<input type="text" name ="location" id="location" placeholder="서울시 강남구 역삼동" />
+				<input type="button" id="findloc" value="위치찾기" />
+				<div id="mapid" style="width: 600px; height: 400px;"></div><br>
+				<input type="submit" value="저장하기" />
+			</form>
+<!-- *************************************************추가부분****************************************************************** -->
 				</div>
 			</div><!-- settingGroup End -->
 		</div><!-- myPageBox End -->
-
-
 	</div><!-- content End -->
 
 	<%@ include file="/WEB-INF/views/footer.jsp" %>
@@ -135,5 +163,75 @@
 		alert("${msg}}");
 		</script>
 	<%} %>
+	<script>
+	$(document).ready(function(){
+		
+		var mymap =L.map('mapid').setView([37.566, 126.978], 13);
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+				'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery <a href="https://www.m/* apbox.com/">Mapbox</a>',
+			id: 'mapbox.streets'
+		}).addTo(mymap);
+		
+		function onMapClick(e) {
+			$(".leaflet-marker-pane img").remove();
+			$(".leaflet-popup-pane").remove();
+			$(".leaflet-shadow-pane").remove();
+			var lat = (e.latlng.lat);
+		    var lng = (e.latlng.lng);
+		    L.marker([lat, lng]).addTo(mymap);	
+		    
+		    $("input#mapLng").val(lng);
+		    $("input#mapLat").val(lat);
+		    
+		    var latlng = encodeURIComponent(lat+","+lng);
+		    $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyD-nx_y7aBlJgfgVZRaIwMbnShQJsxpryY&latlng="+latlng, function(data) {
+				$("input#location").val(data.results[0].formatted_address);				
+										
+			});
+		    
+		}
+		
+		$("#findloc").click(function(){
+		
+			var address = $("#location").val();
+			var lat;
+			var lng;
+			
+			if (address) {			
+				$.getJSON("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyD-nx_y7aBlJgfgVZRaIwMbnShQJsxpryY&address="+encodeURIComponent(address), function(data) {
+					lat = data.results[0].geometry.location.lat;
+					lng = data.results[0].geometry.location.lng;
+					
+					$("input#mapLng").val(lng);
+				    $("input#mapLat").val(lat);
+				    
+					if(mymap)
+						mymap.remove();
+					mymap = L.map('mapid').setView([lat, lng], 16)
+					L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+						maxZoom: 18,
+						attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+							'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+							'Imagery <a href="https://www.mapbox.com/">Mapbox</a>',
+						id: 'mapbox.streets'
+					}).addTo(mymap);
+	
+					 L.marker([lat, lng]).addTo(mymap);
+
+					 mymap.on('click', onMapClick);
+				
+				});
+			}		 
+		
+		});
+		
+		mymap.on('click', onMapClick);
+		
+		
+	});
+	</script>
 </body>
 </html>

@@ -8,8 +8,8 @@ public class UsersVO {
 	private String join_date;
 	private String img;
 	private int field;
-	private long lat;
-	private long lng;
+	private String lat;
+	private String lng;
 	
 	
 	public String getName() {
@@ -54,16 +54,16 @@ public class UsersVO {
 	public void setJoin_date(String join_date) {
 		this.join_date = join_date;
 	}
-	public long getLat() {
+	public String getLat() {
 		return lat;
 	}
-	public void setLat(long lat) {
+	public void setLat(String lat) {
 		this.lat = lat;
 	}
-	public long getLng() {
+	public String getLng() {
 		return lng;
 	}
-	public void setLng(long lng) {
+	public void setLng(String lng) {
 		this.lng = lng;
 	}
 	@Override

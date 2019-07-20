@@ -40,9 +40,14 @@ public class UsersDAO {
 		return user;
 	}
 	
+	public boolean addInfo(UsersVO vo) {
+		boolean result = true;
+		if(session.update("UsersMapper.addInfo",vo)!=1)
+			result=false;
+		return result;
+	}
 	public boolean change(UsersVO vo) {
 		boolean result = true;
-		System.out.println(vo);
 		if(session.update("UsersMapper.changeUser",vo)!=1)
 			result=false;
 		return result;

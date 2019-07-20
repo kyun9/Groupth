@@ -19,6 +19,9 @@
 	<update parameterType="vo.UsersVO" id="changeUser"> 
 		update users set name=#{name},password=#{password},email=#{email} where users_id like #{users_id} 
 	</update>
+	<update parameterType="vo.UsersVO" id="addInfo"> 
+		update users set lat=#{lat}, lng=#{lng}, field=#{field} where users_id like #{users_id} 
+	</update>
 	<select parameterType="string" id="searchGroupId" resultType="_int"> 
 		select gid from users_group where users_id = #{users_id} 
 	</select>
