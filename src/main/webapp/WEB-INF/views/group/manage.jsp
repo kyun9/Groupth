@@ -1,106 +1,266 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="vo.UsersVO, vo.Login_InfoVO, vo.NoticeVO, vo.Group_InfoVO, java.util.ArrayList"%>
+<%@ page import="vo.UsersVO, vo.Login_InfoVO, vo.NoticeVO, vo.Group_InfoVO, java.util.ArrayList"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
+    
+    <title>Groupth</title>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/respond.css" />
+
+    <!--[if lt IE 9]>
+       <script src="/mini/resources/file/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-   crossorigin=""></script>
-   
+	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+	   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+	   crossorigin=""></script>
 </head>
 <body>
+<dl class="skip">
+	<dt class="blind"><strong>skip navigation</strong></dt>
+    <dd><a href="#content">skip to content</a></dd>
+</dl>
+<div id="wrap">
+	
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+
+	<div id="content">
+
+		<%
+			if (request.getAttribute("content") != null) {
+				Group_InfoVO content = (Group_InfoVO) request.getAttribute("content");
+		%>
+		<div id="myPageBox">
+			<h3 class="s_title">&lt;<%=content.getG_name() %>&gt;</h3>
+			<div id="myGroupInfo">
+				<div class="group_cty"><%=content.getType() %></div>
+				<div class="group_img"><img src="../resources/Gimg/<%=content.getImg()%>" alt="그룹이미지" /></div>
+			
+				<div class="padding">	
+					<div class="group_leader">그룹리더 : <%=content.getLeader() %></div>
+					<p><%=content.getG_content() %></p>
+
+					<a href="javascript: void(0);" class="group_remove" onclick="deleteGroup();">그룹삭제</a>
+				</div>
+			</div>
+		<%
+			}
+		%>
+			<div id="groupAdmin">
+				<h4>그룹 멤버</h4>
+				<div class="padding">
+
+					<div class="stand">
+						<div class="table">
+							<table>
+								<caption class="hide">가입대기자 목록</caption>
+								<colgroup>
+									<col width="*" />
+									<col width="20%" />
+									<col width="20%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th colspan="3" class="title">가입대기자</th>
+									</tr>
+									<tr>
+										<th>아이디</th>
+										<th>수락</th>
+										<th>거부</th>
+									</tr>
+								</thead>
+								<tbody>
+									
 	<%
-		if (session.getAttribute("loginUser") != null) {
-	%>
-	<h2>로그인아이디 : ${ sessionScope.loginUser.user}</h2>
-	<%
-		}
 		ArrayList<UsersVO> tempMember = (ArrayList<UsersVO>) request.getAttribute("tempMember");
-		%><h3>ㅁ 가입 신청자 목록</h3><%
+
 		if(!tempMember.isEmpty()){
 			for(UsersVO mem : tempMember){	
 	%>
-		멤버 아이디 : <%=mem.getUsers_id()%>
-		<a href="/mini/group/manage?gid=<%=request.getParameter("gid")%>&uid=<%=mem.getUsers_id()%>&action=welcomeApplicant"><img src="../resources/static/welcome.png" width="25" height="25"></a>
-		<a href="/mini/group/manage?gid=<%=request.getParameter("gid") %>&uid=<%=mem.getUsers_id()%>&action=rejectApplicant"><img src="../resources/static/reject.png" width="25" height="25"></a>
-		<br>
+									<tr>
+										<td><%=mem.getUsers_id()%></td>
+										<td><div class="check"><a href='/mini/group/manage?gid=<%=request.getParameter("gid")%>&uid=<%=mem.getUsers_id()%>&action=welcomeApplicant'><img src="/mini/resources/file/img/s_img/mem_check.png" alt="수락"></a></div></td>
+										<td><div class="check"><a href='/mini/group/manage?gid=<%=request.getParameter("gid") %>&uid=<%=mem.getUsers_id()%>&action=rejectApplicant'><img src="/mini/resources/file/img/s_img/mem_cancel.png" alt="거부"></a></div></td>
+									</tr>
 	<%
 			}}
 		else{%>
-			신청자가 없습니다.
+									<tr>
+										<td colspan="3">신청자가 없습니다.</td>
+									</tr>
 		<%}
 	%>
+								</tbody>
+							</table>
+						</div>
+					</div><!-- 가입대기자 End -->
+
+					<div class="member">
+
+						<div class="table">
+							<table>
+								<caption class="hide">그룸멤버 목록</caption>
+								<colgroup>
+									<col width="20%" />
+									<col width="*" />
+									<col width="20%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th colspan="3" class="title">그룹멤버</th>
+									</tr>
+									<tr>
+										<th>프로필</th>
+										<th>아이디</th>
+										<th>추방</th>
+									</tr>
+								</thead>
+								<tbody>
+
 	<%
 		ArrayList<UsersVO> currentMember = (ArrayList<UsersVO>) request.getAttribute("currentMember");
-		%><h3>ㅁ 그룹멤버 목록</h3><%
 		if(!currentMember.isEmpty()){
 			for(UsersVO mem : currentMember){	
 			if (session.getAttribute("loginUser") != null) {
 				Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
 				if (user.getUser().equals(mem.getUsers_id())) {
 		%>
-			 <img src="../resources/static/leader.png" width="25" height="25">그룹장 :
+
+									<tr>
+										<td><div class="icon"><img src="/mini/resources/file/img/s_img/crown.png" alt="프로필"></div></td>
+										<td><%=mem.getUsers_id()%></td>
+										<td><div class="check"></td>
+									</tr>
+
 		<%}else {%>
-			<a href="/mini/group/manage?gid=<%=request.getParameter("gid") %>&uid=<%=mem.getUsers_id()%>&action=dropApplicant"><img src="../resources/static/drop.png" width="25" height="25"></a>
-			멤버 :
+									<tr>
+										<td><div class="icon"><img src="/mini/resources/file/img/s_img/people.png" alt="프로필"></div></td>
+										<td><%=mem.getUsers_id()%></td>
+										<td><div class="check"><a href='/mini/group/manage?gid=<%=request.getParameter("gid") %>&uid=<%=mem.getUsers_id()%>&action=dropApplicant'><img src="/mini/resources/file/img/s_img/mem_cancel.png" alt="거부"></a></div></td>
+									</tr>
+
 		<%}}%> 
-			<%=mem.getUsers_id()%> <br>
+		
 		<%}}else{%>
 			멤버가 없습니다.
-		<%}%>
-		
-		<br>
-		<br>
-	<button onclick ="writeNotice()">공지 작성하기</button>
-	<table>
-		<tr>
-			<th>Title</th>
-			<th>Writer</th>
-			<th>Date</th> 
-		</tr>
+	<%}%>
+									
+
+									<!-- <tr>
+										<td><div class="icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Wg6L7hMsjleF51zW575bNjK1dCZovVz2xJ7luMsXQkTF1Qxz" alt="프로필"></div></td>
+										<td>usong2</td>
+										<td><div class="check"><a href="#"><img src="./file/img/s_img/mem_cancel.png" alt="거부"></a></div></td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div><!-- settingGroup End -->
+			
+			<div id="groupAdmin">
+				<h4>공지사항</h4>
+				<div class="padding">
+					<div id="boardList">
+						<div class="table_wrap">
+						<table border="0" cellpadding="0" cellspacing="0">
+							<caption>게시판</caption>
+							<colgroup>
+								<col width="*" />
+								<col width="15%" />
+								<col width="20%" />
+								<col width="13%" />
+							</colgroup>
+
+							<thead>
+								<tr>
+									<th scope="col">제목</th>
+									<th scope="col">작성자</th>
+									<th scope="col">작성일</th>
+									<th scope="col">관리</th>
+								</tr>
+							</thead>
+
+							<tbody>
 	<%
 		ArrayList<NoticeVO> noticelist = (ArrayList<NoticeVO>) request.getAttribute("noticelist");
 		if (!noticelist.isEmpty()) {
 	%>
 		<% for (NoticeVO nList : noticelist) {%>
-		<tr>
-			<td><%=nList.getTitle()%></td>
-			<td class="b_title" style="cursor: pointer"><%=nList.getWriter()%></td>
-			<td><%=nList.getWritedate()%><a href="/mini/group/noticeDelete?nid=<%=nList.getNid()%>&gid=<%=request.getParameter("gid")%>">삭제</a></td>
-		</tr>
-		<tr class="b_content"> 
-			<td>내용 : <%=nList.getContent()%></td>
-			<%if(nList.getFiles()!=null){ %>
-			<td><a href="/mini/resources/files/<%=nList.getFiles()%>" download>다운로드 : <%=nList.getFiles()%></a></td>
-			<%} %>
-		</tr>
+								<tr class="click">
+									<td class="title"><%=nList.getTitle()%></td>
+									<td><%=nList.getWriter()%></td>
+									<td><%=nList.getWritedate()%></td>
+									<td><div class="check"><a href='/mini/group/noticeDelete?nid=<%=nList.getNid()%>&gid=<%=request.getParameter("gid")%>'><img src="/mini/resources/file/img/s_img/delete.png" alt="거부"></a></div></td>
+								</tr>
+								<tr class="con">
+									<td colspan="4">
+										<p><%=nList.getContent()%></p>
+										<div><a href="/mini/resources/files/<%=nList.getFiles()%>" download>다운로드 : <%=nList.getFiles()%></a></div>
+									</td>
+								</tr>
 		<%
 			}
 		%>
 	<%} %>
-	</table>
-	<br><br>
-	<button onclick="deleteGroup()">그룹 삭제</button>
-	
-	<br><br>
-	<span id = "chkMsg"></span>
+							</tbody>
+
+						</table>	
+
+						<script>
+							$(document).ready(function(){
+								$("#boardList table td.title").click(function(){
+									if($(this).hasClass("on")){
+										$(this).parent("tr").next().slideUp();
+										$(this).removeClass("on");
+									}else{
+										$(this).parent("tr").next().slideDown();
+										$(this).addClass("on");
+									}
+									
+
+								});
+							});
+						</script>
+						</div> 
+
+					</div><!-- boardList End -->
+
+					<div class="write_btn"><button onclick="writeNotice()">공지 작성하기</button></div>
+				</div>
+				
+
+			</div><!-- settingGroup End -->
+			
+			<div id="groupAdmin">
+				<h4>장소공지</h4>
+				<div class="padding">
+					
+	<span id="chkMsg"></span>
 	<form>
-		<input type="hidden" name="gid" id="gid" value="<%=request.getParameter("gid")%>">
+		<input type="hidden" name="gid" id="gid" value='<%=request.getParameter("gid")%>'>
 		<input type="hidden" name="lat" id="mapLat" />
 		<input type="hidden" name="lng" id="mapLng" />
-		<input type="text" name ="location" id="location" placeholder="서울시 강남구 역삼동" style="width:300px" />
+		<div class="loc_box">
+		<input type="text" name ="location" id="location" placeholder="서울시 강남구 역삼동" />
 		<input type="button" id="findloc" value="위치찾기" />
-		<input type="button" id="storeLocation" value="저장하기">
+		<input type="button" id="storeLocation" value="저장하기" />
+		</div>
 	</form>
-	<div id="mapid" style="width: 600px; height: 400px;"></div>
-	
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<div id="mapid"></div>
+
 	<script>
 
 
@@ -200,22 +360,16 @@
 		});
 	</script>
 	
-	
-	
-	<script>
-		$(".b_content").hide();
-		$(".b_title").click(function(){
-			if($(this).hasClass("on")){
-				$(".b_content").hide();
-				$(this).removeClass("on");
-			}else{
-				$(".b_content").show();
-				$(this).addClass("on");
-			}
+
+
+				</div>
+			</div><!-- settingGroup End -->
 			
-		});
-	</script>
-	
+			
+		</div><!-- myPageBox End -->
+
+	</div><!-- content End -->
+
 	<script>
 			<%
 			if (request.getAttribute("content") != null) {
@@ -227,10 +381,13 @@
 			<%}%>
 			
 		function deleteGroup(){
-			location.href="/mini/group/manage?action=deleteGroup&gid=<%=request.getParameter("gid")%>";
+			location.href='/mini/group/manage?action=deleteGroup&gid=<%=request.getParameter("gid")%>';
 		}
 	</script>
+
+	<%@ include file="/WEB-INF/views/footer.jsp" %>
 	
-	
+</div>
+
 </body>
 </html>

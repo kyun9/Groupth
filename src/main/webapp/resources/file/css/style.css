@@ -259,3 +259,55 @@ html, body{width: 100%;height: 100%;}
 #wrap #content #groupView .detail_txt{padding: 50px 0 80px 0;}
 #wrap #content #groupView .detail_txt h4{margin-bottom: 10px;font-weight: 500;color: #67c9a7;}
 #wrap #content #groupView .detail_txt p{font-size: 15px;line-height: 1.6;font-weight: 300;color: #666;}
+
+
+
+/* group - admin */
+#wrap #content #myPageBox{padding-top: 100px;}
+#wrap #content #myPageBox #myGroupInfo{float: left;width: 25%;margin-right: 4%;border: 1px solid #e5e5e5;}
+#wrap #content #myPageBox #myGroupInfo h3.s_title{font-size: 32px;font-weight: 500;text-align: center;margin-bottom: 80px;margin-top: 100px;}
+#wrap #content #myPageBox #myGroupInfo .group_img{width: 100%;}
+#wrap #content #myPageBox #myGroupInfo .group_img img{width: 100%;display: block;}
+#wrap #content #myPageBox #myGroupInfo .group_cty{font-size: 15px;font-weight: 500;color: #000;background: #E5E5E5;text-align: center;height: 40px;line-height: 40px;}
+#wrap #content #myPageBox #myGroupInfo .padding{padding: 20px;text-align: center;}
+#wrap #content #myPageBox #myGroupInfo .group_leader{font-size: 15px;color: #666;font-weight: 500;margin-bottom: 15px;}
+#wrap #content #myPageBox #myGroupInfo p{font-size: 14px;color: #666;line-height: 1.5;text-align: left;margin-bottom: 20px;}
+#wrap #content #myPageBox #myGroupInfo a.group_remove{display: block;width: 100px;margin: 0 auto;border: 1px solid #41bb91;background: #41bb91;color: #fff;text-align: center;height: 30px;line-height: 30px;}
+
+#wrap #content #myPageBox #groupAdmin{position: relative;float: right;width: 70%;margin-bottom: 80px;}
+#wrap #content #myPageBox #groupAdmin h4{position: absolute;z-index: 2;top: -15px;left: 50px;padding: 0 10px;background: #fff;font-size: 26px;font-weight: 500;display: inline-block;}
+#wrap #content #myPageBox #groupAdmin .padding{position: relative;padding: 40px 5%;min-height: auto;border: 1px solid #e5e5e5;width: 90%;}
+#wrap #content #myPageBox #groupAdmin .padding:after{display: block;content: '';clear: both;}
+#wrap #content #myPageBox #groupAdmin h5{font-size: 16px;font-weight: 500;}
+#wrap #content #myPageBox #groupAdmin .stand{float: left;width: 49%;margin-right: 2%;}
+#wrap #content #myPageBox #groupAdmin .member{float: right;width: 49%;}
+#wrap #content #myPageBox #groupAdmin .table{}
+#wrap #content #myPageBox #groupAdmin .table table{width: 100%;}
+#wrap #content #myPageBox #groupAdmin .table table .hide{display: none;}
+#wrap #content #myPageBox #groupAdmin .table table th, #wrap #content #myPageBox #groupAdmin .table table td{border: 1px solid #e5e5e5;height: 40px;font-size: 15px;text-align: center;}
+#wrap #content #myPageBox #groupAdmin .table table th{background: #e5e5e5;font-weight: 500;border: 1px solid #fff;}
+#wrap #content #myPageBox #groupAdmin .table table td{font-size: 14px;}
+#wrap #content #myPageBox #groupAdmin .table table .title{width: 100%;height: 40px;font-size: 18px;font-weight: 500;color: #fff;background: #3FD174;}
+#wrap #content #myPageBox #groupAdmin .stand .table table .title{background: #666;}
+#wrap #content #myPageBox #groupAdmin .table .icon{width: 70%;margin: 0 auto;}
+#wrap #content #myPageBox #groupAdmin .table .icon img{width: 100%;}
+#wrap #content #myPageBox #groupAdmin .check{text-align: center;}
+#wrap #content #myPageBox #groupAdmin .check img{width: 24px;}
+
+#wrap #content #myPageBox #groupAdmin #boardList{padding: 0;width: 100%;}
+#wrap #content #myPageBox #groupAdmin #boardList .table_wrap table tbody td{padding: 10px 0;}
+#wrap #content #myPageBox #groupAdmin #boardList .table_wrap table tbody td.title{padding-left: 10px;cursor: pointer;}
+#wrap #content #myPageBox #groupAdmin #boardList .table_wrap table tbody td.title a:hover{text-decoration: none;}
+#wrap #content #myPageBox #groupAdmin #boardList .table_wrap table tbody .con td{background: #eee;text-align: left;padding: 24px 10px 24px 10px;}
+#wrap #content #myPageBox #groupAdmin #boardList .table_wrap table tbody .con{display: none;}
+
+#wrap #content #myPageBox #groupAdmin .write_btn{text-align: right;padding: 10px 0 0 0;}
+#wrap #content #myPageBox #groupAdmin .write_btn:after{display: block;}
+#wrap #content #myPageBox #groupAdmin .write_btn button{float: right;display: block;width: 100px;height: 30px;line-height: 30px;color: #fff;background: #41bb91;border: 1px solid #41bb91;text-align: center;}
+
+#wrap #content #myPageBox #groupAdmin #mapid{width: 100%;height: 400px;background: #eee;}
+#wrap #content #myPageBox #groupAdmin .loc_box{margin-bottom: 8px;}
+#wrap #content #myPageBox #groupAdmin .loc_box:after{display: block;content: '';clear: both;}
+#wrap #content #myPageBox #groupAdmin .loc_box #location{float: left;width: 60%;margin-right: 2px;height: 30px;border: 1px solid #e5e5e5;background: #fff;}
+#wrap #content #myPageBox #groupAdmin .loc_box #findloc{float: left;width: 19%;border: 1px solid #ddd;background: #ddd;color: #666;text-align: center;height: 30px;margin-right: 2px;}
+#wrap #content #myPageBox #groupAdmin .loc_box #storeLocation{width: 19%;border: 1px solid #41bb91;background: #41bb91;color: #fff;text-align: center;height: 30px;}
