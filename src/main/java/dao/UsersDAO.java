@@ -1,5 +1,9 @@
 package dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -59,7 +63,16 @@ public class UsersDAO {
 	public UsersVO matchInfo(String idVal) {
 		UsersVO vo =null;
 		vo= session.selectOne("UsersMapper.matchInfo", idVal);
-		System.out.println(vo);
 		return vo;
+	}
+	public List<UsersVO> allUsersLocation(int range,int field,String lat,String lng){
+		List<UsersVO> list= null;
+		Map<String,String> parameters = new HashMap<String,String>();
+		parameters.put("range", String.valueOf(range));
+		parameters.put("field", String.valueOf(field));
+		parameters.put("lat", lat);
+		parameters.put("lng", lng);
+		list= session.selectList("UsersMapper.allUsersLocation", parameters);
+		return list;
 	}
 }

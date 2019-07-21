@@ -34,4 +34,7 @@
 	<select id="matchInfo" parameterType="string" resultType = "vo.UsersVO">
 		select * from users where users_id =#{idVal}
 	</select>
+	<select id="allUsersLocation" parameterType="java.util.HashMap" resultType="vo.UsersVO">
+		<![CDATA[select * from users where field=#{field} and ( 6371 * acos( cos( radians(lat) ) * cos( radians( #{lat} ) ) * cos( radians( #{lng} ) - radians(lng) ) + sin( radians(lat) ) * sin( radians(  #{lat} ) ) ) ) < #{range}]]>
+	</select> 
 </mapper>

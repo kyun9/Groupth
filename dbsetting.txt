@@ -123,3 +123,10 @@ update groups set gid=groups_seq.nextval;
 update notice set nid=notice_seq.nextval;
 
 commit;
+
+CREATE OR REPLACE FUNCTION RADIANS(nDegrees IN NUMBER) RETURN NUMBER DETERMINISTIC IS
+BEGIN
+  -- radians = degrees / (180 / pi)
+  -- RETURN nDegrees / (180 / ACOS(-1));  -- but 180/pi is a constant, so...
+  RETURN nDegrees / 57.29577951308232087679815481410517033235;
+END RADIANS;

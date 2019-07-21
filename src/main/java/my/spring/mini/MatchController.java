@@ -29,8 +29,11 @@ public class MatchController {
 		return mav;
 	}
 	@RequestMapping(value="/match",  method = RequestMethod.POST)
-	public ModelAndView doPostMatch(HttpSession session) {
+	public ModelAndView doPostMatch(HttpSession session,int range,int field,String lat, String lng) {
 		ModelAndView mav = new ModelAndView();
+		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
+		mav.addObject("allUsersLocation", usersDAO.allUsersLocation(range,field,lat,lng));
+		mav.addObject("matchInfo", usersDAO.matchInfo(user.getUser_name()));
 		mav.setViewName("match/matchResult"); 
 		return mav;
 	}

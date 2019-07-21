@@ -30,7 +30,6 @@
 		<a href="/mini/mypage">추가입력 바로가기</a>
 	<%} %>
 	<form method="post" action="/mini/match" onsubmit="return check()">
-				<input type="hidden" name="action" value="result" />
 				<input type="hidden" name="lat" id="mapLat" />
 				<input type="hidden" name="lng" id="mapLng" />
 				스터디 매칭 분야 : <select name="field">
@@ -43,7 +42,7 @@
 						<%
 							}}
 						%>
-				</select>
+				</select> 범위 설정(반지름 km기준) : <input type="number" name="range" min="0" max="10" required>
 				<br>
 				원하는 스터디 지역 검색 : 
 				<input type="text" name ="location" id="location" placeholder="서울시 강남구 역삼동" required/>
