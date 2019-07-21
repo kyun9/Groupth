@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
@@ -15,6 +16,7 @@
 	   crossorigin=""></script>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/header.jsp" %>
 	<%
 		Login_InfoVO user = (Login_InfoVO)session.getAttribute("loginUser");
 		if(user!=null){
@@ -135,5 +137,6 @@
 				
 			});
 	</script>
+	<%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>

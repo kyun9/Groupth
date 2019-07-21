@@ -15,6 +15,7 @@
 	   crossorigin=""></script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header.jsp" %>
 <h1>매칭 결과</h1>
 	<% UsersVO userInfo = (UsersVO) request.getAttribute("matchInfo");
 		ArrayList<UsersVO> allUsersLocation =(ArrayList<UsersVO>) request.getAttribute("allUsersLocation");
@@ -52,5 +53,6 @@
 		}).addTo(mymap);
 	});
 	</script>
+	<%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>
