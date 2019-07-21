@@ -142,10 +142,6 @@ public class GroupController {
 	}
 	@RequestMapping(value="/group/manage/storeLocation",method=RequestMethod.GET)
 	public @ResponseBody int storeLocation(int gid, String lat,String lng,String location) {
-		System.out.println("controller "+ gid);
-		System.out.println("controller "+ lat);
-		System.out.println("controller "+ lng);
-		System.out.println("controller "+ location);
 		int result= GroupDao.storeLocation(gid,lat,lng,location);
 		return result;
 	}

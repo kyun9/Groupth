@@ -62,9 +62,7 @@
 				<h4>내 정보 수정</h4>
 				<div class="padding">
 					<%
-						if(request.getAttribute("showUser") != null){
 							UsersVO vo = (UsersVO)request.getAttribute("showUser");
-						
 					%>
 					<form method="post" action="/mini/mypage/myInfo">
 						<input type="hidden" name="action" value="change" />
@@ -100,9 +98,6 @@
 							
 						</div>
 					</form>
-					<%
-						}
-					%>
 					
 				</div><!-- padding End -->
 			</div><!-- settingGroup End -->
@@ -126,11 +121,14 @@
 					
 					</ul>
 <!-- ******항목 이름 추가 정보 입력하기*******************************************추가부분****************************************************************** -->
-				<form method="post" action="/mini/mypage/myInfo">
+				<h1>추가정보 등록</h1>
+				<img src="/mini/resources/users/<%=vo.getImg()%>" width=50 height=50>
+				<form method="post" action="/mini/mypage/myInfo" enctype="multipart/form-data">
 				<input type="hidden" name="action" value="addInfo" />
 				<input type="hidden" name="lat" id="mapLat" />
 				<input type="hidden" name="lng" id="mapLng" />
-				관심 그룹 분야 : <select name="field">
+				이미지 변경하기 : <input type="file" name = "image" accept="image/*"><br>
+				관심 그룹 분야 : <select id="field" name="field">
 						<%
 							ArrayList<FieldVO> field = (ArrayList<FieldVO>) request.getAttribute("field");
 							if (!field.isEmpty()) {
@@ -148,6 +146,17 @@
 				<div id="mapid" style="width: 600px; height: 400px;"></div><br>
 				<input type="submit" value="저장하기" />
 			</form>
+			<script>
+				<%if(vo.getField()!=0){%>
+					$("#field option:eq("+(<%=vo.getField()%>-1)+")").attr("selected","selected");
+				<%}if(vo.getLat()!=null){%>
+				var latlng = encodeURIComponent(<%=vo.getLat()%>+","+<%=vo.getLng()%>);
+				$.getJSON("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyD-nx_y7aBlJgfgVZRaIwMbnShQJsxpryY&latlng="+latlng, function(data) {
+					$("input#location").val(data.results[0].formatted_address);				
+											
+				});
+				<%}%>
+			</script>
 <!-- *************************************************추가부분****************************************************************** -->
 				</div>
 			</div><!-- settingGroup End -->

@@ -20,12 +20,18 @@ public class MatchController {
 	FieldDAO Fielddao;
 	
 	@RequestMapping(value="/match",  method = RequestMethod.GET)
-	public ModelAndView match(HttpSession session) {
+	public ModelAndView doGetMatch(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
 		mav.addObject("matchInfo", usersDAO.matchInfo(user.getUser_name()));
 		mav.addObject("field", Fielddao.ListAllType());
 		mav.setViewName("match/match");
+		return mav;
+	}
+	@RequestMapping(value="/match",  method = RequestMethod.POST)
+	public ModelAndView doPostMatch(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("match/matchResult"); 
 		return mav;
 	}
 }

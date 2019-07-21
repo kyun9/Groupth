@@ -29,8 +29,8 @@
 		추가 정보를 입력하지 않았습니다. 
 		<a href="/mini/mypage">추가입력 바로가기</a>
 	<%} %>
-	<form method="post" action="/mini/mypage/myInfo" onsubmit="return check()">
-				<input type="hidden" name="action" value="addInfo" />
+	<form method="post" action="/mini/match" onsubmit="return check()">
+				<input type="hidden" name="action" value="result" />
 				<input type="hidden" name="lat" id="mapLat" />
 				<input type="hidden" name="lng" id="mapLng" />
 				스터디 매칭 분야 : <select name="field">

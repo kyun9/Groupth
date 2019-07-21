@@ -42,7 +42,11 @@ public class UsersDAO {
 	
 	public boolean addInfo(UsersVO vo) {
 		boolean result = true;
-		if(session.update("UsersMapper.addInfo",vo)!=1)
+		System.out.println(vo);
+		if(vo.getImg().equals("smile.png")) {
+			session.update("UsersMapper.addInfoException",vo);
+		}
+		else if(session.update("UsersMapper.addInfo",vo)!=1)
 			result=false;
 		return result;
 	}

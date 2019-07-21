@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UsersMapper">
 	<insert id = "insertUser" parameterType="vo.UsersVO">
-		insert into users(users_id, name, password, email, join_date)
-		values(#{users_id},#{name},#{password},#{email}, sysdate)
+		insert into users(users_id, name, password, email, join_date, img)
+		values(#{users_id},#{name},#{password},#{email}, sysdate, 'default.png')
 	</insert>
 	<select id="searchLoginId" resultType="vo.UsersVO" parameterType="string">
 		select users_id, name, password from users where users_id like #{idVal}
@@ -20,6 +20,9 @@
 		update users set name=#{name},password=#{password},email=#{email} where users_id like #{users_id} 
 	</update>
 	<update parameterType="vo.UsersVO" id="addInfo"> 
+		update users set lat=#{lat}, lng=#{lng}, field=#{field}, img=#{img} where users_id like #{users_id} 
+	</update>
+	<update parameterType="vo.UsersVO" id="addInfoException"> 
 		update users set lat=#{lat}, lng=#{lng}, field=#{field} where users_id like #{users_id} 
 	</update>
 	<select parameterType="string" id="searchGroupId" resultType="_int"> 
