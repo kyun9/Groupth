@@ -51,6 +51,7 @@ public class BoardController {
 			mav.addObject("listComments", commentDAO.listComments(bid));
 		}else if (action.equals("delete")) {
 			dao.delete(Integer.valueOf(bid));
+			mav.addObject("msg", "게시물을 삭제하였습니다.");
 			mav.addObject("list", dao.listAll());
 			mav.setViewName("redirect:/board");
 			return mav;
@@ -59,12 +60,12 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value = "/board/content", method = RequestMethod.POST)
-	public ModelAndView doReply(HttpSession session, CommentVO vo) {
+	public ModelAndView doReply(HttpSession session, CommentVO vo,String bid,String writer, String action ) {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
 		vo.setWriter(user.getUser());
 		commentDAO.insertReply(vo);
-		mav.setViewName("redirect:/board");
+		mav.setViewName("redirect:/board/content?bid="+bid+"&writer="+writer+"&action="+action);
 		return mav;
 	}
 	

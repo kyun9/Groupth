@@ -29,7 +29,10 @@
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 
 	<div id="content">
-
+	<div class="sub_visual" id="community">
+			<div class="cover"></div>
+			<h3>커뮤니티</h3>
+		</div>
 	<div id="boardWrite">
 		<div class="padding">
 			<h3>커뮤니티 글쓰기</h3>

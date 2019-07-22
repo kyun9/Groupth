@@ -36,7 +36,10 @@
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 
 	<div id="content">
-		
+		<div class="sub_visual" id="group">
+			<div class="cover"></div>
+			<h3>그룹</h3>
+		</div>
 		<%
 		if (request.getAttribute("content") != null) {
 			Group_InfoVO content = (Group_InfoVO) request.getAttribute("content");

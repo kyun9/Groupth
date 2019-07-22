@@ -38,32 +38,107 @@
 		function myInfo(){
 			document.getElementById("myInfo").style.display="block";
 			document.getElementById("settingGroup").style.display="none";
+			document.getElementById("addInfo").style.display="none";
 			$(".info").addClass("on");
 			$(".group").removeClass("on");
+			$(".add").removeClass("on");
 		}
 		function myGroup(){
 			document.getElementById("settingGroup").style.display="block";
 			document.getElementById("myInfo").style.display="none";
+			document.getElementById("addInfo").style.display="none";
 			$(".group").addClass("on");
+			$(".info").removeClass("on");
+			$(".add").removeClass("on");
+		}
+		function addInfo(){
+			document.getElementById("addInfo").style.display="block";
+			document.getElementById("settingGroup").style.display="none";
+			document.getElementById("myInfo").style.display="none";
+			$(".add").addClass("on");
+			$(".group").removeClass("on");
 			$(".info").removeClass("on");
 		}
 	</script>
 	<div id="content">
-		
+		<div class="sub_visual" id="mypage">
+			<div class="cover"></div>
+			<h3>마이페이지</h3>
+		</div>
 		<div id="myPageBox">
 			<div id="myPageNav">
 				<h3>마이페이지</h3>
 				<ul>
-					<li class="group on"><a onclick="myGroup()">내 그룹 관리</a></li>
+					<li class="add on"><a onclick="addInfo()">추가정보 입력</a></li>
+					<li class="group"><a onclick="myGroup()">내 그룹 관리</a></li>
 					<li class="info"><a onclick="myInfo()">내 정보 수정</a></li> 
 				</ul>
 			</div>
-			<div id="myInfo" style="display: none">
+
+			<div id="addInfo">
+				<h4>추가정보 입력</h4>
+				<%
+					UsersVO vo = (UsersVO)request.getAttribute("showUser");
+				%>
+				<form method="post" action="/mini/mypage/myInfo" enctype="multipart/form-data">
+				<div class="padding">
+					<div class="profile">
+						<div class="subject">프로필 이미지 관리</div>
+						<div class="img"><img src="/mini/resources/users/<%=vo.getImg()%>" /></div>
+							<input type="hidden" name="action" value="addInfo" />
+							<input type="hidden" name="lat" id="mapLat" />
+							<input type="hidden" name="lng" id="mapLng" />
+							<input type="file" name = "image" accept="image/*" />
+
+					</div><!-- profile End -->
+
+					<div class="interest">
+						<div class="subject">관심 그룹 분야</div>
+						<select id="field" name="field">
+							<%
+								ArrayList<FieldVO> field = (ArrayList<FieldVO>) request.getAttribute("field");
+								if (!field.isEmpty()) {
+									for (FieldVO type : field) {
+							%>
+							<option value="<%=type.getFid()%>"><%=type.getType()%></option>
+							<%
+								}}
+							%>
+						</select>
+					</div>
+
+					<div class="map_wrap">
+						<div class="subject">나의 위치 등록</div>
+						
+						<div class="loc_box">
+							<span class="txt">주소 입력 : </span>
+							<input type="text" name ="location" id="location" placeholder="서울시 강남구 역삼동" />
+							<input type="button" id="findloc" value="위치찾기" />
+						</div>
+						<div id="mapid" style="width: 100%; height: 400px;"></div>
+					</div>
+					
+					<div class="save">
+						<input type="submit" value="저장하기" />
+					</div>
+					<script>
+						<%if(vo.getField()!=0){%>
+							$("#field option:eq("+(<%=vo.getField()%>-1)+")").attr("selected","selected");
+						<%}if(vo.getLat()!=null){%>
+						var latlng = encodeURIComponent(<%=vo.getLat()%>+","+<%=vo.getLng()%>);
+						$.getJSON("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyD-nx_y7aBlJgfgVZRaIwMbnShQJsxpryY&latlng="+latlng, function(data) {
+							$("input#location").val(data.results[0].formatted_address);				
+													
+						});
+						<%}%>
+					</script>
+				</div>	
+				</form>
+			</div><!-- addInfo End -->
+
+			<div id="myInfo" style="display: none;">
 				<h4>내 정보 수정</h4>
 				<div class="padding">
-					<%
-							UsersVO vo = (UsersVO)request.getAttribute("showUser");
-					%>
 					<form method="post" action="/mini/mypage/myInfo">
 						<input type="hidden" name="action" value="change" />
 						<div class="input_box">
@@ -101,62 +176,26 @@
 					
 				</div><!-- padding End -->
 			</div><!-- settingGroup End -->
-			<div id="settingGroup" style="display: block">
+			<div id="settingGroup" style="display: none;">
 				<h4>내 그룹 관리</h4>
 				<div class="padding">
-					<%
+					<ul>
+						<%
 						if(request.getAttribute("myGroup") != null){
 							ArrayList<GroupVO> group = (ArrayList<GroupVO>) request.getAttribute("myGroup");
 							for(GroupVO myGroup : group){
-					%>
-					<ul>
+						%>
 						<li>
 							<div class="padding">
 								<div class="img"><a href="/mini/group/content?gid=<%=myGroup.getGid()%>"><img src="/mini/resources/Gimg/<%=myGroup.getImg()%>" alt="<%=myGroup.getG_name()%>" /></a></div>
-								<div class="title"><a href="#"><%=myGroup.getG_name()%></a></div>
+								<div class="title"><a href="/mini/group/content?gid=<%=myGroup.getGid()%>"><%=myGroup.getG_name()%></a></div>
 								<a href="/mini/mypage/deleteGroup?gid=<%=myGroup.getGid()%>" class="out">탈퇴하기</a>
 							</div>
 						</li>
 						<%}}%> 
 					</ul>
-<!-- ******항목 이름 추가 정보 입력하기*******************************************추가부분****************************************************************** -->
-				<h1>추가정보 등록</h1>
-				<img src="/mini/resources/users/<%=vo.getImg()%>" width=50 height=50>
-				<form method="post" action="/mini/mypage/myInfo" enctype="multipart/form-data">
-				<input type="hidden" name="action" value="addInfo" />
-				<input type="hidden" name="lat" id="mapLat" />
-				<input type="hidden" name="lng" id="mapLng" />
-				이미지 변경하기 : <input type="file" name = "image" accept="image/*"><br>
-				관심 그룹 분야 : <select id="field" name="field">
-						<%
-							ArrayList<FieldVO> field = (ArrayList<FieldVO>) request.getAttribute("field");
-							if (!field.isEmpty()) {
-								for (FieldVO type : field) {
-						%>
-						<option value="<%=type.getFid()%>"><%=type.getType()%></option>
-						<%
-							}}
-						%>
-				</select>
-				<br>
-				주소 입력 : 
-				<input type="text" name ="location" id="location" placeholder="서울시 강남구 역삼동" />
-				<input type="button" id="findloc" value="위치찾기" />
-				<div id="mapid" style="width: 600px; height: 400px;"></div><br>
-				<input type="submit" value="저장하기" />
-			</form>
-			<script>
-				<%if(vo.getField()!=0){%>
-					$("#field option:eq("+(<%=vo.getField()%>-1)+")").attr("selected","selected");
-				<%}if(vo.getLat()!=null){%>
-				var latlng = encodeURIComponent(<%=vo.getLat()%>+","+<%=vo.getLng()%>);
-				$.getJSON("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyD-nx_y7aBlJgfgVZRaIwMbnShQJsxpryY&latlng="+latlng, function(data) {
-					$("input#location").val(data.results[0].formatted_address);				
-											
-				});
-				<%}%>
-			</script>
-<!-- *************************************************추가부분****************************************************************** -->
+
+
 				</div>
 			</div><!-- settingGroup End -->
 		</div><!-- myPageBox End -->

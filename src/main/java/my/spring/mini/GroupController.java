@@ -60,9 +60,10 @@ public class GroupController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/group/createGroup", method = RequestMethod.POST)
+	@RequestMapping(value="/group", method = RequestMethod.POST)
 	public ModelAndView doPostCreatGroup(GroupVO vo, String action, MultipartFile image) throws IOException {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("field", Fielddao.ListAllType());
 		if (action.equals("insert")) {
 			vo.setImg(image.getOriginalFilename());
 			imageUploadService.getImagePath(image);
@@ -72,6 +73,7 @@ public class GroupController {
 			else
 				mav.addObject("msg","그룹 생성에 실패하였습니다.");
 		}
+		mav.addObject("grouplist", GroupDao.ListAllGroup());
 		mav.setViewName("redirect:/group");
 		return mav;
 	}

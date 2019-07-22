@@ -29,7 +29,10 @@
 
 	<div id="content">
 		
-		
+		<div class="sub_visual" id="group">
+			<div class="cover"></div>
+			<h3>그룹</h3>
+		</div>
 	<div id="boardWrite">
 		<div class="padding">
 			<h3>공지사항 작성하기</h3>
@@ -37,9 +40,9 @@
 			<form method="post" action="/mini/group/content/write" enctype="multipart/form-data">
 				<input type="hidden" name="gid" value='<%=request.getParameter("gid")%>'>
 			<input type="hidden" name="writer" value="${sessionScope.loginUser.user}">
-				<div class="input_box">
+				<div class="input_box"> 
 					<div class="title">제목</div>
-					<div class="input"><input type="text" name="title" placeholder="제목을 입력하세요." required /></div>
+					<div class="input"><input type="text" name="title" value="<그룹리더 공지사항>" required /></div>
 				</div>
 				<div class="input_box">
 					<div class="title">내용</div>

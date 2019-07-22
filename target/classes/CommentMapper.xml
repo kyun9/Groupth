@@ -8,6 +8,6 @@
 		values(COMMENTS_SEQ.nextval,#{bid},#{writer},#{content}, sysdate)
 	</insert>
 	<select id="listComments" parameterType="string" resultType="vo.CommentVO">
-		select * from comments where bid =#{bid}
+		select * from comments where bid =#{bid} order by writedate asc 
 	</select>
 </mapper>

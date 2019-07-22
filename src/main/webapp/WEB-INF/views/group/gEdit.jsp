@@ -27,12 +27,15 @@
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 
 	<div id="content">
-		
+		<div class="sub_visual" id="group">
+			<div class="cover"></div>
+			<h3>그룹</h3>
+		</div>
 		<div id="boardWrite">
 			<div class="padding">
 				<h3>그룹 생성하기</h3>
 
-				<form method="post" action="/mini/group/createGroup" enctype="multipart/form-data">
+				<form method="post" action="/mini/group" enctype="multipart/form-data">
 					<input type="hidden" name ="action" value="insert">
 					<div class="input_box double">
 						<div class="box">

@@ -30,6 +30,10 @@
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 	
 	<div id="content">
+	<div class="sub_visual" id="community">
+			<div class="cover"></div>
+			<h3>커뮤니티</h3>
+		</div>
 	<%
 		if (request.getAttribute("listone") != null) {
 			BoardVO one = (BoardVO) request.getAttribute("listone");
@@ -70,6 +74,8 @@
 				<div>
 					<form method="post" action="/mini/board/content">
 						<input type="hidden" name = "bid" value="<%=request.getParameter("bid")%>" >
+						<input type="hidden" name = "writer" value="<%=request.getParameter("writer")%>" >
+						<input type="hidden" name = "action" value="<%=request.getParameter("action")%>" >
 						<textarea cols="50" rows="3" name="content" placeholder="내용을 입력해주세요." /></textarea>
 						<input type="submit" style="height:50px; width:100px;"  value="댓글 등록하기"> 
 					</form>
@@ -80,10 +86,11 @@
 					if (!list.isEmpty()) {
 						for (CommentVO vo : list) {
 				%>
+				<br>
 				<div style=" border-bottom: 1px solid silver; text-align:center;">
-					<span><%=vo.getWriter() %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<p style="font-size: 20px;margin-bottom: 10px;font-weight: 500;"><%=vo.getContent() %></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					작성일 : <span style="color:#5D5D5D; font-weight:lighter"><%=vo.getWritedate()%></span><br>
-					댓 글 : <span style="font-weight:bold"><%=vo.getContent() %></span><br>
+					작성자 : <span style="font-weight:bold"><%=vo.getWriter() %></span><br>
 				</div>
 				<%}} %>
 			</div>

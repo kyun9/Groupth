@@ -29,9 +29,11 @@
 	<%@ include file="../header.jsp" %>
 
 	<div id="content">
-	
+		<div class="sub_visual" id="community">
+			<div class="cover"></div>
+			<h3>커뮤니티</h3>
+		</div>
 		<div id="boardList">
-			<h3 class="s_title">커뮤니티</h3>
 			
 			<%
 				ArrayList<BoardVO> list = (ArrayList<BoardVO>) request.getAttribute("list");
@@ -115,8 +117,7 @@
 		</div>
 
 	</div><!-- content End -->
-
-
+	
 	<%@ include file="../footer.jsp" %>
 
 </div>

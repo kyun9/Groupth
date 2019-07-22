@@ -78,9 +78,12 @@
 </div>
 <script type="text/javascript">
 function Checkid(users_id){                                                 
-    var reg_users_id =/^[a-z]+[a-z0-9]{5,19}$/g;
+    var reg_users_id =/^[a-z]+[a-z0-9]{5,10}$/g;
     if(users_id.length == 0) {                             
        return false;         
+    }
+    else if(users_id.length > 10){
+    	return false;
     }
     else if(!users_id.match(reg_users_id)) {                             
         return false;         
@@ -123,7 +126,7 @@ function GoToEnroll(){
 		return false;	
 	}          
 	if(!Checkid(obId.value)){
-		alert("영문자로 시작, 숫자 또는 영어로 끝나는 5~19자리");
+		alert("아이디 에러! 영문자로 시작, 숫자 또는 영어로 끝나는 5~10자리");
 		obId.focus();
 		return false;              
 	}

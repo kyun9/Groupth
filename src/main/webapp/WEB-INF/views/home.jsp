@@ -89,16 +89,43 @@
 
 		</script>
 
+
+		<div class="quick_section">
+			<h3>카테고리</h3>
+			<ul>
+				<li><a href="/mini/group?field=IT&action=search"><img src="./resources/file/img/s_img/icon_it.png" alt="IT" /></a>
+					<a href="/mini/group?field=IT&action=search" class="title">IT</a>
+				</li>
+				<li><a href="/mini/group?field=어학&action=search"><img src="./resources/file/img/s_img/icon_language.png" alt="어학" /></a>
+					<a href="/mini/group?field=어학&action=search" class="title">어학</a>
+				</li>
+				<li class="right"><a href="/mini/group?field=대입&action=search"><img src="./resources/file/img/s_img/icon_graduation.png" alt="대입" /></a>
+					<a href="/mini/group?field=대입&action=search" class="title">대입</a>
+				</li>
+				<li><a href="/mini/group?field=고입&action=search"><img src="./resources/file/img/s_img/icon_highschool.png" alt="고입" /></a>
+					<a href="/mini/group?field=고입&action=search" class="title">고입</a>
+				</li>
+				<li><a href="/mini/group?field=취업&action=search"><img src="./resources/file/img/s_img/icon_job.png" alt="취업" /></a>
+					<a href="/mini/group?field=취업&action=search" class="title">취업</a>
+				</li>
+				<li class="right"><a href="/mini/group?field=기타&action=search"><img src="./resources/file/img/s_img/icon_etc.png" alt="기타" />
+					<a href="/mini/group?field=기타&action=search" class="title">기타</a>
+				</a></li>
+			</ul>
+		</div>
+
 	</div><!-- content End -->
 
 	<script>
 	$(window).scroll(function(e){
-		var vh = $(".visual_section").height();
+		var vh = $(".visual_section").height()-30;
 		if($(this).scrollTop() <= vh){
+			$("#header").removeClass("on");
 			$("ul.gnb li").removeClass("on");
 			$(".nav_bar ul li").removeClass("on");
 			$("#header .menu").removeClass("bk");
 		}else{
+			$("#header").addClass("on");
 			$("ul.gnb li").addClass("on");
 			$(".nav_bar ul li").addClass("on");
 			$("#header .menu").addClass("bk");

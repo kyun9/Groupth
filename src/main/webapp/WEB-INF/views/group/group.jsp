@@ -76,9 +76,11 @@
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 	
 	<div id="content">
-
+	<div class="sub_visual" id="group">
+			<div class="cover"></div>
+			<h3>그룹</h3>
+		</div>
 		<div id="groupSch">
-			<h3 class="s_title">그룹</h3>
 			<div class="group_box">
 				<form method="get" action="/mini/group">
 				<div class="box">
@@ -170,8 +172,13 @@
 	});
 	</script>
 	<%@ include file="/WEB-INF/views/footer.jsp" %>
-
+	
 </div>
+	<%if(request.getParameter("msg")!=null){%>
+		<script>
+			alert("<%=request.getParameter("msg")%>")
+		</script>
+	<%} %>
 
 </body>
 </html>

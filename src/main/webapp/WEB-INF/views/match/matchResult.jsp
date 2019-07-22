@@ -7,6 +7,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/mini/resources/file/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/mini/resources/file/css/respond.css" />
+
+    <!--[if lt IE 9]>
+       <script src="/mini/resources/file/js/html5shiv.js"></script>
+    <![endif]-->
+    
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
@@ -15,12 +24,25 @@
 	   crossorigin=""></script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/header.jsp" %>
-<h1>매칭 결과</h1>
+<dl class="skip">
+	<dt class="blind"><strong>skip navigation</strong></dt>
+    <dd><a href="#content">skip to content</a></dd>
+</dl>
+<div id="wrap">
+	
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+	
+	<div id="content">
+	<div class="sub_visual" id="matching">
+			<div class="cover"></div>
+			<h3>매칭 결과</h3>
+		</div>
+		<div id="matchBox">
+			<div class="padding">
 	<% UsersVO userInfo = (UsersVO) request.getAttribute("matchInfo");
 		ArrayList<UsersVO> allUsersLocation =(ArrayList<UsersVO>) request.getAttribute("allUsersLocation");
 	%>
-<div id="mapid" style="width: 600px; height: 400px;"></div><br>
+<div id="mapid" style="width: 100%; height: 400px;"></div><br>
 <script>
 	$(document).ready(function(){
 		var mymap =L.map('mapid').setView([<%=request.getParameter("lat")%>, <%=request.getParameter("lng")%>], 12);
@@ -53,6 +75,15 @@
 		}).addTo(mymap);
 	});
 	</script>
+			</div>
+		</div>
+
+		<div class="list_btn"><a href="/mini/match">목록</a></div>
+	</div><!-- content End -->
+	
 	<%@ include file="/WEB-INF/views/footer.jsp" %>
+	
+</div>
+	
 </body>
 </html>
