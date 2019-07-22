@@ -14,10 +14,58 @@
 
     <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/respond.css" />
+    <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/grid.css" />
+
+	<script src="/mini/resources/file/js/blocksit.min.js"></script>
 
     <!--[if lt IE 9]>
        <script src="/mini/resources/file/js/html5shiv.js"></script>
     <![endif]-->
+
+    <script>
+	$(document).ready(function() {
+		//vendor script
+
+		//blocksit define
+		$(window).load( function() {
+			$('#groupList').BlocksIt({
+				numOfCol: 3,
+				offsetX: 8,
+				offsetY: 8
+			});
+		});
+		
+		//window resize
+		var currentWidth = 1100;
+		$(window).resize(function() {
+			var winWidth = $(window).width();
+			var conWidth;
+			if(winWidth < 660) {
+				conWidth = 440;
+				col = 1
+			} else if(winWidth < 880) {
+				conWidth = 660;
+				col = 2
+			} else if(winWidth < 1100) {
+				conWidth = 880;
+				col = 3;
+			} else {
+				conWidth = 1100;
+				col = 3;
+			}
+			
+			if(conWidth != currentWidth) {
+				currentWidth = conWidth;
+				$('#groupList').width(conWidth);
+				$('#groupList').BlocksIt({
+					numOfCol: col,
+					offsetX: 8,
+					offsetY: 8
+				});
+			}
+		});
+	});
+	</script>
 </head>
 <body>
 <dl class="skip">
@@ -75,35 +123,42 @@
 		</script>
 
 
-		<div id="groupList">
-			<ul>
+<!-- 
+<div id="groupList">
+
+	<div class="grid">
+		<div class="imgholder"><a href="#"><img src="http://www.inwebson.com/demo/blocksit-js/demo2/images/img27.jpg" /></a></div>
+		<p class="cty">IT</p>
+		<div class="title"><a href="#">멍멍클럽과 함께하는 자바</a></div>
+		<div class="leader">그룹리더 : 멍멍이</div>
+		<div class="cnt">인원 : 5/20</div>
+	</div>
+
+</div>
+ -->
+	<div id="groupList">
 				<%
 				ArrayList<Group_InfoVO> group = (ArrayList<Group_InfoVO>) request.getAttribute("grouplist");
 				if (!group.isEmpty()) {
 					for (Group_InfoVO list : group) {
 				%> 
-				<li>
-					<div class="img"><a href="/mini/group/content?gid=<%=list.getGid()%>"><img src="/mini/resources/Gimg/<%=list.getImg()%>" alt="<%=list.getG_name()%>"></a></div>
+				<div class="grid">
+					<div class="imgholder"><a href="/mini/group/content?gid=<%=list.getGid()%>"><img src="/mini/resources/Gimg/<%=list.getImg()%>" alt="<%=list.getG_name()%>"></a></div>
 					<div class="cty"><%=list.getType() %></div>
 					<div class="title"><a href="/mini/group/content?gid=<%=list.getGid()%>"><%=list.getG_name()%></a></div>
 					<div class="leader">그룹리더 : <%=list.getLeader() %></div>
-					<div class="number">인원 : <%=list.getCount_mem() %>/<%=list.getLimit_mem() %></div>
-				</li>
-
+					<div class="cnt">인원 : <%=list.getCount_mem() %>/<%=list.getLimit_mem() %></div>
+				</div>
+		
 				<%}} %>
-			</ul>
-		</div>
+		</div> 
 	</div><!-- content End -->
 	
 	<script>
 		$("#groupList ul li:nth-child(3n").css("margin-right", "0");
 
 	</script>
-	<%if(request.getParameter("msg")!=null){%>
-		<script>
-			alert("<%=request.getParameter("msg")%>");
-		</script>
-	<%} %>
+
 	<script type="text/javascript">
 	$(document).ready(function() {
 	    $('input[type="checkbox"][name="field"]').click(function(){

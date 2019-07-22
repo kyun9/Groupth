@@ -23,13 +23,16 @@ if(session.getAttribute("loginUser")!=null){
 <%
 if(session.getAttribute("loginUser")!=null){
 %>
-						<li><a href="/mini/logout">로그아웃</a></li>
-						<li class="last"><a href="/mini/mypage">마이페이지</a></li>
+						<li class="last"><a href="/mini/logout">로그아웃</a></li>
+						<li class="long"><a href="/mini/mypage">
+						<% if (session.getAttribute("loginUser") != null) { %>
+						<strong>${sessionScope.loginUser.user}</strong>
+						<%}%>님의 마이페이지</a></li>
 <%
 }else{
 %>
-						<li><a href="/mini/login">로그인</a></li>
 						<li class="last"><a href="/mini/register">회원가입</a></li>
+						<li><a href="/mini/login">로그인</a></li>
 <%
 }
 %>

@@ -208,7 +208,7 @@
 								<tr class="con">
 									<td colspan="4">
 										<p><%=nList.getContent()%></p>
-										<div><a href="/mini/resources/files/<%=nList.getFiles()%>" download>다운로드 : <%=nList.getFiles()%></a></div>
+										<div class="download"><a href="/mini/resources/files/<%=nList.getFiles()%>" download>다운로드 : <%=nList.getFiles()%></a></div>
 									</td>
 								</tr>
 		<%
