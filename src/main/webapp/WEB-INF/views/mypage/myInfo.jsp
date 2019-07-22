@@ -118,7 +118,6 @@
 							</div>
 						</li>
 						<%}}%> 
-					
 					</ul>
 <!-- ******항목 이름 추가 정보 입력하기*******************************************추가부분****************************************************************** -->
 				<h1>추가정보 등록</h1>
@@ -167,11 +166,11 @@
 
 
 </div>
-<% if(request.getAttribute("msg")!=null) {%>
 		<script>
-		alert("${msg}}");
+		<%if(request.getParameter("msg")!=null){%>
+		alert("<%=request.getParameter("msg")%>");
+		<%}%>
 		</script>
-	<%} %>
 	<script>
 	$(document).ready(function(){
 		

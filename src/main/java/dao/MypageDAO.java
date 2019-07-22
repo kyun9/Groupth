@@ -17,8 +17,8 @@ public class MypageDAO {
 		Map<String,String> parameters = new HashMap<String ,String>();
 		parameters.put("id", idVal);
 		parameters.put("gid", gid);
-		session.delete("GroupMapper.myInfoGroup",parameters);
-		
+		if(session.delete("GroupMapper.myInfoGroup",parameters)!=1)
+			result =false;
 		return result;
 	}
 	

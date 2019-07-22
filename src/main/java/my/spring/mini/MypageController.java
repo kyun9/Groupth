@@ -47,19 +47,21 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
 		vo.setUsers_id(user.getUser());
-		String fileName=image.getOriginalFilename();
-		if(!fileName.equals("")) {
-			vo.setImg(fileName);
-			imageUploadService.getUsersImagePath(image);
-		}else {
-			vo.setImg("smile.png");
-		}
 		if(action!=null) {
 			if(action.equals("change")) {
 				usersDAO.change(vo);
+				mav.addObject("msg","회원정보가 수정되었습니다.");
 			}
 			else if(action.equals("addInfo")) {
+				String fileName=image.getOriginalFilename();
+				if(!fileName.equals("")) {
+					vo.setImg(fileName);
+					imageUploadService.getUsersImagePath(image);
+				}else {
+					vo.setImg("smile.png");
+				}
 				usersDAO.addInfo(vo);
+				mav.addObject("msg","정보가 추가되었습니다.");
 			}
 		}
 		mav.setViewName("redirect:/mypage");
@@ -70,8 +72,12 @@ public class MypageController {
 	public ModelAndView deleteGroup(String gid, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
-		mypageDAO.deleteGroup(gid,user.getUser());
-		
+		boolean result =mypageDAO.deleteGroup(gid,user.getUser());
+		if(!result) {
+			mav.addObject("msg","그룹장은 그룹 관리에서 그룹을 삭제할 수 있습니다.");
+		}else {
+			mav.addObject("msg","그룹에서 탈퇴 하였습니다.");
+		}
 		mav.setViewName("redirect:/mypage");
 		return mav;
 	}
