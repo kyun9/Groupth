@@ -35,7 +35,7 @@
 		});
 		var matchUserContent;
 		<%for(UsersVO matchUser : allUsersLocation){%>
-			matchUserContent="<h3><%=matchUser.getUsers_id()%></h3><hr>이메일 : <%=matchUser.getEmail()%><br><img src='/mini/resources/users/<%=userInfo.getImg()%>' width='50' hegith='50'>";
+			matchUserContent="<h3><%=matchUser.getUsers_id()%></h3><hr>이메일 : <%=matchUser.getEmail()%><br><img src='/mini/resources/users/<%=matchUser.getImg()%>' width='50' hegith='50'>";
 			L.marker([<%=matchUser.getLat()%>,<%=matchUser.getLng()%>], {icon: myIcon}).addTo(mymap).bindPopup(matchUserContent);
 		<%}%>
 		

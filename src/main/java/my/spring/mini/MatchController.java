@@ -23,7 +23,7 @@ public class MatchController {
 	public ModelAndView doGetMatch(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
-		mav.addObject("matchInfo", usersDAO.matchInfo(user.getUser_name()));
+		mav.addObject("matchInfo", usersDAO.matchInfo(user.getUser()));
 		mav.addObject("field", Fielddao.ListAllType());
 		mav.setViewName("match/match");
 		return mav;
@@ -33,7 +33,7 @@ public class MatchController {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
 		mav.addObject("allUsersLocation", usersDAO.allUsersLocation(range,field,lat,lng));
-		mav.addObject("matchInfo", usersDAO.matchInfo(user.getUser_name()));
+		mav.addObject("matchInfo", usersDAO.matchInfo(user.getUser()));
 		mav.setViewName("match/matchResult"); 
 		return mav;
 	}
