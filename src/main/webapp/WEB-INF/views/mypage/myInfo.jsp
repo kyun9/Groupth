@@ -114,7 +114,7 @@
 							<div class="padding">
 								<div class="img"><a href="/mini/group/content?gid=<%=myGroup.getGid()%>"><img src="/mini/resources/Gimg/<%=myGroup.getImg()%>" alt="<%=myGroup.getG_name()%>" /></a></div>
 								<div class="title"><a href="#"><%=myGroup.getG_name()%></a></div>
-								<a href="#" class="out">탈퇴하기</a>
+								<a href="/mini/mypage/deleteGroup?gid=<%=myGroup.getGid()%>" class="out">탈퇴하기</a>
 							</div>
 						</li>
 						<%}}%> 

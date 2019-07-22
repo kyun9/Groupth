@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.FieldDAO;
+import dao.MypageDAO;
 import dao.UsersDAO;
 import dao.Users_GroupDAO;
 import service.ImageUploadService;
@@ -26,6 +27,8 @@ public class MypageController {
 	Users_GroupDAO ugDAO;
 	@Autowired
 	FieldDAO Fielddao;
+	@Autowired
+	MypageDAO mypageDAO;
 	@Autowired
 	private ImageUploadService imageUploadService;
 	
@@ -59,6 +62,16 @@ public class MypageController {
 				usersDAO.addInfo(vo);
 			}
 		}
+		mav.setViewName("redirect:/mypage");
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/deleteGroup", method=RequestMethod.GET)
+	public ModelAndView deleteGroup(String gid, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
+		mypageDAO.deleteGroup(gid,user.getUser());
+		
 		mav.setViewName("redirect:/mypage");
 		return mav;
 	}

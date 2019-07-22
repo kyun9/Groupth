@@ -54,4 +54,7 @@
 	<select id="findLoc" parameterType="_int" resultType="vo.GroupVO">
 		select * from groups where gid =#{gid}
 	</select>
+	<delete id="myInfoGroup" parameterType="java.util.HashMap">
+		delete from users_group where users_id = #{id} and gid=#{gid} and not cofirm in ('leader')
+	</delete>
 </mapper>
