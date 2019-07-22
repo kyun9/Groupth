@@ -68,9 +68,9 @@ public class GroupController {
 			imageUploadService.getImagePath(image);
 			boolean result = GroupDao.create(vo);
 			if(result) 
-				System.out.println("그룹 생성 성공");
+				mav.addObject("msg","성공적으로 그룹을 생성하였습니다.");
 			else
-				System.out.println("그룹 생성 실패");
+				mav.addObject("msg","그룹 생성에 실패하였습니다.");
 		}
 		mav.setViewName("redirect:/group");
 		return mav;

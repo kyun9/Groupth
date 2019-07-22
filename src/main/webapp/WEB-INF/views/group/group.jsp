@@ -99,7 +99,11 @@
 		$("#groupList ul li:nth-child(3n").css("margin-right", "0");
 
 	</script>
-
+	<%if(request.getParameter("msg")!=null){%>
+		<script>
+			alert("<%=request.getParameter("msg")%>");
+		</script>
+	<%} %>
 	<script type="text/javascript">
 	$(document).ready(function() {
 	    $('input[type="checkbox"][name="field"]').click(function(){
