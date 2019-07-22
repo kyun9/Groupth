@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="vo.Login_InfoVO"%>
-<%@ page import="vo.BoardVO"%>
+<%@ page import="vo.Login_InfoVO, vo.CommentVO"%>
+<%@ page import="vo.BoardVO,java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -69,6 +69,30 @@
 	<%
 		}
 	%>
+	
+	</form>
+<!--*********************************************************************************************  -->
+		<% if(session.getAttribute("loginUser")!=null){ %>
+			<div>
+				<form method="post" action="/mini/board/content">
+					<input type="hidden" name = "bid" value="<%=request.getParameter("bid")%>" >
+					<textarea cols="50" rows="3" name="content" placeholder="내용을 입력해주세요." /></textarea>
+					<input type="submit" value="댓글 등록하기"> 
+				</form>
+			</div>
+			<%} %>
+			<%
+				ArrayList<CommentVO> list = (ArrayList<CommentVO>) request.getAttribute("listComments");
+				if (!list.isEmpty()) {
+					for (CommentVO vo : list) {
+			%>
+			<div>
+				<%=vo.getWriter() %>
+				<%=vo.getContent() %>
+				<%=vo.getWritedate() %>
+			</div>
+			<%}} %>
+<!--*********************************************************************************************  -->
 	</div><!-- content End -->
 
 	<%@ include file="/WEB-INF/views/footer.jsp" %>
