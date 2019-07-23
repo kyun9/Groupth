@@ -71,7 +71,7 @@
 						<td class="title">
 						<% if(vo.getCnt() >= 50){
 						%>	
-							<img src="/mini/resources/file/img/s_img/hot.png" style="width: 20px;" alt="인기글" />
+							<img src="/mini/resources/file/img/s_img/hot.gif" style="width: 20px;" alt="인기글" />
 						<%
 						}
 						%>

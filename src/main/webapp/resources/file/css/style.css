@@ -2,6 +2,7 @@
 @import url(reset.css);
 
 html, body{width: 100%;height: 100%;}
+.effect{position: relative;}
 
 #wrap{width: 100%;height: 100%;}
 #wrap #header{position: fixed;top: 0;left: 0;z-index: 999;width: 100%;height: 80px;background: #fff;border-bottom: 1px solid #e5e5e5;}
@@ -68,7 +69,8 @@ html, body{width: 100%;height: 100%;}
 #wrap #content .quick_section ul:after{display: block;content: '';clear: both;}
 #wrap #content .quick_section ul li{float: left;width: 31.333333333333333333333333333333%;margin-right: 3%;margin-bottom: 30px}
 #wrap #content .quick_section ul li.right{margin-right: 0;}
-#wrap #content .quick_section ul li a{display: block;width: 100%;height: 100px;padding: 30px 0;background: #e8faf4;border: 2px solid #d0f6e9;text-align: center;}
+#wrap #content .quick_section ul li a{display: block;width: 100%;height: 100px;padding: 30px 0;background: #e8faf4;border: 2px solid #d0f6e9;text-align: center;transition : all 0.25s ease 0s;-webkit-transition: all 0.25s ease 0s;}
+#wrap #content .quick_section ul li a:hover{background: #8dd6bd;transition : all 0.25s ease 0s;-webkit-transition: all 0.25s ease 0s;}
 #wrap #content .quick_section ul li a img{max-width: 100px;}
 #wrap #content .quick_section ul li a.title{display: block;width: 100%;height: 30px;line-height: 30px;font-size: 16px;font-weight: 500;text-align: center;padding: 0;border: none;background: transparent;}
 

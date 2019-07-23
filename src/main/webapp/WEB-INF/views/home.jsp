@@ -15,8 +15,6 @@
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 
-	<script src="./resources/file/js/magic.js"></script>
-	
     <link rel="stylesheet" type="text/css" href="./resources/file/css/style.css" />
     <link rel="stylesheet" type="text/css" href="./resources/file/css/respond.css" />
 
