@@ -40,7 +40,7 @@
 					if(session.getAttribute("loginUser")!=null){
 				%>
 				<h3>직접 만나 함께하는 즐거움</h3>
-				<p>로컬 그룹에 가입하고 사람들과 좋아하는 일을 함께 하며 새로운 경험을 즐겨 보세요.</p>
+				<p>로컬 그룹에 가입하고 사람들과 좋아하는 일을 <span class="mob_br"></span>함께 하며 새로운 경험을 즐겨 보세요.</p>
 				<a href="/mini/group">그룹으로 바로가기</a>
 				<%}else{ %>
 				<h3>직접 만나 함께하는 즐거움</h3>
@@ -96,19 +96,19 @@
 				<li><a href="/mini/group?field=IT&action=search"><img src="./resources/file/img/s_img/icon_it.png" alt="IT" /></a>
 					<a href="/mini/group?field=IT&action=search" class="title">IT</a>
 				</li>
-				<li><a href="/mini/group?field=어학&action=search"><img src="./resources/file/img/s_img/icon_language.png" alt="어학" /></a>
+				<li class="m_right"><a href="/mini/group?field=어학&action=search"><img src="./resources/file/img/s_img/icon_language.png" alt="어학" /></a>
 					<a href="/mini/group?field=어학&action=search" class="title">어학</a>
 				</li>
 				<li class="right"><a href="/mini/group?field=대입&action=search"><img src="./resources/file/img/s_img/icon_graduation.png" alt="대입" /></a>
 					<a href="/mini/group?field=대입&action=search" class="title">대입</a>
 				</li>
-				<li><a href="/mini/group?field=고입&action=search"><img src="./resources/file/img/s_img/icon_highschool.png" alt="고입" /></a>
+				<li class="m_right"><a href="/mini/group?field=고입&action=search"><img src="./resources/file/img/s_img/icon_highschool.png" alt="고입" /></a>
 					<a href="/mini/group?field=고입&action=search" class="title">고입</a>
 				</li>
 				<li><a href="/mini/group?field=취업&action=search"><img src="./resources/file/img/s_img/icon_job.png" alt="취업" /></a>
 					<a href="/mini/group?field=취업&action=search" class="title">취업</a>
 				</li>
-				<li class="right"><a href="/mini/group?field=기타&action=search"><img src="./resources/file/img/s_img/icon_etc.png" alt="기타" />
+				<li class="right m_right"><a href="/mini/group?field=기타&action=search"><img src="./resources/file/img/s_img/icon_etc.png" alt="기타" />
 					<a href="/mini/group?field=기타&action=search" class="title">기타</a>
 				</a></li>
 			</ul>

@@ -42,7 +42,7 @@
 			<input type="hidden" name="writer" value="${sessionScope.loginUser.user}">
 				<div class="input_box"> 
 					<div class="title">제목</div>
-					<div class="input"><input type="text" name="title" value="<그룹리더 공지사항>" required /></div>
+					<div class="input"><input type="text" name="title" placeholder="제목을 입력하세요." required /></div>
 				</div>
 				<div class="input_box">
 					<div class="title">내용</div>
