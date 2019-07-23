@@ -11,6 +11,8 @@
     
     <title>Groupth</title>
 	
+	<link rel="shortcut icon" href="/mini/resources/file/img/s_img/favicon.ico" type="image/x-icon" />
+	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/style.css" />

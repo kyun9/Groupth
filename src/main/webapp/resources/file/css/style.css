@@ -21,6 +21,7 @@ html, body{width: 100%;height: 100%;}
 #wrap.index #header ul.gnb li a{color: #fff;}
 #wrap #header ul.gnb li.on a{color: #000;}
 
+
 #wrap.index #header{border-bottom: none;}
 #wrap #header.on{background: #fff;border-bottom: 1px solid #e5e5e5;}
 
@@ -56,7 +57,9 @@ html, body{width: 100%;height: 100%;}
 #wrap #content .visual_section .container{position: absolute;top: 0;left: 0;z-index: 3;width: 100%;height: 400px;padding-top: 300px;}
 #wrap #content .visual_section h3{color: #fff;font-size: 30px;font-weight: 600;text-align: center;margin-bottom: 24px;}
 #wrap #content .visual_section p{color: #fff;font-size: 18px;font-weight: 300;text-align: center;margin-bottom: 45px;line-height: 1.5;}
-#wrap #content .visual_section a{display: block;width: 300px;margin: 0 auto;height: 55px;line-height: 55px;text-align: center;color: #fff;font-size: 15px;background: #41bb91;font-weight: 600;letter-spacing: 0.5px;}
+#wrap #content .visual_section a{display: block;width: 300px;margin: 0 auto;height: 55px;line-height: 55px;text-align: center;color: #fff;font-size: 15px;background: #41bb91;font-weight: 600;letter-spacing: 0.5px;transition : all 0.25s ease 0s;-webkit-transition: all 0.25s ease 0s;}
+#wrap #content .visual_section a:hover{background: #00ffa7;transition : all 0.25s ease 0s;-webkit-transition: all 0.25s ease 0s;}
+
 
 #wrap #content .quick_section{width: 70%;margin: 0 auto;}
 #wrap #content .quick_section h3{font-size: 28px;font-weight: 500;letter-spacing: -1px;margin-bottom: 30px;}
@@ -65,7 +68,7 @@ html, body{width: 100%;height: 100%;}
 #wrap #content .quick_section ul:after{display: block;content: '';clear: both;}
 #wrap #content .quick_section ul li{float: left;width: 31.333333333333333333333333333333%;margin-right: 3%;margin-bottom: 30px}
 #wrap #content .quick_section ul li.right{margin-right: 0;}
-#wrap #content .quick_section ul li a{display: block;width: 100%;height: 100px;padding: 30px 0;background: #ddd;border: 1px solid #ccc;text-align: center;}
+#wrap #content .quick_section ul li a{display: block;width: 100%;height: 100px;padding: 30px 0;background: #e8faf4;border: 2px solid #d0f6e9;text-align: center;}
 #wrap #content .quick_section ul li a img{max-width: 100px;}
 #wrap #content .quick_section ul li a.title{display: block;width: 100%;height: 30px;line-height: 30px;font-size: 16px;font-weight: 500;text-align: center;padding: 0;border: none;background: transparent;}
 
@@ -125,6 +128,8 @@ html, body{width: 100%;height: 100%;}
 #wrap #content #joinBox .button ul li.last{margin-right: 0;}
 #wrap #content #joinBox .button input{width: 100%;border: 1px solid #41bb91;background: #41bb91;color: #fff;text-align: center;font-size: 16px;height: 55px;line-height: 55px;}
 #wrap #content #joinBox .button ul li.last input{border: 1px solid #eee;background: #ddd;color: #333;}
+
+#wrap #content #joinBox #idCheck{border: 1px solid #41bb91;background: #41bb91;color: #fff;text-align: center;font-size: 16px;height: 35px;line-height: 35px;width: 80px;}
 
 
 /* mypage - group */

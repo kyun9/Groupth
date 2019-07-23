@@ -10,6 +10,8 @@
     
     <title>Groupth</title>
 	
+	<link rel="shortcut icon" href="/mini/resources/file/img/s_img/favicon.ico" type="image/x-icon" />
+	
 	<link rel="stylesheet" type="text/css" href="/mini/resources/file/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/mini/resources/file/css/respond.css" />
 

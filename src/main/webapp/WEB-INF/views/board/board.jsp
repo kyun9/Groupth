@@ -10,6 +10,8 @@
     
     <title>Groupth</title>
 	
+	<link rel="shortcut icon" href="/mini/resources/file/img/s_img/favicon.ico" type="image/x-icon" />
+	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./resources/file/css/style.css" />
@@ -66,7 +68,14 @@
 					%>
 					<tr>
 						<td><%=vo.getBid()%></td>
-						<td class="title"><a href='/mini/board/content?bid=<%=vo.getBid()%>&writer=<%=vo.getWriter()%>&action=read'><%=vo.getTitle()%></a></td>
+						<td class="title">
+						<% if(vo.getCnt() >= 50){
+						%>	
+							<img src="/mini/resources/file/img/s_img/hot.png" style="width: 20px;" alt="인기글" />
+						<%
+						}
+						%>
+						<a href='/mini/board/content?bid=<%=vo.getBid()%>&writer=<%=vo.getWriter()%>&action=read'><%=vo.getTitle()%></a></td>
 						<td><a href='/mini/board?action=listwriter&writer=<%=vo.getWriter()%>'><%=vo.getWriter()%></a></td>
 						<td><%=vo.getWritedate()%></td>
 						<td><%=vo.getCnt()%></td>

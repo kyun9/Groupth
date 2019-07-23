@@ -9,6 +9,8 @@
     
     <title>Groupth</title>
 	
+	<link rel="shortcut icon" href="/mini/resources/file/img/s_img/favicon.ico" type="image/x-icon" />
+	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./resources/file/css/style.css" />
@@ -36,17 +38,17 @@
 			<div class="input_box">
 				<div class="title">아이디</div>
 				<div class="input"><input type="text" name="users_id"  id="users_id" placeholder="영문자로 시작 숫자 및 영문자 끝나는 5~19자리 문자" required /></div>
-				<input type="button" id="idCheck"  value="중복확인">
+				<input type="button" id="idCheck" value="중복확인" />
 				<span id = "chkMsg"></span>	
 			</div>
 			<div class="input_box">
 				<div class="title">패스워드</div>
 				<div class="input"><input type="password" name="password"  id="password" placeholder="특수문자,숫자를 각각 1개 이상 포함한 8~15개의 문자열" required /></div>		
 			</div>
-			<!-- <div class="input_box">
+			<div class="input_box">
 				<div class="title">패스워드 확인</div>
-				<div class="input"><input type="text" name="password_confirm" placeholder="패스워드를 입력하세요." /></div>
-			</div> -->
+				<div class="input"><input type="password" name="password_confirm" id="passwordConfirm" placeholder="패스워드를 입력하세요." /></div>
+			</div>
 			<div class="input_box">
 				<div class="title">이름</div>
 				<div class="input"><input type="text" name="name"   placeholder="이름을 입력하세요." required /></div>
@@ -119,6 +121,7 @@ function GoToEnroll(){
 	var obId  = document.getElementById("users_id");
 	var obPassword  = document.getElementById("password");
 	var obEmail  = document.getElementById("email");
+	var obPasswordConfirm = document.getElementById("passwordConfirm");
 
 	if (!obId.value) {
 		alert("아이디를 입력하세요!");
@@ -134,11 +137,16 @@ function GoToEnroll(){
 		alert("비번을 입력하세요!");
 		obPassword.focus();	
 		return false;	
-	}          
+	}
 	if(!Checkpassword(obPassword.value)){
 		alert("영문, 특수 1,숫자 1을 포함한 8~15개의 문자로 작성!");
 		obPassword.focus();
 		return false;              
+	}
+	if(obPasswordConfirm.value != obPassword.value){
+		window.alert("비밀번호가 다릅니다!");
+		obPasswordConfirm.focus();
+		return false;
 	}
 	if (!obEmail.value) {             
 		alert("이메일을 입력하세요!");
