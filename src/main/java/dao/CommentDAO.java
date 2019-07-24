@@ -21,8 +21,6 @@ public class CommentDAO {
 		return result;
 	}
 	public List<CommentVO> listComments(String bid){
-		List<CommentVO> list = null;
-		list = session.selectList("CommentMapper.listComments",bid);
-		return list;
+		return session.selectList("CommentMapper.listComments",bid);
 	}
 }

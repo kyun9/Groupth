@@ -31,8 +31,8 @@ public class MypageController {
 	MypageDAO mypageDAO;
 	@Autowired
 	private ImageUploadService imageUploadService;
-	
-	@RequestMapping(value="/mypage", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
@@ -42,41 +42,42 @@ public class MypageController {
 		mav.setViewName("mypage/myInfo");
 		return mav;
 	}
-	@RequestMapping(value="/mypage/myInfo", method=RequestMethod.POST)
-	public ModelAndView doPostMyInfo(UsersVO vo,String action,HttpSession session, MultipartFile image) throws IOException {
+
+	@RequestMapping(value = "/mypage/myInfo", method = RequestMethod.POST)
+	public ModelAndView doPostMyInfo(UsersVO vo, String action, HttpSession session, MultipartFile image)
+			throws IOException {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
 		vo.setUsers_id(user.getUser());
-		if(action!=null) {
-			if(action.equals("change")) {
+		if (action != null) {
+			if (action.equals("change")) {
 				usersDAO.change(vo);
-				mav.addObject("msg","회원정보가 수정되었습니다.");
-			}
-			else if(action.equals("addInfo")) {
-				String fileName=image.getOriginalFilename();
-				if(!fileName.equals("")) {
+				mav.addObject("msg", "회원정보가 수정되었습니다.");
+			} else if (action.equals("addInfo")) {
+				String fileName = image.getOriginalFilename();
+				if (!fileName.equals("")) {
 					vo.setImg(fileName);
 					imageUploadService.getUsersImagePath(image);
-				}else {
+				} else {
 					vo.setImg("smile.png");
 				}
 				usersDAO.addInfo(vo);
-				mav.addObject("msg","정보가 추가되었습니다.");
+				mav.addObject("msg", "정보가 추가되었습니다.");
 			}
 		}
 		mav.setViewName("redirect:/mypage");
 		return mav;
 	}
-	
-	@RequestMapping(value="/mypage/deleteGroup", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/mypage/deleteGroup", method = RequestMethod.GET)
 	public ModelAndView deleteGroup(String gid, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
-		boolean result =mypageDAO.deleteGroup(gid,user.getUser());
-		if(!result) {
-			mav.addObject("msg","그룹장은 그룹 관리에서 그룹을 삭제할 수 있습니다.");
-		}else {
-			mav.addObject("msg","그룹에서 탈퇴 하였습니다.");
+		boolean result = mypageDAO.deleteGroup(gid, user.getUser());
+		if (!result) {
+			mav.addObject("msg", "그룹장은 그룹 관리에서 그룹을 삭제할 수 있습니다.");
+		} else {
+			mav.addObject("msg", "그룹에서 탈퇴 하였습니다.");
 		}
 		mav.setViewName("redirect:/mypage");
 		return mav;

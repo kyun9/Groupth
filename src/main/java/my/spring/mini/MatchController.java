@@ -18,8 +18,8 @@ public class MatchController {
 	UsersDAO usersDAO;
 	@Autowired
 	FieldDAO Fielddao;
-	
-	@RequestMapping(value="/match",  method = RequestMethod.GET)
+
+	@RequestMapping(value = "/match", method = RequestMethod.GET)
 	public ModelAndView doGetMatch(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
@@ -28,13 +28,14 @@ public class MatchController {
 		mav.setViewName("match/match");
 		return mav;
 	}
-	@RequestMapping(value="/match",  method = RequestMethod.POST)
-	public ModelAndView doPostMatch(HttpSession session,int range,int field,String lat, String lng) {
+
+	@RequestMapping(value = "/match", method = RequestMethod.POST)
+	public ModelAndView doPostMatch(HttpSession session, int range, int field, String lat, String lng) {
 		ModelAndView mav = new ModelAndView();
 		Login_InfoVO user = (Login_InfoVO) session.getAttribute("loginUser");
-		mav.addObject("allUsersLocation", usersDAO.allUsersLocation(range,field,lat,lng));
+		mav.addObject("allUsersLocation", usersDAO.allUsersLocation(range, field, lat, lng));
 		mav.addObject("matchInfo", usersDAO.matchInfo(user.getUser()));
-		mav.setViewName("match/matchResult"); 
+		mav.setViewName("match/matchResult");
 		return mav;
 	}
 }

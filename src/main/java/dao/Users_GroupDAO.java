@@ -34,15 +34,11 @@ public class Users_GroupDAO {
 	}
 
 	public List<UsersVO> tempMember(int gid) {
-		List<UsersVO> list;
-		list = session.selectList("TempMemMapper.listTempMember", gid);
-		return list;
+		return session.selectList("TempMemMapper.listTempMember", gid);
 	}
 
 	public List<UsersVO> currentMember(int gid) {
-		List<UsersVO> list;
-		list = session.selectList("TempMemMapper.listCurrentMember", gid);
-		return list;
+		return session.selectList("TempMemMapper.listCurrentMember", gid);
 	}
 
 	public boolean statusJoin(String users_id, int gid) {
@@ -81,6 +77,7 @@ public class Users_GroupDAO {
 		}
 		return result;
 	}
+
 	public boolean dropMember(int gid, String users_id) {
 		boolean result = true;
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -94,13 +91,12 @@ public class Users_GroupDAO {
 		}
 		return result;
 	}
-	public List<GroupVO> myGroup(String idVal){
-		List<GroupVO> glist=null;
+
+	public List<GroupVO> myGroup(String idVal) {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("idVal", idVal);
 		parameters.put("leader", "leader");
 		parameters.put("accept", "accept");
-		glist = session.selectList("UsersMapper.myGroup", parameters);
-		return glist;
+		return session.selectList("UsersMapper.myGroup", parameters);
 	}
 }

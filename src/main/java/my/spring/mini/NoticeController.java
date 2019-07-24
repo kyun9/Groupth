@@ -19,31 +19,28 @@ public class NoticeController {
 	NoticeDAO dao;
 	@Autowired
 	private FileUploadService fileUploadService;
-	
-	@RequestMapping(value="/group/content/write", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/group/content/write", method = RequestMethod.GET)
 	public ModelAndView doGetNotice() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("notice/nedit");
 		return mav;
 	}
-	
-	@RequestMapping(value="/group/content/write", method=RequestMethod.POST)
-	public ModelAndView doPostNotice(NoticeVO vo,MultipartFile file,String gid) throws IOException {
+
+	@RequestMapping(value = "/group/content/write", method = RequestMethod.POST)
+	public ModelAndView doPostNotice(NoticeVO vo, MultipartFile file, String gid) throws IOException {
 		ModelAndView mav = new ModelAndView();
-		String fileName=file.getOriginalFilename();
-		System.out.println(fileName);
-		if(!fileName.equals("")) {
+		String fileName = file.getOriginalFilename();
+		if (!fileName.equals("")) {
 			vo.setFiles(fileName);
 			fileUploadService.getFilePath(file);
 		}
-		if(dao.writeNotice(vo)) {
+		if (dao.writeNotice(vo)) {
 			System.out.println("notice성공");
-		}
-		else {
+		} else {
 			System.out.println("실패");
 		}
-		mav.setViewName("redirect:/group/content?gid="+gid);
-		//mav.setViewName("redirect:/group");
+		mav.setViewName("redirect:/group/content?gid=" + gid);
 		return mav;
 	}
 }

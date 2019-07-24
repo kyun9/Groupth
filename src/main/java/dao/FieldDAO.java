@@ -11,13 +11,9 @@ import vo.FieldVO;
 @Repository
 public class FieldDAO {
 	@Autowired
-	SqlSession session=null;
-	
+	SqlSession session = null;
+
 	public List<FieldVO> ListAllType() {
-		
-		List<FieldVO> list= null;
-		String statement = "FieldMapper.listAllType";
-		list=session.selectList(statement);
-		return list;
+		return session.selectList("FieldMapper.listAllType");
 	}
 }

@@ -147,5 +147,5 @@ public class GroupController {
 		int result= GroupDao.storeLocation(gid,lat,lng,location);
 		return result;
 	}
-	
+
 }
