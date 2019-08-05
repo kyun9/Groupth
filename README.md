@@ -1,6 +1,6 @@
 
-
-< div style = "text-align : center"><img src= "logo_세로형.png" width ="80"></
+<div style = "text-align : center">
+    <img src= "file:///C:/Users/USER/Desktop/mini/Groupth/logo_세로형.png" width ="80"></div>
 
 # Groupth
 
