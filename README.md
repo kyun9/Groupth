@@ -1,6 +1,6 @@
 
 
-<img src= "logo_세로형.png" width ="80">
+<img src= "logo_세로형.png" width ="80" text-align: center>
 
 # Groupth
 
