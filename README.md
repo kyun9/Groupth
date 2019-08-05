@@ -34,4 +34,4 @@ You can also match study members based on the desired location.
 
 #### Main Page
 
-![main](C:\Users\USER\Downloads\main.PNG)
+![main](main.PNG)
