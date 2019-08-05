@@ -1,6 +1,5 @@
 
-<div style = "text-align : center">
-    <img src= "logo_세로형.png" width ="80"></div>
+<div style = "text-align : center"><img src= "logo_세로형.png" width ="80"></div>
 
 # Groupth
 
