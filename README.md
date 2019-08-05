@@ -1,6 +1,6 @@
 
 
-<img src= "file:///C:/Users/USER/Desktop/mini/Groupth/logo_세로형.png" width ="80">
+<img src= "logo_세로형.png" width ="80">
 
 # Groupth
 
