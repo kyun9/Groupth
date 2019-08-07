@@ -31,6 +31,7 @@ You can also match study members based on the desired location.
 
 <hr/>
 
-#### Main Page
+### Result
 
-![main](main.PNG)
+
+[![Watch the video](Groupth.PNG)](https://www.youtube.com/watch?v=UFqDNVF4j3I)
