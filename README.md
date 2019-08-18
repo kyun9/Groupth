@@ -12,6 +12,8 @@
 "Groupth"  help users create and manage study groups.
 You can also match study members based on the desired location.
 
+Google Map API & Leaflet
+
 <hr>
 
 #### STACK
